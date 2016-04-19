@@ -282,6 +282,75 @@ router.get('/report_terminal/:date1/:date2', function (req, res, next) {
     // ensure directory
 })
 
+router.get('/report_level/:date1/:date2/:risk_type/:risk_level', function (req, res, next) {
+    var db = req.db;
+    var json = {};
+    var date1 = req.params.date1;
+    var date2 = req.params.date2;
+    var risk_type = req.params.risk_type;
+    var risk_level = req.params.risk_level;
+    console.log(date1);
+    console.log(date2);
+    report_terminal.getReport_terminal2(db,date1,date2,risk_type,risk_level)
+        .then(function(rows){
+            json.detail = rows;
+            console.log(json.detail);
+            json.detail.Date_Time=moment(json.detail.Date_Time).format("DD/MM/YYYY HH:mm");
+            fse.ensureDirSync('./templates/html');
+            fse.ensureDirSync('./templates/pdf');
+
+            var destPath = './templates/html/' + moment().format('x');
+            fse.ensureDirSync(destPath);
+
+            json.img = './img/sign.png';
+            // Create pdf
+            gulp.task('html', function (cb) {
+                return gulp.src('./templates/report_level.jade')
+                    .pipe(data(function () {
+                        return json;
+                    }))
+                    .pipe(jade())
+                    .pipe(gulp.dest(destPath));
+                cb();
+            });
+
+            gulp.task('pdf', ['html'], function () {
+                var html = fs.readFileSync(destPath + '/report_level.html', 'utf8')
+                var options = {
+                    format: 'A4',
+                    orientation: "landscape",
+                    header:{
+                        height: "18mm",
+                        contents: '<div style="text-align: center"><h2>รายงาน สรุปอุบัติการณ์ความเสี่ยงแยกตามระดับความรุนแรง</h2></div>'
+                    },
+                    footer: {
+                        height: "15mm",
+                        contents: '<span style="color: #444;"><small>Printed: '+ new Date() +'</small></span>'
+                    }
+                };
+
+                var pdfName = './templates/pdf/risk-' + moment().format('x') + '.pdf';
+
+                pdf.create(html, options).toFile(pdfName, function(err, resp) {
+                    if (err) {
+                        res.send({ok: false, msg: err});
+                    } else {
+                        res.download(pdfName, function () {
+                            rimraf.sync(destPath);
+                            fse.removeSync(pdfName);
+                        });
+                    }
+                });
+            });
+            // Convert html to pdf
+            gulp.start('pdf');
+
+        },function(err){
+            res.send({ok: false, msg: err});
+        })
+    // ensure directory
+})
+
 router.get('/report_senior/:date1/:date2', function (req, res, next) {
     var db = req.db;
     var json = {};

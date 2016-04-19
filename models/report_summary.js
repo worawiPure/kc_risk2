@@ -54,6 +54,36 @@ module.exports = {
         return q.promise;
     },
 
+    getReport_level: function(db,data){
+        var q = Q.defer();
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,SUBSTRING(l.risk_level,1,2) as Leve,e.depname, '+
+            'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
+            'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
+            'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
+            'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
+            'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
+            'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
+            'LEFT JOIN risk_sub_program p ON p.id = c.risk_group        '+
+            'LEFT JOIN risk_detail d ON d.id = c.risk_sub_group             '+
+            'LEFT JOIN clinic_level l ON l.id = c.risk_level                '+
+            'LEFT JOIN department e ON e.depcode = f.depcode                '+
+            'LEFT JOIN risk_type x ON x.id=f.type_risk                      '+
+            'WHERE f.date_risk BETWEEN ? and ?        '+
+            'AND f.type_risk = ?                       '+
+            'AND c.risk_level = ?                      '+
+            'ORDER BY f.date_risk';
+
+        db.raw(sql,[data.date1,data.date2,data.risk_type,data.risk_level])
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
     getReport_user_senior: function(db,data){
         var q = Q.defer();
         var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,SUBSTRING(l.risk_level,1,2) as Leve,e.depname, '+
@@ -101,6 +131,36 @@ module.exports = {
         'ORDER BY f.date_risk';
 
         db.raw(sql,[date1,date2])
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    getReport_level2: function(db,date1,date2,risk_type,risk_level){
+        var q = Q.defer();
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,SUBSTRING(l.risk_level,1,2) as Leve,e.depname, '+
+            'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
+            'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
+            'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
+            'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
+            'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
+            'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
+            'LEFT JOIN risk_sub_program p ON p.id = c.risk_group        '+
+            'LEFT JOIN risk_detail d ON d.id = c.risk_sub_group             '+
+            'LEFT JOIN clinic_level l ON l.id = c.risk_level                '+
+            'LEFT JOIN department e ON e.depcode = f.depcode                '+
+            'LEFT JOIN risk_type x ON x.id=f.type_risk                      '+
+            'WHERE f.date_risk BETWEEN ? and ?                              '+
+            'AND f.type_risk = ?                       '+
+            'AND c.risk_level = ?                      '+
+            'ORDER BY f.date_risk';
+
+        db.raw(sql,[date1,date2,risk_type,risk_level])
             .then(function(rows){
                 q.resolve(rows[0])
             })
