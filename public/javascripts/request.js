@@ -1,4 +1,165 @@
 $(function() {
+
+        //
+        //var obj_check=$(".css-require");
+        //$("#btnSave").on("submit",function(){
+        //    obj_check.each(function(i,k){
+        //        var status_check=0;
+        //        if(obj_check.eq(i).find(":radio").length>0 || obj_check.eq(i).find(":checkbox").length>0){
+        //            status_check=(obj_check.eq(i).find(":checked").length==0)?0:1;
+        //        }else{
+        //            status_check=($.trim(obj_check.eq(i).val())=="")?0:1;
+        //        }
+        //        formCheckStatus($(this),status_check);
+        //    });
+        //    if($(this).find(".has-error").length>0){
+        //        return false;
+        //    }
+        //});
+
+
+        $('#slRisktype').on('change', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+            });
+
+        $('#slComplaint').on('change', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+            });
+
+        $('#txtTopic').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        });
+
+        $('#txtDate_risk').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        });
+
+        $('#txtTime_risk').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        });
+
+        $('#txtArea_risk').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        });
+
+        $('#slProgram').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+        }
+        });
+
+        $('#slSubProgram').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        });
+
+        $('#slSubGroup').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        });
+
+        $('#txtRisk_detail').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        });
+
+        $('#slRisk_level').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        });
+
+        $('#txtType_report').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        });
+
+        $('#txtName_report').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        });
+
+
+        var formCheckStatus = function(obj,status){
+            if(status==1){
+                obj.parent(".form-group").removeClass("has-error").addClass("has-success");
+                obj.next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                obj.parent(".form-group").removeClass("has-success").addClass("has-error");
+                obj.next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        }
+
+
     $('#divSubProgram').fadeIn();
     $('#slProgram').on('change', function (e) {
         //   console.log($(this).val());
@@ -183,6 +344,7 @@ $(function() {
         }
     })
 })
+
 
 
 
