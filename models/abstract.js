@@ -193,6 +193,76 @@ module.exports = {
                 q.reject(err)
             });
         return q.promise;
+    },
+
+    remove_first: function(db,id){
+        var q = Q.defer();
+        db('risk_request_first')
+            .delete()
+            .where('id',id)
+            .then(function(){
+                q.resolve();
+            })
+            .catch(function(err){
+                q.reject(err);
+            });
+        return q.promise;
+    },
+
+    remove_second: function(db,id){
+        var q = Q.defer();
+        db('risk_request_second')
+            .delete()
+            .where('id',id)
+            .then(function(){
+                q.resolve();
+            })
+            .catch(function(err){
+                q.reject(err);
+            });
+        return q.promise;
+    },
+
+    remove_third: function(db,id){
+        var q = Q.defer();
+        db('risk_request_third')
+            .delete()
+            .where('risk_request_id',id)
+            .then(function(){
+                q.resolve();
+            })
+            .catch(function(err){
+                q.reject(err);
+            });
+        return q.promise;
+    },
+
+    remove_fourth: function(db,id){
+        var q = Q.defer();
+        db('risk_request_fourth')
+            .delete()
+            .where('risk_request_id',id)
+            .then(function(){
+                q.resolve();
+            })
+            .catch(function(err){
+                q.reject(err);
+            });
+        return q.promise;
+    },
+
+    remove_fifth: function(db,id){
+        var q = Q.defer();
+        db('risk_request_fifth')
+            .delete()
+            .where('risk_request_id',id)
+            .then(function(){
+                q.resolve();
+            })
+            .catch(function(err){
+                q.reject(err);
+            });
+        return q.promise;
     }
 
 

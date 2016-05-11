@@ -171,5 +171,32 @@ router.post('/search_department',function(req,res){
 
 });
 
+router.post('/remove_risk', function(req,res){
+    var db = req.db;
+    var id = req.body.id;
+    if(id){
+        abstract.remove_first(db,id)
+            .then(function(){
+                return abstract.remove_second(db,id)
+            })
+            .then(function(){
+                return abstract.remove_third(db,id)
+            })
+            .then(function(){
+                return abstract.remove_fourth(db,id)
+            })
+            .then(function(){
+                return abstract.remove_fifth(db,id)
+            })
+            .then(function () {
+                res.send({ok: true});
+            },
+            function(err){
+                res.send({ok:false,msg:err})
+            })
+    } else {
+        res.send({ok:false,msg:'ข้อมูลไม่สมบูรณ์'})
+    }
+});
 
 module.exports = router;

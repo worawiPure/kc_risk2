@@ -13,8 +13,10 @@ $(function(){
                 '<td> '+
                 '   <div class="btn-group btn-group-sm" role="group"> '+
                 '<a class="btn btn-success" type="button" href="/abstract_risk/show_risk/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ดูรายละเอียด"> <i class="fa fa-search"></i></a> '+
-                '<a class="btn btn-danger" href="#" data-action="Addabstract" data-id="'+ v.id +'" data-toggle="tooltip" data-placement="top" title="สรุปรายละเอียด" > '+
+                '<a class="btn btn-primary" href="#" data-action="Addabstract" data-id="'+ v.id +'" data-toggle="tooltip" data-placement="top" title="สรุปรายละเอียด" > '+
                 '<i class="glyphicon glyphicon-pencil"> </i></a> '+
+                '<a class="btn btn-danger" href="#" data-action="Removeabstract" data-id="'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ลบอุบัติการณ์" > '+
+                '<i class="glyphicon glyphicon-trash"> </i></a> '+
                 '</div> '+
                 '<td> '+
                 '   <div class="btn-group btn-group-sm" role="group"> '+
@@ -139,6 +141,36 @@ $(function(){
             })
 
     });
+
+    $(document).on('click','a[data-action="Removeabstract"]', function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        if(confirm('คุณต้องการลบรายการนี้ ใช่หรือไม่')){
+            $.ajax({
+                method:'POST',
+                url:'/abstract_risk/remove_risk',
+                dataType:'json',
+                data:{
+                    id:id
+                }
+            })
+                .success(function(data){
+                    if(data.ok) {
+                        alert('ลบเสร็จเรีนบร้อยแล้ว');
+                        getAbstractRisk();
+                    } else {
+                        console.log(data.msg);
+                        alert('ไม่สามารถบันทึได้')
+                    }
+                })
+                .error(function(xhr, status, err){
+                    console.log(err);
+                    alert('กรุณาตรวจสอบการเชื่อมต่อกับแม่ข่าย')
+                })
+        }
+
+    });
+
 
     $('#mdlNew').on('hidden.bs.modal', function (e) {
         $('#txtdetail').val('');
