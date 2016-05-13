@@ -53,7 +53,7 @@ router.get('/:id', function (req, res, next) {
                  format: 'A4',
                  header:{
                      height: "18mm",
-                     contents: '<div style="text-align: center"><h2>รายละเอียด อุบัติการณ์ความเสี่ยง</h2></div>'
+                     contents: '<div style="text-align: center"><h4>รายละเอียด อุบัติการณ์ความเสี่ยง</h2></div>'
                  },
                  footer: {
                      height: "15mm",

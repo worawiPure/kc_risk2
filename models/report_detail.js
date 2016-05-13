@@ -4,7 +4,7 @@ module.exports = {
     getReport_detail: function(db,id){
         var q = Q.defer();
         var sql =   'SELECT f.id,a.name as risk_type,b.name as complaint_type,f.topic_risk,f.date_risk,f.time_risk,e.depname,f.area_risk,   '+
-        'g.program_risk,p.name_sub_program,d.risk_detail,c.note_other,c.risk_detail as detail,l.risk_level,c.risk_correct,                  '+
+        'g.program_risk,p.name_sub_program,d.risk_detail,c.sentinel,c.note_other,c.risk_detail as detail,l.risk_level,c.risk_correct,                  '+
         't.hn,t.an,t.name_patient,t.name_kin,t.name_officer,t.name_other,t.note_patient,t.note_kin,t.note_officer,t.note_other as ot,       '+
         'h.name as type_report,o.name_report,o.position,e2.depname as oe,                                                                   '+
         'i.date_repeat,i.date_finished,i.name_repeat,i.result_repeat,i.depcode_connected,i.edit_system,i.note FROM  risk_request_first f    '+
@@ -15,7 +15,7 @@ module.exports = {
         'LEFT JOIN risk_type a ON a.id=f.type_risk                          '+
         'LEFT JOIN type_complaint b ON b.id=f.complaint_type                '+
         'LEFT JOIN risk_program g ON g.id=c.risk_program                    '+
-        'LEFT JOIN risk_sub_program p ON p.id = c.risk_sub_group            '+
+        'LEFT JOIN risk_sub_program p ON p.id = c.risk_group            '+
         'LEFT JOIN risk_detail d ON d.id = c.risk_sub_group                 '+
         'LEFT JOIN clinic_level l ON l.id = c.risk_level                    '+
         'LEFT JOIN department e ON e.depcode = f.depcode                    '+

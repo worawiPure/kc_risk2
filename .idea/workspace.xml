@@ -58,27 +58,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prints.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="prints.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/prints.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.7924217" vertical-offset="7480" max-vertical-offset="9163">
-              <caret line="376" column="59" selection-start-line="376" selection-start-column="59" selection-end-line="376" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="9163">
+              <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
               <folding>
-                <marker date="1461036992690" expanded="true" signature="1947:1965" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="2145:2157" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="4352:4370" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="4568:4580" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="6930:6948" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="7140:7152" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="9424:9442" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="9634:9646" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="12039:12057" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="12270:12282" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="14622:14640" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="14832:14844" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="17185:17203" placeholder="..." />
-                <marker date="1461036992690" expanded="true" signature="17395:17407" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="1947:1965" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="2145:2157" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="4352:4370" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="4568:4580" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="6930:6948" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="7140:7152" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="9424:9442" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="9634:9646" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="12039:12057" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="12270:12282" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="14622:14640" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="14832:14844" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="17185:17203" placeholder="..." />
+                <marker date="1463115227100" expanded="true" signature="17395:17407" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="report_detail.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/models/report_detail.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6296296" vertical-offset="0" max-vertical-offset="1037">
+              <caret line="22" column="55" selection-start-line="22" selection-start-column="55" selection-end-line="22" selection-end-column="55" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -86,8 +96,8 @@
       <file leaf-file-name="report_detail.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/report_detail.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-107.44" vertical-offset="2516" max-vertical-offset="7242">
-              <caret line="306" column="32" selection-start-line="306" selection-start-column="32" selection-end-line="306" selection-end-column="32" />
+            <state vertical-scroll-proportion="-14.96" vertical-offset="4216" max-vertical-offset="7242">
+              <caret line="270" column="63" selection-start-line="270" selection-start-column="63" selection-end-line="270" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -138,7 +148,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/javascripts/report_terminal.js" />
         <option value="$PROJECT_DIR$/views/page/terminal.jade" />
         <option value="$PROJECT_DIR$/views/page/report_risk.jade" />
         <option value="$PROJECT_DIR$/public/javascripts/report_risk.js" />
@@ -167,7 +176,6 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/views/admin_layout.jade" />
         <option value="$PROJECT_DIR$/models/report_summary.js" />
-        <option value="$PROJECT_DIR$/routes/prints.js" />
         <option value="$PROJECT_DIR$/routes/report_risk.js" />
         <option value="$PROJECT_DIR$/views/page/level.jade" />
         <option value="$PROJECT_DIR$/public/javascripts/level.js" />
@@ -189,6 +197,8 @@
         <option value="$PROJECT_DIR$/views/page/admin_show_detail.jade" />
         <option value="$PROJECT_DIR$/public/javascripts/risk_report.js" />
         <option value="$PROJECT_DIR$/templates/report_detail.jade" />
+        <option value="$PROJECT_DIR$/routes/prints.js" />
+        <option value="$PROJECT_DIR$/models/report_detail.js" />
       </list>
     </option>
   </component>
@@ -454,13 +464,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/page/user_senior_report.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55498284" vertical-offset="0" max-vertical-offset="969">
-          <caret line="19" column="51" selection-start-line="19" selection-start-column="51" selection-end-line="19" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/department.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33278418" vertical-offset="87" max-vertical-offset="1547">
@@ -780,14 +783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/risk_edit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2243" max-vertical-offset="3213">
-          <caret line="137" column="8" selection-start-line="137" selection-start-column="8" selection-end-line="137" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/page/edit_risk.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="94.36" vertical-offset="4178" max-vertical-offset="4760">
@@ -815,14 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/report_detail.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-107.44" vertical-offset="2516" max-vertical-offset="7242">
-          <caret line="306" column="32" selection-start-line="306" selection-start-column="32" selection-end-line="306" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/report_level.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2113402" vertical-offset="3481" max-vertical-offset="4199">
@@ -831,26 +818,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/report_detail.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.96" vertical-offset="4216" max-vertical-offset="7242">
+          <caret line="270" column="63" selection-start-line="270" selection-start-column="63" selection-end-line="270" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/risk_edit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2243" max-vertical-offset="3213">
+          <caret line="137" column="8" selection-start-line="137" selection-start-column="8" selection-end-line="137" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/prints.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.7924217" vertical-offset="7480" max-vertical-offset="9163">
-          <caret line="376" column="59" selection-start-line="376" selection-start-column="59" selection-end-line="376" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="9163">
+          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
           <folding>
-            <marker date="1461036992690" expanded="true" signature="1947:1965" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="2145:2157" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="4352:4370" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="4568:4580" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="6930:6948" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="7140:7152" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="9424:9442" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="9634:9646" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="12039:12057" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="12270:12282" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="14622:14640" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="14832:14844" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="17185:17203" placeholder="..." />
-            <marker date="1461036992690" expanded="true" signature="17395:17407" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="1947:1965" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="2145:2157" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="4352:4370" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="4568:4580" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="6930:6948" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="7140:7152" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="9424:9442" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="9634:9646" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="12039:12057" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="12270:12282" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="14622:14640" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="14832:14844" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="17185:17203" placeholder="..." />
+            <marker date="1463115227100" expanded="true" signature="17395:17407" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/report_detail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6296296" vertical-offset="0" max-vertical-offset="1037">
+          <caret line="22" column="55" selection-start-line="22" selection-start-column="55" selection-end-line="22" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
