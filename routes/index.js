@@ -585,6 +585,7 @@ router.post('/edit_request', function(req,res){
                 console.log(data.program);
                 console.log(data.subprogram);
                 console.log(data.subgroup);
+                console.log(data.sentinel);
                 return request.update_part2(db,data)
             })
             .then(function(){

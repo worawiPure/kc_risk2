@@ -283,6 +283,7 @@ $(function() {
 
     $('#btnSave').on('click', function(e){
         var data = {};
+
         data.risktype = $('#slRisktype').val();
         data.complaint = $('#slComplaint').val();
         data.topic = $('#txtTopic').val();
@@ -297,7 +298,7 @@ $(function() {
         data.subgroup = $('#slSubGroup').val();
         data.note_other = $('#txtNote_other').val();
         data.risk_detail = $('#txtRisk_detail').val();
-        data.sentinel = $('#checkboxSentinel').val();
+        data.sentinel = $("#radioYes").prop('checked') ? 'Y' : 'N';
         data.risk_level = $('#slRisk_level').val();
         data.risk_correct = $('#txtRisk_correct').val();
         data.hn = $('#txtHn').val();

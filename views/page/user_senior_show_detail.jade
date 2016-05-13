@@ -106,12 +106,15 @@ block content
                     .row
                         .col-md-5
                             .form-group
-                                label(for="checkboxSentinel") Sentinel event case
+                                label.radio(for="radioSentinel") Sentinel event case (เหตุการณ์ที่ต้องรอใน 24 ชม.)
                                 | &nbsp;&nbsp;&nbsp;
                                 if rows.sentinel=="Y"
-                                    input#checkboxSentinel(type="checkbox", checked="checked", disabled="disabled")
+                                    input#radioYes(type='radio', name='sentinel', checked='checked', disabled="disabled")
+                                    |  ใช่
                                 else
-                                    input#checkboxSentinel(type="checkbox" , disabled="disabled" )
+                                    input#radioNo(type='radio', name='sentinel', checked='checked', disabled="disabled")
+                                    |  ไม่
+
                     .row
                         .col-md-12#divRiskLevel
                             .form-group
@@ -245,3 +248,13 @@ block content
                             .form-group
                                 label(for="txtNote") หมายเหตุ
                                 textarea(type="text", rows="3", readonly).form-control #{rows.zx}
+
+
+
+
+                              //  label(for="checkboxSentinel") Sentinel event case
+                                    | &nbsp;&nbsp;&nbsp;
+                                    if rows.sentinel=="Y"
+                                        input#checkboxSentinel(type="checkbox", checked="checked", disabled="disabled")
+                                    else
+                                        input#checkboxSentinel(type="checkbox" , disabled="disabled" )

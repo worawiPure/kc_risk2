@@ -141,13 +141,22 @@ block content
                     .row
                         .col-md-5
                             .form-group
-                                label(for="checkboxSentinel") Sentinel event case
+                                label.radio(for="radioSentinel") Sentinel event case (เหตุการณ์ที่ต้องรอใน 24 ชม.)
                                 | &nbsp;&nbsp;&nbsp;
-                                if data.detail.sentinel=="Y"
-                                    input#checkboxSentinel(type="checkbox", checked="checked")
+                                if  data.detail.sentinel == "Y"
+                                    label(value="Y", style='width:20%')
+                                        input#radioYes(type='radio', name='sentinel', checked)
+                                        |  ใช่
+                                    label(value="N", style='width:20%')
+                                        input#radioNo(type='radio', name='sentinel')
+                                        |  ไม่
                                 else
-                                    input#checkboxSentinel(type="checkbox")
-
+                                    label(value="Y", style='width:20%')
+                                        input#radioYes(type='radio', name='sentinel')
+                                        |  ใช่
+                                    label(value="N", style='width:20%')
+                                        input#radioNo(type='radio', name='sentinel', checked)
+                                        |  ไม่
                     .row
                         .col-md-12#divRiskLevel
                             .form-group
@@ -256,3 +265,10 @@ block content
                                             option(value="#{f.depcode}") #{f.depname}
 
     button(type="button").btn.btn-success#btnEdit บันทึก
+
+  //  label(for="checkboxSentinel") Sentinel event case
+        | &nbsp;&nbsp;&nbsp;
+        if data.detail.sentinel=="Y"
+            input#checkboxSentinel(type="checkbox", checked="checked")
+        else
+            input#checkboxSentinel(type="checkbox")

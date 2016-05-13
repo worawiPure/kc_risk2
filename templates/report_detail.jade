@@ -283,6 +283,15 @@ html
                             tr
                                 td
                                     .head(style="width: 100%;")
+                                        label.radio(for="radioSentinel") Sentinel event case (เหตุการณ์ที่ต้องรอใน 24 ชม.) :
+                                        | &nbsp;&nbsp;&nbsp;
+                                        if detail.sentinel=="Y"
+                                            |  ใช่
+                                        else
+                                            |  ไม่
+                            tr
+                                td
+                                    .head(style="width: 100%;")
                                         strong ความรุนแรง:
                                         | &nbsp; #{detail.risk_level}
                                         br

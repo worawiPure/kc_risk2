@@ -135,7 +135,7 @@ $(function() {
         data.subgroup = $('#slSubGroup').val();
         data.note_other = $('#txtNote_other').val();
         data.risk_detail = $('#txtRisk_detail').val();
-        data.sentinel = $('#checkboxSentinel').val();
+        data.sentinel = $("#radioYes").prop("checked") ? 'Y' : 'N';
         data.risk_level = $('#slRisk_level').val();
         data.risk_correct = $('#txtRisk_correct').val();
         data.hn = $('#txtHn').val();
@@ -159,7 +159,7 @@ $(function() {
         data.edit_system = $('#txtEdit_system').val();
         data.date_finished = $('#txtDate_finished').val();
         data.note = $('#txtNote').val();
-        data.sentinel = $('#checkboxSentinel').val()?'Y':'N';
+        //data.sentinel = $('#checkboxSentinel').val()?'Y':'N';
         if(!data.risktype || !data.complaint || !data.topic || !data.date_risk || !data.time_risk
             || !data.department || !data.area_risk || !data.program || !data.risk_detail || !data.type_report || !data.name_report ) {
             $('#divAlert').fadeIn('slow');
