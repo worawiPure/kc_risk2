@@ -8,6 +8,8 @@ $(function() {
             var html = '<tr> ' +
                 '<td> ' + i + ' </td>'+
                 '<td>' + v.risk_detail  + ' </td>'+
+                '<td>' + v.name_sub_program  + ' </td>'+
+                '<td>' + v.program_risk  + ' </td>'+
                 '<td>' + v.risk_level  + ' </td>'+
                 '<td>' + v.depname  + ' </td>'+
                 '<td> ' + moment(v.Date_Time).format('DD/MM/YYYY HH:mm') + ' </td>'+

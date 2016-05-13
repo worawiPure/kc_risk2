@@ -285,7 +285,7 @@ html
                             tr
                                 td
                                     .head(style="width: 100%;")
-                                        label.radio(for="radioSentinel") Sentinel event case (เหตุการณ์ที่ต้องรอใน 24 ชม.) :
+                                        strong Sentinel event case (เหตุการณ์ที่ต้องรอใน 24 ชม.) :
                                         | &nbsp;&nbsp;&nbsp;
                                         if detail.sentinel=="Y"
                                             |  ใช่
@@ -380,6 +380,7 @@ html
                                     .head(style="width: 100%;")
                                         strong หน่วยงาน:
                                         | &nbsp; #{detail.oe}
+
                     div.slib-box
                         table
                             tr

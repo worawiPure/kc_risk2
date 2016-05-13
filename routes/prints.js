@@ -119,7 +119,7 @@ router.get('/abstract_report/:id', function (req, res, next) {
                         format: 'A4',
                         header: {
                             height: "30mm",
-                            contents: '<div style="text-align: center"><h1>รายงาน สรุปอุบัติการณ์</h2></div>'
+                            contents: '<div style="text-align: center"><h2>รายงาน สรุปอุบัติการณ์</h2></div>'
                         },
                         footer: {
                             height: "15mm",

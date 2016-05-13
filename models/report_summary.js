@@ -3,11 +3,12 @@ var Q = require('q');
 module.exports = {
     getReport_summary: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.id,p.name_sub_program,d.risk_detail,l.risk_level,e.depname,CONCAT(f.date_risk," / ",time_risk) as Date_Time,f.confirm,i.result_repeat  FROM  risk_request_first f '+
+        var sql =   'SELECT f.id,d.risk_detail,p.name_sub_program,z.program_risk,l.risk_level,e.depname,CONCAT(f.date_risk," / ",time_risk) as Date_Time,f.confirm,i.result_repeat  FROM  risk_request_first f '+
        'INNER JOIN risk_request_second c ON f.id = c.risk_request_id '+
        'INNER JOIN risk_request_third t ON t.risk_request_id = f.id '+
        'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id '+
        'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id '+
+        'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
         'LEFT JOIN risk_sub_program p ON p.id = c.risk_group  '+
         'LEFT JOIN risk_detail d ON d.id = c.risk_sub_group  '+
         'LEFT JOIN clinic_level l ON l.id = c.risk_level  '+
