@@ -261,7 +261,9 @@ html
                                     .head(style="width: 100%;")
                                         strong โปรแกรม:
                                         | &nbsp; #{detail.program_risk}
-                                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            tr
+                                td
+                                    .head(style="width: 100%;")
                                         strong โปรแกรมย่อย:
                                         | &nbsp; #{detail.name_sub_program}
                             tr
@@ -301,7 +303,7 @@ html
                                         strong การแก้ไขปัญหาทันที:
                                         | &nbsp; #{detail.risk_correct}
                                         br
-
+                    div(style="page-break-after:always;")
                     div.slib-box
                         table
                             tr
@@ -349,7 +351,7 @@ html
                                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         strong รายละเอียด:
                                         | &nbsp; #{detail.ot}
-                    div(style="page-break-after:always;")
+
                     div.slib-box
                         table
                             tr
