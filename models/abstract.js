@@ -4,8 +4,9 @@ module.exports = {
     getSubAllDetail: function (db,startpage) {
         var q = Q.defer();
         var sql = 'SELECT f.date_risk,f.id,f.topic_risk,d.depname,r.detail,f.confirm,f.abstract FROM risk_request_first f '+
+        'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id                     '+
         'LEFT JOIN risk_abstract r ON r.request_id = f.id                                 '+
-        'LEFT JOIN department d ON f.depcode=d.depcode                             '+
+        'LEFT JOIN department d ON u.depcode=d.depcode                             '+
         'ORDER BY f.id DESC  limit 15 offset ?';
         db.raw(sql,[startpage])
             .then(function (rows) {
@@ -157,9 +158,10 @@ module.exports = {
     search_department: function(db,data){
         var q = Q.defer();
         var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname,r.detail FROM risk_request_first f '+
+       ' INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id                     '+
        ' LEFT OUTER JOIN risk_abstract r ON r.id = f.id   '+
        ' LEFT OUTER JOIN department d ON f.depcode=d.depcode  '+
-       ' WHERE f.depcode = ?    '+
+       ' WHERE u.depcode = ?    '+
        ' ORDER BY f.id DESC';
         db.raw(sql,[data.department])
             //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL

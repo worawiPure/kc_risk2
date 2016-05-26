@@ -291,7 +291,7 @@ router.get('/report_level/:date1/:date2/:risk_type/:risk_level', function (req, 
     var risk_level = req.params.risk_level;
     console.log(date1);
     console.log(date2);
-    report_terminal.getReport_terminal2(db,date1,date2,risk_type,risk_level)
+    report_terminal.getReport_level2(db,date1,date2,risk_type,risk_level)
         .then(function(rows){
             json.detail = rows;
             console.log(json.detail);

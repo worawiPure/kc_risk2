@@ -38,7 +38,8 @@ module.exports = {
         var q = Q.defer();
         var sql =   'SELECT a.*,f.*,d.depname FROM risk_abstract a '+
         'INNER JOIN risk_request_first f ON f.id=a.request_id    '+
-        'LEFT JOIN department d ON d.depcode=f.depcode   '+
+        'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id                     '+
+        'LEFT JOIN department d ON d.depcode=u.depcode   '+
         'WHERE request_id = ?';
 
         db.raw(sql,[id])

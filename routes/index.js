@@ -151,13 +151,13 @@ router.get('/show_risk/:id',function(req,res){
     }
 });
 
-router.get('/user_senior_show_risk/:id/:depcode',function(req,res){
+router.get('/user_senior_show_risk/:id/:cc',function(req,res){
     if (req.session.level_user_id != 4){
         res.render('./page/access_denied')
     }else {
         var db = req.db;
         var id = req.params.id;
-        var depcode = req.params.depcode;
+        var cc = req.params.depcode;
         show_risk2.Chack_sesion_depcode(db, id, req.session.depcode)
             .then(function (total) {
                 if (total > 0) {
@@ -412,7 +412,7 @@ router.get('/edit_risk/:id', function(req,res){
     }
 });
 
-router.get('/user_senior_edit_risk/:id/:depcode', function(req,res){
+router.get('/user_senior_edit_risk/:id/:cc', function(req,res){
     if (req.session.level_user_id != 4){
         res.render('./page/access_denied')
     }else {

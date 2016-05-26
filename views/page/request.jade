@@ -72,15 +72,15 @@ block content
                             .form-group
                                 label(for="txtTime_report_risk") เวลาที่รายงาน
                                 input#txtTime_report_risk(type="time").form-control
-
                     .row
                         .col-md-4
                             .form-group
-                                label(for="slDepartment") หน่วยงาน
+                                label(for="slDepartment") หน่วยงานที่เกิดความเสี่ยง
                                 select#slDepartment.form-control
-                                    for m in data.depcodes
-                                        option(value="#{m.depcode}") #{m.depname}
-                        .col-md-8
+                                    option(value="") กรุณาเลือกรายการ....
+                                    for d in data.departments
+                                        option(value="#{d.depcode}") #{d.depname}
+                        //.col-md-8
                             .form-group.has-feedback
                                 label(for="txtArea_risk") บริเวณที่เกิดความเสี่ยง
                                 input#txtArea_risk(type="text" placeholder="บริเวณที่เกิดความเสี่ยง").form-control.css-require
@@ -122,9 +122,9 @@ block content
                                 label(for="txtRisk_detail") รายละเอียดความเสี่ยง
                                 textarea#txtRisk_detail(type="text" rows="3" placeholder="รายละเอียดความเสี่ยง").form-control.css-require
                     .row
-                        .col-md-5
+                        .col-md-7
                             .form-group
-                                label.radio(for="radioSentinel") Sentinel event case (เหตุการณ์ที่ต้องรอใน 24 ชม.)
+                                label.radio(for="radioSentinel") Sentinel event case (เหตุการณ์ที่ต้องรายงานภายใน 24 ชม.)
                                 | &nbsp;&nbsp;&nbsp;
 
                                 label(value='Y', style='width:20%')
@@ -229,9 +229,9 @@ block content
                             .form-group
                                 label(for="slDepartment2") หน่วยงาน
                                 select#slDepartment2.form-control
-                                    option(value="") กรุณาเลือกรายการ....
-                                    for d in data.departments
-                                        option(value="#{d.depcode}") #{d.depname}
+                                    for m in data.depcodes
+                                        option(value="#{m.depcode}") #{m.depname}
+
 
     button(type="button").btn.btn-success#btnSave บันทึก
 

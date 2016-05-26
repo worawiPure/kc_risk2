@@ -47,7 +47,7 @@ module.exports = {
 
     getSubAllDetail_user_senior: function(db,depcode,startpage){
         var q = Q.defer();
-        var sql =   'SELECT f.confirm,f.id,a.name as aa,f.topic_risk,c.name as com,f.date_risk,f.time_risk,d.depname,f.area_risk,p.program_risk,b.name_sub_program,e.risk_detail as subgroup,s.note_other as yy,s.risk_correct,s.risk_detail,s.risk_level,t.hn,t.an,t.name_kin,t.name_officer,t.name_other,t.name_patient,t.note_kin,t.note_officer,t.note_other,t.note_patient,r.name as report,u.name_report,u.position,f.depcode,d2.depname as mm FROM risk_request_first f '+
+        var sql =   'SELECT f.confirm,f.id,a.name as aa,f.topic_risk,c.name as com,f.date_risk,f.time_risk,d.depname,f.area_risk,p.program_risk,b.name_sub_program,e.risk_detail as subgroup,s.note_other as yy,s.risk_correct,s.risk_detail,s.risk_level,t.hn,t.an,t.name_kin,t.name_officer,t.name_other,t.name_patient,t.note_kin,t.note_officer,t.note_other,t.note_patient,r.name as report,u.name_report,u.position,f.depcode,d2.depname as mm,u.depcode as cc FROM risk_request_first f '+
         'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
         'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
         'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
@@ -59,7 +59,7 @@ module.exports = {
         'LEFT JOIN risk_sub_program b ON b.id=s.risk_group   '+
         'LEFT JOIN risk_detail e ON e.id=s.risk_sub_group   '+
         'LEFT JOIN type_report r ON r.id=u.type_report '+
-        'WHERE f.depcode = ? limit 10 offset ? ';
+        'WHERE u.depcode = ? limit 10 offset ? ';
         db.raw(sql,[depcode,startpage])
             .then(function(rows){
                 q.resolve(rows[0])
@@ -77,7 +77,7 @@ module.exports = {
         'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
         'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
         'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
-        'WHERE f.depcode = ? ';
+        'WHERE u.depcode = ? ';
         db.raw(sql,[depcode])
             .then(function(rows){
                 q.resolve(rows[0][0].total)
@@ -188,7 +188,7 @@ module.exports = {
     },
     Chack_sesion_depcode: function(db,id,depcode){
         var q = Q.defer();
-        db('risk_request_first')
+        db('risk_request_fourth')
             .where({
                 id:id,
                 depcode:depcode

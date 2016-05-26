@@ -75,19 +75,18 @@ block content
                             .form-group
                                 label(for="txtTime_report_risk") เวลาที่รายงาน
                                 input#txtTime_report_risk(type="time").form-control
-
                     .row
                         .col-md-4
                             .form-group
-                                label(for="slDepartment") หน่วยงาน
+                                label(for="slDepartment") หน่วยงานที่เกิดความเสี่ยง
                                 select#slDepartment.form-control
-                                    option(value="") กรุณาเลือกรายการ....
-                                    for m in data.depcodes
-                                        if m.depcode == data.detail.depcode
-                                            option(value="#{m.depcode}", selected="selected") #{m.depname}
+                                    for f in data.departments
+                                        if f.id == data.detail.depcode
+                                            option(value="#{f.depcode}", selected="selected") #{f.depname}
                                         else
-                                            option(value="#{m.depcode}") #{m.depname}
-                        .col-md-8
+                                            option(value="#{f.depcode}") #{f.depname}
+
+                        //.col-md-8
                             .form-group
                                 label(for="txtArea_risk") บริเวณที่เกิดความเสี่ยง
                                 input#txtArea_risk(type="text", value="#{data.detail.area_risk}").form-control
@@ -258,11 +257,12 @@ block content
                             .form-group
                                 label(for="slDepartment2") หน่วยงาน
                                 select#slDepartment2.form-control
-                                    for f in data.departments
-                                        if f.id == data.detail.cc
-                                            option(value="#{f.depcode}", selected="selected") #{f.depname}
+                                    for m in data.depcodes
+                                        if m.depcode == data.detail.depcode
+                                            option(value="#{m.depcode}", selected="selected") #{m.depname}
                                         else
-                                            option(value="#{f.depcode}") #{f.depname}
+                                            option(value="#{m.depcode}") #{m.depname}
+
 
     button(type="button").btn.btn-success#btnEdit บันทึก
 

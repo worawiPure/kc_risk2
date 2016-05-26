@@ -161,7 +161,7 @@ $(function() {
         data.note = $('#txtNote').val();
         //data.sentinel = $('#checkboxSentinel').val()?'Y':'N';
         if(!data.risktype || !data.complaint || !data.topic || !data.date_risk || !data.time_risk
-            || !data.department || !data.area_risk || !data.program || !data.risk_detail || !data.type_report || !data.name_report ) {
+            || !data.department || !data.program || !data.risk_detail || !data.type_report || !data.name_report ) {
             $('#divAlert').fadeIn('slow');
         } else{
             $.ajax({

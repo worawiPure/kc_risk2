@@ -253,9 +253,10 @@ module.exports = {
     user_senior_search_date: function(db,data){
         var q = Q.defer();
         var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.`name` as aa FROM  risk_request_first f  '+
+        'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
         'LEFT JOIN risk_type t ON f.type_risk=t.id '+
         'WHERE f.date_risk = ? '+
-        'and f.depcode = ? ';
+        'and u.depcode = ? ';
 
          db.raw(sql,[data.date,data.depcode])
              //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
@@ -295,9 +296,10 @@ module.exports = {
     user_senior_search_topic: function(db,data){
         var q = Q.defer();
         var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.`name` as aa FROM  risk_request_first f  '+
+            'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
             'LEFT JOIN risk_type t ON f.type_risk=t.id '+
             'WHERE f.topic_risk Like ? '+
-            'and f.depcode = ? ';
+            'and u.depcode = ? ';
         var query = '%'+data.topic+'%';
         db.raw(sql,[query,data.depcode])
             //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL

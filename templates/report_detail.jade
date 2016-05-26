@@ -226,7 +226,7 @@ html
                                         strong ประเภท:
                                         | &nbsp; #{detail.complaint_type}
                                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        strong หน่วยงาน:
+                                       // strong หน่วยงาน:
                                         | &nbsp; #{detail.depname}
                             tr
                                 td
@@ -246,8 +246,8 @@ html
                             tr
                                 td
                                     .head(style="width: 100%;")
-                                        strong บริเวณที่เกิดความเสี่ยง:
-                                        | &nbsp; #{detail.area_risk}
+                                        strong หน่วยงานที่เกิดความเสี่ยง:
+                                        | &nbsp; #{detail.depname}
                                         br
                     div.slib-box
                         table
@@ -285,7 +285,7 @@ html
                             tr
                                 td
                                     .head(style="width: 100%;")
-                                        strong Sentinel event case (เหตุการณ์ที่ต้องรอใน 24 ชม.) :
+                                        strong Sentinel event case (เหตุการณ์ที่ต้องรายงานภายใน 24 ชม.) :
                                         | &nbsp;&nbsp;&nbsp;
                                         if detail.sentinel=="Y"
                                             |  ใช่

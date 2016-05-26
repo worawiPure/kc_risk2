@@ -100,7 +100,7 @@ module.exports = {
             'LEFT JOIN department e ON e.depcode = f.depcode                '+
             'LEFT JOIN risk_type x ON x.id=f.type_risk                      '+
             'WHERE f.date_risk BETWEEN ? and ?        '+
-            'AND f.depcode = ?                        '+
+            'AND o.depcode = ?                        '+
             'ORDER BY f.date_risk';
 
         db.raw(sql,[data.date1,data.date2,data.depcode])
@@ -187,7 +187,7 @@ module.exports = {
             'LEFT JOIN department e ON e.depcode = f.depcode                '+
             'LEFT JOIN risk_type x ON x.id=f.type_risk                      '+
             'WHERE f.date_risk BETWEEN ? and ?                              '+
-            'AND f.depcode = ?                                              '+
+            'AND o.depcode = ?                                              '+
             'ORDER BY f.date_risk';
 
         db.raw(sql,[date1,date2,depcode])
