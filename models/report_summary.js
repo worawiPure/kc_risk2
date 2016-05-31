@@ -29,7 +29,7 @@ module.exports = {
 
     getReport_terminal: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,SUBSTRING(l.risk_level,1,2) as Leve,e.depname, '+
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
         'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
         'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
         'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
@@ -57,7 +57,7 @@ module.exports = {
 
     getReport_level: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,SUBSTRING(l.risk_level,1,2) as Leve,e.depname, '+
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
             'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
             'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
             'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
@@ -87,7 +87,7 @@ module.exports = {
 
     getReport_user_senior: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,SUBSTRING(l.risk_level,1,2) as Leve,e.depname, '+
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
             'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
             'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
             'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
@@ -116,7 +116,7 @@ module.exports = {
 
     getReport_terminal2: function(db,date1,date2){
         var q = Q.defer();
-        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,SUBSTRING(l.risk_level,1,2) as Leve,e.depname, '+
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
         'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
         'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
         'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
@@ -144,7 +144,7 @@ module.exports = {
 
     getReport_level2: function(db,date1,date2,risk_type,risk_level){
         var q = Q.defer();
-        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,SUBSTRING(l.risk_level,1,2) as Leve,e.depname, '+
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
             'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
             'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
             'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
@@ -174,7 +174,7 @@ module.exports = {
 
     getReport_senior: function(db,date1,date2,depcode){
         var q = Q.defer();
-        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,SUBSTRING(l.risk_level,1,2) as Leve,e.depname, '+
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
             'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
             'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
             'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
@@ -203,7 +203,7 @@ module.exports = {
 
     getReport_user: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,SUBSTRING(l.risk_level,1,2) as Leve,e.depname, '+
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
             'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
             'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
             'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
@@ -232,7 +232,7 @@ module.exports = {
 
     getReport_user2: function(db,date1,date2,username){
         var q = Q.defer();
-        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,SUBSTRING(l.risk_level,1,2) as Leve,e.depname, '+
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
             'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
             'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
             'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+

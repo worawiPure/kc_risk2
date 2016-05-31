@@ -102,7 +102,7 @@ block content
                         .col-md-12
                             .form-group
                                 label(for="txtRisk_detail") รายละเอียดความเสี่ยง
-                                input(type="text", value="#{rows.risk_detail}", disabled="disabled").form-control
+                                textarea(type="text",rows="5", readonly=).form-control #{rows.risk_detail}
                     .row
                         .col-md-7
                             .form-group
