@@ -9,7 +9,8 @@ $(function(){
                 '<td> ' + i + ' </td>'+
                 '<td> ' + moment(v.date_risk).format('DD/MM/YYYY') + ' </td>'+
                 '<td> ' + v.topic_risk + ' </td>'+
-                '<td> ' + v.depname + ' </td>'+
+                '<td> ' + v.department_report + ' </td>'+
+                '<td> ' + v.department_risk + ' </td>'+
                 '<td> '+
                 '   <div class="btn-group btn-group-sm" role="group"> '+
                 '<a class="btn btn-success" type="button" href="/abstract_risk/show_risk/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ดูรายละเอียด"> <i class="fa fa-search"></i></a> '+
@@ -122,6 +123,11 @@ $(function(){
 
             })
     };
+
+    $('#Block_Search').fadeOut();
+    $('#btnShowSearch').on('click',function(e){
+    $('#Block_Search').fadeIn();
+    });
 
     $(document).on('click', 'a[data-action="Addabstract"]', function (e) {
         e.preventDefault();

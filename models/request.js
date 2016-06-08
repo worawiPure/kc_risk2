@@ -56,6 +56,7 @@ module.exports = {
         db('risk_request_third')
         .insert({
                 risk_request_id:data.id,
+                sone:data.sone,
                 hn:data.hn,
                 an:data.an,
                 name_patient:data.name_patient,
@@ -168,6 +169,7 @@ module.exports = {
         var q = Q.defer();
         db('risk_request_third')
             .update({
+                sone:data.sone,
                 hn:data.hn,
                 an:data.an,
                 name_patient:data.name_patient,
@@ -272,6 +274,28 @@ module.exports = {
         return q.promise;
     },
 
+    user_senior_search_date_feedback: function(db,data){
+        var q = Q.defer();
+        db('risk_request_first as f')
+            .select( 'f.id','f.date_risk','f.topic_risk','t.name as aa','d.depname as mm')
+            .innerJoin('risk_request_fourth as u', 'u.risk_request_id', 'f.id')
+            .leftJoin('risk_type as t','t.id','f.type_risk')
+            .leftJoin('department as d', 'd.depcode', 'u.depcode')
+            .where('f.date_risk',[data.date])
+            .whereIn('f.depcode',[data.depcode,data.sub_depcode])
+            .whereNotIn('u.depcode',[data.depcode,data.sub_depcode])
+
+            .then(function(rows){
+                console.log(rows);
+                q.resolve(rows)
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
     search_topic: function(db,data){
         var q = Q.defer();
         var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.`name` as aa FROM  risk_request_first f  '+
@@ -285,7 +309,6 @@ module.exports = {
                 console.log(rows[0]);
                 q.resolve(rows[0])
             })
-
             .catch(function(err){
                 console.log(err)
                 q.reject(err)
@@ -306,6 +329,30 @@ module.exports = {
             .then(function(rows){
                 console.log(rows[0]);
                 q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    user_senior_search_topic_feedback: function(db,data){
+        var q = Q.defer();
+        var query = '%'+data.topic+'%';
+        db('risk_request_first as f')
+            .select( 'f.id','f.date_risk','f.topic_risk','t.name as aa','d.depname as mm')
+            .innerJoin('risk_request_fourth as u', 'u.risk_request_id', 'f.id')
+            .leftJoin('risk_type as t','t.id','f.type_risk')
+            .leftJoin('department as d', 'd.depcode', 'u.depcode')
+            .where('f.topic_risk','like', query)
+            .whereIn('f.depcode',[data.depcode,data.sub_depcode])
+            .whereNotIn('u.depcode',[data.depcode,data.sub_depcode])
+        //db.raw(sql,[query,data.depcode])
+            //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
+            .then(function(rows){
+                console.log(rows);
+                q.resolve(rows)
             })
             .catch(function(err){
                 console.log(err)

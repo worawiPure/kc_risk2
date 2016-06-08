@@ -12,7 +12,7 @@ $(function() {
                 .success(function (data) {
                     var $sl = $('#slSubProgram');
                     $sl.empty();
-                    $sl.append('<option value="">ไม่มี</option> ');
+                    //$sl.append('<option value="">ไม่มี</option> ');
                     _.forEach(data.rows, function (v) {
                         $sl.append('<option value="' + v.id + '">' + v.name_sub_program + '</option> ');
                     });
@@ -95,7 +95,7 @@ $(function() {
                 .success(function (data) {
                     var $sl = $('#slRisk_level');
                     $sl.empty();
-                    $sl.append('<option value=""></option> ');
+                    $sl.append('<option value="">****กรุณาเลือกความรุนแรง******</option> ');
                     _.forEach(data.rows, function (v) {
                         $sl.append('<option value="' + v.id + '">' + v.risk_level + '</option> ');
                     });
@@ -139,6 +139,7 @@ $(function() {
         data.sentinel = $("#radioYes").prop("checked") ? 'Y' : 'N';
         data.risk_level = $('#slRisk_level').val();
         data.risk_correct = $('#txtRisk_correct').val();
+        data.sone = $("#radioOPD").prop("checked") ? 'OPD' : 'IPD';
         data.hn = $('#txtHn').val();
         data.an = $('#txtAn').val();
         data.name_patient = $('#txtName_patient').val();
@@ -162,7 +163,8 @@ $(function() {
         data.note = $('#txtNote').val();
        // data.sentinel = $('#checkboxSentinel').val()?'Y':'N';
         if(!data.risktype || !data.complaint || !data.topic || !data.date_risk || !data.time_risk
-            || !data.department || !data.program || !data.risk_detail || !data.type_report || !data.name_report ) {
+            || !data.department || !data.program  || !data.subprogram || !data.subgroup || !data.risk_detail
+            || !data.risk_level || !data.type_report || !data.name_report ) {
             $('#divAlert').fadeIn('slow');
         } else{
             $.ajax({

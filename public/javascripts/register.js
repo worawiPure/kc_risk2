@@ -45,7 +45,7 @@ $(function(){
                 .success(function (data) {
                     if (data.ok) {
                         alert('บันทึกข้อมูลเรียบร้อยแล้ว');
-                        window.location.href="/";
+                        window.location.href="/users/user";
                     } else {
                         $('#divDuplicated').fadeIn();
                         setTimeout(function () {

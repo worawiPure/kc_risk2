@@ -11,14 +11,16 @@ html
     link(rel="stylesheet", href="/libs/bootstrap-material-design/dist/css/ripples.min.css")
     link(rel="stylesheet", href="/libs/bootstrap-material-design/dist/css/roboto.min.css")
     link(rel="stylesheet", href="/stylesheets/style.css")
+    link(rel="stylesheet", href="/libs/nprogress/nprogress.css")
     script(src="/libs/jquery/dist/jquery.min.js")
     script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
     script(src="/libs/bootstrap-material-design/dist/js/material.min.js")
     script(src="/libs/bootstrap-material-design/dist/js/ripples.min.js")
     script(src="/libs/paging/jquery.paging.min.js")
-    script(src="/javascripts/app.js")
     script(src="/libs/lodash/lodash.min.js")
     script(src="/libs/moment/moment.js")
+    script(src="/libs/nprogress/nprogress.js")
+    script(src="/javascripts/app.js")
 
     script.
         $(function(){
@@ -73,6 +75,14 @@ html
                   a(href="/report_risk/level")
                     i.fa.fa-file
                     | &nbsp;&nbsp;รายงานความเสี่ยงแยกระดับความรุนแรง
+                li
+                  a(href="/report_risk/summary_date")
+                      i.fa.fa-file
+                      | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดตามวันที่
+                li
+                  a(href="/report_risk/summary_department")
+                      i.fa.fa-file
+                      | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดแบบเลือกแผนก
           p.navbar-text.navbar-right #{session.fullname}
           ul.nav.navbar-nav.pull-right
             li.dropdown
@@ -122,6 +132,10 @@ html
                                     a(href="/report_risk/level")
                                         i.fa.fa-file
                                         | &nbsp;&nbsp;รายงานความเสี่ยงแยกระดับความรุนแรง
+                                  li
+                                    a(href="/report_risk/summary_date")
+                                        i.fa.fa-file
+                                        | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดตามวันที่
           .panel.panel-default
             .panel-body
                 .ul.nav.nav-pills.nav-stacked

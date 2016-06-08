@@ -5,7 +5,7 @@ module.exports = {
         var q = Q.defer();
         var sql =   'SELECT f.id,a.name as risk_type,b.name as complaint_type,f.topic_risk,f.date_risk,f.time_risk,e.depname,f.area_risk,   '+
         'g.program_risk,p.name_sub_program,d.risk_detail,c.sentinel,c.note_other,c.risk_detail as detail,l.risk_level,c.risk_correct,                  '+
-        't.hn,t.an,t.name_patient,t.name_kin,t.name_officer,t.name_other,t.note_patient,t.note_kin,t.note_officer,t.note_other as ot,       '+
+        't.sone,t.hn,t.an,t.name_patient,t.name_kin,t.name_officer,t.name_other,t.note_patient,t.note_kin,t.note_officer,t.note_other as ot,       '+
         'h.name as type_report,o.name_report,o.position,e2.depname as oe,                                                                   '+
         'i.date_repeat,i.date_finished,i.name_repeat,i.result_repeat,i.depcode_connected,i.edit_system,i.note FROM  risk_request_first f    '+
         'INNER JOIN risk_request_second c ON f.id = c.risk_request_id                                                                       '+

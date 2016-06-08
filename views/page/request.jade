@@ -111,7 +111,7 @@ block content
                             .form-group.has-feedback
                                 label(for="slSubGroup") Sub Group
                                 select#slSubGroup.form-control.css-require
-                    .row
+                    //.row
                         .col-md-12
                             .form-group
                                 label(for="txtNote_other") ระบุกรณีเลือกประเภทอื่นๆ
@@ -126,9 +126,8 @@ block content
                             .form-group
                                 label.radio(for="radioSentinel") Sentinel event case (เหตุการณ์ที่ต้องรายงานภายใน 24 ชม.)
                                 | &nbsp;&nbsp;&nbsp;
-
                                 label(value='Y', style='width:20%')
-                                    input#radioYes(type='radio', name='sentinel', checked='')
+                                    input#radioYes(type='radio', name='sentinel')
                                     |  ใช่
                                 label(value='N', style='width:20%')
                                     input#radioNo(type='radio', name='sentinel')
@@ -155,10 +154,22 @@ block content
                     #divPatient
                         .row
                             .col-md-6
+                                form.form-inline
+                                    .form-group
+                                        label.radio(for="radioSone") ประเภทผู้ป่วย :
+                                        | &nbsp;&nbsp;&nbsp;&nbsp;
+                                        label(value='OPD')
+                                        input#radioOPD(type='radio', name='sone')
+                                        |OPD
+                                        | &nbsp;&nbsp;&nbsp;&nbsp;
+                                        label(value='IPD')
+                                        input#radioIPD(type='radio', name='sone')
+                                        |IPD
+                            .col-md-3
                                 .form-group
                                     label(for="txtHn") HN
                                     input#txtHn(type="text" placeholder="HN กรณีผู้ป่วยนอก").form-control
-                            .col-md-6
+                            .col-md-3
                                 .form-group
                                     label(for="txtAn") AN
                                     input#txtAn(type="text" placeholder="AN กรณีผู้ป่วยใน").form-control

@@ -272,7 +272,7 @@ html
                                         strong กลุ่มย่อย:
                                         | &nbsp; #{detail.risk_detail}
                                         br
-                            tr
+                            //tr
                                 td
                                     .head(style="width: 100%;")
                                         strong ระบุกรณีอื่นๆ:
@@ -311,6 +311,15 @@ html
                                     .head(style="width: 100%;")
                                         strong ส่วนที่3 ผลกระทบจากการเกิดอุบัติการณื
                                         br
+                            tr
+                                td
+                                    .head(style="width: 100%;")
+                                        strong ประเภทผู้ป่วย :
+                                        | &nbsp;&nbsp;&nbsp;
+                                        if detail.sone=="OPD"
+                                            |  OPD
+                                        else
+                                            |  IPD
                             tr
                                 td
                                     .head(style="width: 100%;")

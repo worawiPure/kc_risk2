@@ -127,7 +127,7 @@ block content
                                             option(value="#{y.id}", selected="selected") #{y.risk_detail}
                                         else
                                             option(value="#{y.id}") #{y.risk_detail}
-                    .row
+                    //.row
                         .col-md-12
                             .form-group
                                 label(for="txtNote_other") ระบุกรณีเลือกประเภทอื่นๆ
@@ -181,6 +181,25 @@ block content
                 .panel-body
                     #divPatient
                         .row
+                            .col-md-5
+                                form.form-inline
+                                    .form-group
+                                        label.radio(for="radiosone") ประเภทผู้ป่วย :
+                                        | &nbsp;&nbsp;&nbsp;
+                                        if  data.detail.sone == "OPD"
+                                            label(value="OPD")
+                                                input#radioOPD(type='radio', name='sone', checked)
+                                                | OPD
+                                            label(value="IPD")
+                                                input#radioIPD(type='radio', name='sone')
+                                                | IPD
+                                        else
+                                            label(value="OPD")
+                                                input#radioOPD(type='radio', name='sone')
+                                                | OPD
+                                            label(value="IPD")
+                                                input#radioIPD(type='radio', name='sone', checked)
+                                                | IPD
                             .col-md-6
                                 .form-group
                                     label(for="txtHn") HN

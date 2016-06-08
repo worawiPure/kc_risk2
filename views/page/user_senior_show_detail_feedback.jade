@@ -1,12 +1,11 @@
 extends  ../user_senior_layout
 block scripts
-    script(src="/javascripts/user_senior_risk_report.js")
+    script(src="")
 block content
     br
     ol.breadcrumb
         li
-            a(href="/user_senior_risk_report") หัวข้อความเสี่ยง
-        li.active รายละเอียดความเสี่ยง
+            a(href="/user_senior_risk_report_feedback") หัวข้อความเสี่ยงที่หน่วยงานอื่นรายงานเกี่ยวกับแผนกเรา
         li #{rows.topic_risk}
     ul.nav.nav-tabs(role="tablist")
         li.active(role='presentation')

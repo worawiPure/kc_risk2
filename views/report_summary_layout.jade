@@ -16,9 +16,11 @@ html
     script(src="/libs/bootstrap-material-design/dist/js/material.min.js")
     script(src="/libs/bootstrap-material-design/dist/js/ripples.min.js")
     script(src="/libs/paging/jquery.paging.min.js")
-    script(src="/javascripts/app.js")
     script(src="/libs/lodash/lodash.min.js")
     script(src="/libs/moment/moment.js")
+    script(src="/libs/nprogress/nprogress.js")
+    script(src="/javascripts/app.js")
+
 
     script.
         $(function(){
@@ -73,6 +75,14 @@ html
                     a(href="/report_risk/level")
                         i.fa.fa-file
                         | &nbsp;&nbsp;รายงานความเสี่ยงแยกระดับความรุนแรง
+                li
+                    a(href="/report_risk/summary_date")
+                        i.fa.fa-file
+                        | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดตามวันที่
+                li
+                    a(href="/report_risk/summary_department")
+                        i.fa.fa-file
+                        | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดแบบเลือกแผนก
           p.navbar-text.navbar-right #{session.fullname} | #{session.depname}
           ul.nav.navbar-nav.pull-right
             li.dropdown

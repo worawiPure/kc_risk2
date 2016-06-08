@@ -388,6 +388,7 @@ router.post('/login',function(req,res){
         req.session.level_user_id=rows[0].level_user_id
         req.session.username=username;
         req.session.depcode=rows[0].depcode;
+        req.session.sub_depcode=rows[0].sub_depcode;
         req.session.fullname=rows[0].fname + ' ' + rows[0].lname;
         req.session.depname=rows[0].depname;
 

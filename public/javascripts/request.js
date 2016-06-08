@@ -18,7 +18,7 @@ $(function() {
         //});
 
 
-        $('#slRisktype').on('change', function (e) {
+        $('#slRisktype').on('click', function (e) {
             if($(this).val().length){
                 $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
                 $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
@@ -28,7 +28,7 @@ $(function() {
             }
             });
 
-        $('#slComplaint').on('change', function (e) {
+        $('#slComplaint').on('click', function (e) {
             if($(this).val().length){
                 $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
                 $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
@@ -37,6 +37,16 @@ $(function() {
                 $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
             }
             });
+
+        $('#slDepartment').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        });
 
         $('#txtTopic').on('click', function (e) {
             if($(this).val().length){
@@ -59,16 +69,6 @@ $(function() {
         });
 
         $('#txtTime_risk').on('click', function (e) {
-            if($(this).val().length){
-                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
-                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
-            }else{
-                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
-                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
-            }
-        });
-
-        $('#txtArea_risk').on('click', function (e) {
             if($(this).val().length){
                 $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
                 $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
@@ -173,7 +173,7 @@ $(function() {
                 .success(function (data) {
                     var $sl = $('#slSubProgram');
                     $sl.empty();
-                    $sl.append('<option value="">ไม่มี</option> ');
+                    //$sl.append('<option value="">ไม่มี</option> ');
                     _.forEach(data.rows, function (v) {
                         $sl.append('<option value="' + v.id + '">' + v.name_sub_program + '</option> ');
                     });
@@ -257,7 +257,8 @@ $(function() {
                 .success(function (data) {
                     var $sl = $('#slRisk_level');
                     $sl.empty();
-                    $sl.append('<option value=""></option> ');
+                    //$sl.append('<option value=""></option> ');
+                    $sl.append('<option value="">*****กรุณาเลือกระดับความรุนแรง******</option> ');
                     _.forEach(data.rows, function (v) {
                         $sl.append('<option value="' + v.id + '">' + v.risk_level + '</option> ');
                     });
@@ -283,7 +284,6 @@ $(function() {
 
     $('#btnSave').on('click', function(e){
         var data = {};
-
         data.risktype = $('#slRisktype').val();
         data.complaint = $('#slComplaint').val();
         data.topic = $('#txtTopic').val();
@@ -296,11 +296,12 @@ $(function() {
         data.program = $('#slProgram').val();
         data.subprogram = $('#slSubProgram').val();
         data.subgroup = $('#slSubGroup').val();
-        data.note_other = $('#txtNote_other').val();
+        //data.note_other = $('#txtNote_other').val();
         data.risk_detail = $('#txtRisk_detail').val();
         data.sentinel = $("#radioYes").prop('checked') ? 'Y' : 'N';
         data.risk_level = $('#slRisk_level').val();
         data.risk_correct = $('#txtRisk_correct').val();
+        data.sone = $("#radioOPD").prop('checked') ? 'OPD' : 'IPD';
         data.hn = $('#txtHn').val();
         data.an = $('#txtAn').val();
         data.name_patient = $('#txtName_patient').val();
@@ -322,10 +323,9 @@ $(function() {
         data.edit_system = $('#txtEdit_system').val();
         data.date_finished = $('#txtDate_finished').val();
         data.note = $('#txtNote').val();
-        data.sentinel = $('#checkboxSentinel').val()?'Y':'N';
 
         if(!data.risktype || !data.complaint || !data.topic || !data.date_risk || !data.time_risk
-            || !data.department || !data.program || !data.risk_detail || !data.type_report || !data.name_report ) {
+            || !data.department || !data.program || !data.subprogram || !data.subgroup || !data.risk_detail || !data.risk_level || !data.type_report || !data.name_report ) {
             $('#divAlert').fadeIn('slow');
         } else{
             $.ajax({

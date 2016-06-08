@@ -69,6 +69,13 @@ router.get('/user_senior_risk_report', function(req, res, next) {
     res.render('page/user_senior_risk_report');}
 });
 
+router.get('/user_senior_risk_report_feedback', function(req, res, next) {
+    if (req.session.level_user_id != 4){
+        res.render('./page/access_denied')
+    }else{
+        res.render('page/user_senior_risk_report_feedback');}
+});
+
 router.post('/get_risk_report' ,function(req,res) {
     var db = req.db;
     var username = req.session.username;
@@ -121,6 +128,35 @@ router.post('/user_senior_get_risk_report_total' ,function(req,res) {
     )
 });
 
+router.post('/user_senior_get_risk_feedback_report' ,function(req,res) {
+    var db = req.db;
+    var depcode = req.session.depcode;
+    var sub_depcode = req.session.sub_depcode;
+    var startpage = parseInt(req.body.startRecord);
+    console.log(depcode,sub_depcode)
+    show_risk.getSubAllDetail_user_senior_feedback(db,req.session.depcode,req.session.sub_depcode,startpage)
+        .then(function(rows) {
+            res.send({ok:true,rows:rows})
+        },function(err){
+            res.send({ok:false,msg:err})
+        }
+    )
+});
+
+router.post('/user_senior_get_risk_report_feedback_total' ,function(req,res) {
+    var db = req.db;
+    var depcode = req.session.depcode;
+    var sub_depcode = req.session.sub_depcode;
+    console.log(depcode,sub_depcode)
+    show_risk.getSubAllDetail_user_senior_feedback_total(db,req.session.depcode,req.session.sub_depcode)
+        .then(function(total) {
+            res.send({ok:true,total:total})
+        },function(err){
+            res.send({ok:false,msg:err})
+        }
+    )
+});
+
 
 router.get('/show_risk/:id',function(req,res){
     if (req.session.level_user_id != 1){
@@ -143,6 +179,7 @@ router.get('/show_risk/:id',function(req,res){
                             res.send({ok: false, msg: err})
                         }
                     )
+
                 }
                 else {
                     res.render('./page/access_denied')
@@ -181,6 +218,25 @@ router.get('/user_senior_show_risk/:id/:cc',function(req,res){
     }
 });
 
+router.get('/user_senior_show_risk_feedback/:id',function(req,res){
+    if (req.session.level_user_id != 4){
+        res.render('./page/access_denied')
+    }else {
+        var db = req.db;
+        var id = req.params.id;
+        show_risk2.getSubShowDetail(db,id)
+            .then(function (rows) {
+                var data = rows[0];
+                data.date_risk = moment(data.date_risk).format('DD/MM/YYYY');
+                            data.date_report_risk = moment(data.date_report_risk).format('DD/MM/YYYY');
+                            data.date_repeat = moment(data.date_repeat).format('DD/MM/YYYY');
+                            data.date_finished = moment(data.date_finished).format('DD/MM/YYYY');
+                            res.render('page/user_senior_show_detail_feedback', {rows: data});
+                        }, function (err) {
+                            res.send({ok: false, msg: err})
+                        })
+    }
+});
 
 router.get('/risk_repeat/:id/:depcode',function(req,res){
     if (req.session.level_user_id != 4){
@@ -660,9 +716,25 @@ router.post('/user_senior_search_date_risk',function(req,res){
                     console.log(err);
                     res.send({ok:false,msg:err})
                 })
-
 });
 
+router.post('/user_senior_search_date_risk_feedback',function(req,res){
+    var db = req.db;
+    var data = {};
+    data.date = req.body.date;
+    data.depcode = req.session.depcode;
+    data.sub_depcode = req.session.sub_depcode;
+    console.log(data);
+    request.user_senior_search_date_feedback(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
+});
 
 router.post('/search_topic_risk',function(req,res){
     var db = req.db;
@@ -691,6 +763,25 @@ router.post('/user_senior_search_topic_risk',function(req,res){
 
     console.log(data);
     request.user_senior_search_topic(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
+
+});
+
+router.post('/user_senior_search_topic_risk_feedback',function(req,res){
+    var db = req.db;
+    var data = {};
+    data.topic = req.body.topic;
+    data.depcode = req.session.depcode;
+    data.sub_depcode = req.session.sub_depcode;
+    console.log(data);
+    request.user_senior_search_topic_feedback(db,data)
         .then(function(rows){
             console.log(rows);
             res.send({ok: true,rows:rows});

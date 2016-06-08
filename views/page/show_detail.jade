@@ -93,7 +93,7 @@ block content
                             .form-group
                                 label(for="slSubGroup") Sub Group
                                 input(type="text", value="#{rows.vv}", readonly).form-control
-                    .row
+                    //.row
                         .col-md-12
                             .form-group
                                 label(for="txtNote_other") ระบุกรณีเลือกประเภทอื่นๆ
@@ -132,11 +132,22 @@ block content
                         | &nbsp; ส่วนที่ 3 ผลกระจากการเกิดอุบัติการณ์
                 .panel-body
                         .row
-                            .col-md-6
+                            .col-md-4
+                                form.form-inline
+                                    .form-group
+                                        label.radio(for="radioSone") ประเภทผู้ป่วย :
+                                        | &nbsp;&nbsp;&nbsp;
+                                        if rows.sone=="OPD"
+                                            input#radioOPD(type='radio', name='sone', checked='checked', disabled="disabled")
+                                            |  OPD
+                                        else
+                                            input#radioIPD(type='radio', name='sone', checked='checked', disabled="disabled")
+                                            |  IPD
+                            .col-md-3
                                 .form-group
                                     label(for="txtHn") HN
                                     input(type="text", value="#{rows.hn}", readonly).form-control
-                            .col-md-6
+                            .col-md-3
                                 .form-group
                                     label(for="txtAn") AN
                                     input(type="text", value="#{rows.an}", readonly).form-control

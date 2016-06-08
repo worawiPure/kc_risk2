@@ -6,6 +6,7 @@ var abstract = require('../models/abstract');
 var risk_type = require('../models/risk_type');
 var report_summary =require('../models/report_summary');
 var level =require('../models/risk_type');
+var department = require('../models/department');
 
 /* GET home page. */
 // /a/
@@ -59,6 +60,42 @@ router.get('/level', function(req, res, next) {
                 res.render('./page/level', {data: data});
             }, function (err) {
                 res.render('./page/level', {data: {risk_types: []}});
+            }
+        )
+    }
+});
+
+router.get('/summary_date', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id != 3){
+        res.render('./page/access_denied')
+    }else {
+        var db = req.db;
+        var data = {};
+        department.getList(db)
+            .then(function (rows) {
+                console.log(rows);
+                data.departments = rows;
+                res.render('./page/report_summary_date', {data: data});
+            }, function (err) {
+                res.render('./page/report_summary_date', {data: {departments: []}});
+            }
+        )
+    }
+});
+
+router.get('/summary_department', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id != 3){
+        res.render('./page/access_denied')
+    }else {
+        var db = req.db;
+        var data = {};
+        department.getList(db)
+            .then(function (rows) {
+                console.log(rows);
+                data.departments = rows;
+                res.render('./page/report_summary_department', {data: data});
+            }, function (err) {
+                res.render('./page/report_summary_department', {data: {departments: []}});
             }
         )
     }
@@ -141,6 +178,43 @@ router.post('/report_terminal',function(req,res){
     data.date2 = req.body.date2;
     console.log(data);
     report_summary.getReport_terminal(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
+
+});
+
+router.post('/report_summary_date',function(req,res){
+    var db = req.db;
+    var data = {};
+    data.date1 = req.body.date1;
+    data.date2 = req.body.date2;
+    console.log(data);
+    report_summary.getReport_summary_date(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
+
+});
+
+router.post('/report_summary_department',function(req,res){
+    var db = req.db;
+    var data = {};
+    data.date1 = req.body.date1;
+    data.date2 = req.body.date2;
+    data.depcode = req.body.depcode;
+    console.log(data);
+    report_summary.getReport_summary_department(db,data)
         .then(function(rows){
             console.log(rows);
             res.send({ok: true,rows:rows});

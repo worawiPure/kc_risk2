@@ -3,10 +3,11 @@ var Q = require('q');
 module.exports = {
     getSubAllDetail: function (db,startpage) {
         var q = Q.defer();
-        var sql = 'SELECT f.date_risk,f.id,f.topic_risk,d.depname,r.detail,f.confirm,f.abstract FROM risk_request_first f '+
+        var sql = 'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,d2.depname as department_risk,r.detail,f.confirm,f.abstract FROM risk_request_first f '+
         'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id                     '+
         'LEFT JOIN risk_abstract r ON r.request_id = f.id                                 '+
         'LEFT JOIN department d ON u.depcode=d.depcode                             '+
+        'LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
         'ORDER BY f.id DESC  limit 15 offset ?';
         db.raw(sql,[startpage])
             .then(function (rows) {
@@ -136,11 +137,12 @@ module.exports = {
 
     search_date: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname,r.detail FROM risk_request_first f '+
+        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,d2.depname as department_risk,r.detail FROM risk_request_first f '+
             ' LEFT OUTER JOIN risk_abstract r ON r.id = f.id   '+
             ' LEFT OUTER JOIN department d ON f.depcode=d.depcode  '+
+            ' LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
             ' WHERE f.date_risk = ?    '+
-            ' ORDER BY f.id DESC';
+            ' ORDER BY f.date_risk DESC';
         db.raw(sql,[data.date])
             //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
             .then(function(rows){
@@ -157,12 +159,13 @@ module.exports = {
 
     search_department: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname,r.detail FROM risk_request_first f '+
+        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,d2.depname as department_risk,r.detail FROM risk_request_first f '+
        ' INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id                     '+
        ' LEFT OUTER JOIN risk_abstract r ON r.id = f.id   '+
        ' LEFT OUTER JOIN department d ON f.depcode=d.depcode  '+
+       ' LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
        ' WHERE u.depcode = ?    '+
-       ' ORDER BY f.id DESC';
+       ' ORDER BY f.date_risk DESC';
         db.raw(sql,[data.department])
             //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
             .then(function(rows){
@@ -179,10 +182,12 @@ module.exports = {
 
     search_topic: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname,r.detail FROM risk_request_first f '+
+        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,d2.depname as department_risk,r.detail FROM risk_request_first f '+
             ' LEFT OUTER JOIN risk_abstract r ON r.id = f.id   '+
             ' LEFT OUTER JOIN department d ON f.depcode=d.depcode '+
-            ' WHERE f.topic_risk Like ? ';
+            ' LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
+            ' WHERE f.topic_risk Like ? '+
+            ' ORDER BY f.date_risk DESC';
         var query = '%'+data.topic+'%';
         db.raw(sql,[query])
             //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL

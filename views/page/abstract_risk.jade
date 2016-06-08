@@ -9,7 +9,7 @@ block content
         li
             a(href="#") หน้าหลัก
         li.active สรุปความเสี่ยง
-    .well.well-sm
+    .well.well-sm#Block_Search
         div.form-inline
             .row
                 .col-md-5
@@ -41,13 +41,18 @@ block content
                 i.fa.fa-comments-o
                 | &nbsp; สรุปความเสี่ยง
         .panel-body
+            button.btn.btn-xs.btn-primary.pull-right#btnShowSearch
+                i.fa.fa-search.fa-lg
+                | &nbsp; ค้นหา
+        .panel-body
             table.table.striped#tblAbstractRisk
                 thead
                     tr
                         td ลำดับ
                         td วันที่
                         td หัวข้อความเสี่ยง
-                        td หน่วยงาน
+                        td หน่วยที่รายงาน
+                        td หน่วยที่เกิดความเสี่ยง
                         td(style="width : 120px") สรุปความเสี่ยง
                         td(style="width : 110px")
                             i.fa.fa-print

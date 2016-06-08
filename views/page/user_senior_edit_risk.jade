@@ -127,7 +127,7 @@ block content
                                             option(value="#{y.id}", selected="selected") #{y.risk_detail}
                                         else
                                             option(value="#{y.id}") #{y.risk_detail}
-                    .row
+                    //.row
                         .col-md-12
                             .form-group
                                 label(for="txtNote_other") ระบุกรณีเลือกประเภทอื่นๆ
@@ -181,11 +181,34 @@ block content
                 .panel-body
                     #divPatient
                         .row
-                            .col-md-6
+                            .col-md-5
+                                form.form-inline
+                                    .form-group
+                                        label.radio(for="radiosone") ประเภทผู้ป่วย :
+                                        | &nbsp;&nbsp;&nbsp;
+                                        if  data.detail.sone == "OPD"
+                                            label(value="OPD")
+                                                input#radioOPD(type='radio', name='sone', checked)
+                                                | OPD
+                                                | &nbsp;&nbsp;&nbsp;
+                                            label(value="IPD")
+                                                input#radioIPD(type='radio', name='sone')
+                                                | IPD
+                                                | &nbsp;&nbsp;&nbsp;
+                                        else
+                                            label(value="OPD")
+                                                input#radioOPD(type='radio', name='sone')
+                                                | OPD
+                                                | &nbsp;&nbsp;&nbsp;
+                                            label(value="IPD")
+                                                input#radioIPD(type='radio', name='sone', checked)
+                                                | IPD
+                                                | &nbsp;&nbsp;&nbsp;
+                            .col-md-3
                                 .form-group
                                     label(for="txtHn") HN
                                     input#txtHn(type="text", value="#{data.detail.hn}").form-control
-                            .col-md-6
+                            .col-md-3
                                 .form-group
                                     label(for="txtAn") AN
                                     input#txtAn(type="text", value="#{data.detail.an}").form-control
