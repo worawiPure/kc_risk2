@@ -26,6 +26,8 @@ $(function() {
         });
         $('[data-toggle="tooltip"]').tooltip();
         }
+
+        $('#btnPrint').fadeOut('slow');
         $('#btnSearch').on('click', function(e){
             e.preventDefault();
             var data = {};
@@ -42,6 +44,7 @@ $(function() {
                 $('#divAlert').fadeIn('slow');
             } else{
                 $('#divAlert').fadeOut('slow');
+                $('#btnPrint').fadeIn('slow');
                 NProgress.start();
                 console.log(data);
                     $.ajax({
@@ -58,6 +61,16 @@ $(function() {
                         alert(err);
                     })
             }
+        });
+
+        $('#btnPrint').on('click', function(e){
+            e.preventDefault();
+            var data = {};
+            var searchrisk1 = $('#Date_Searchrisk1').val();
+            var searchrisk2 = $('#Date_Searchrisk2').val();
+            var depcode = $('#slDepartment').val();
+            window.open('/prints/report_summary_department/' + searchrisk1 + '/' +searchrisk2+ '/' +depcode)
+
         });
 
 })

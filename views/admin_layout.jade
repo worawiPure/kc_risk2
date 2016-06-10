@@ -50,7 +50,7 @@ html
             li.dropdown
               a(href="#", data-toggle="dropdown", role="button",
               aria-haspopup="true", aria-expanded="false").dropdown-toggle
-                | สรุปรายงานความเสี่ยง
+                | สรุปความเสี่ยง
                 span.caret
               ul.dropdown-menu
                 li
@@ -68,21 +68,21 @@ html
                     i.fa.fa-file
                     | &nbsp;&nbsp;รายงานความเสี่ยงแยกประเภทคลีนิค
                 li
-                  a(href="/report_risk/terminal")
-                    i.fa.fa-file
-                    | &nbsp;&nbsp;รายงานสรุปความเสี่ยง
-                li
                   a(href="/report_risk/level")
                     i.fa.fa-file
                     | &nbsp;&nbsp;รายงานความเสี่ยงแยกระดับความรุนแรง
                 li
+                  a(href="/report_risk/terminal")
+                    i.fa.fa-file
+                    | &nbsp;&nbsp;รายงานสรุปหัวข้อความเสี่ยงตามวันที่
+                li
                   a(href="/report_risk/summary_date")
-                      i.fa.fa-file
-                      | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดตามวันที่
+                    i.fa.fa-file
+                    | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดตามวันที่
                 li
                   a(href="/report_risk/summary_department")
-                      i.fa.fa-file
-                      | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดแบบเลือกแผนก
+                    i.fa.fa-file
+                    | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดแบบเลือกแผนกที่เกิดความเสี่ยง
           p.navbar-text.navbar-right #{session.fullname}
           ul.nav.navbar-nav.pull-right
             li.dropdown
@@ -120,58 +120,60 @@ html
                                   i.fa.fa-file-text-o
                                   | &nbsp;&nbsp;รายงาน
                               ul.dropdown-menu
-                                li
+                                  li
                                     a(href="/report_risk")
                                         i.fa.fa-file
                                         | &nbsp;&nbsp;รายงานความเสี่ยงแยกประเภทคลีนิค
-                                  li
-                                    a(href="/report_risk/terminal")
-                                        i.fa.fa-file
-                                        | &nbsp;&nbsp;รายงานสรุปความเสี่ยง
                                   li
                                     a(href="/report_risk/level")
                                         i.fa.fa-file
                                         | &nbsp;&nbsp;รายงานความเสี่ยงแยกระดับความรุนแรง
                                   li
+                                      a(href="/report_risk/terminal")
+                                          i.fa.fa-file
+                                          | &nbsp;&nbsp;รายงานสรุปหัวข้อความเสี่ยงตามวันที่
+                                  li
                                     a(href="/report_risk/summary_date")
                                         i.fa.fa-file
                                         | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดตามวันที่
-          .panel.panel-default
-            .panel-body
-                .ul.nav.nav-pills.nav-stacked
-                    if session.level_user_id==2
-                        li.active
-                            a(href="#")
-                              i.fa.fa-cogs
-                              | &nbsp; จัดการโปรแกรมความเสี่ยง
-                          li
-                            a(href="/program/risk_program")
-                              i.fa.fa-cog
-                              | &nbsp; โปรแกรมความเสี่ยง
-                          li
-                            a(href="/program/risk_group")
-                              i.fa.fa-cog
-                              | &nbsp; หมวดหมู่ อุบัติการณ์/ความเสี่ยง
-                          li
-                            a(href="/detail/risk_group_detail")
-                              i.fa.fa-cog
-                              | &nbsp;อุบัติการณ์/ความเสี่ยง
-          .panel.panel-default
-              .panel-body
-                  .ul.nav.nav-pills.nav-stacked
-                      if session.level_user_id==2
-                          li.active
-                            a(href="#")
-                                i.fa.fa-cogs
-                                | &nbsp; เครื่องมือจัดการระบบพื้นฐาน
-                          li
-                            a(href="/users/user")
-                                i.fa.fa-users
-                                | &nbsp; จัดการผู้ใช้งาน
-                          li
-                            a(href="/users/department")
-                                i.fa.fa-users
-                                | &nbsp; จัดการแผนก
+                                  li
+                                    a(href="/report_risk/summary_department")
+                                        i.fa.fa-file
+                                        | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดแบบเลือกแผนกที่เกิดความเสี่ยง
+              #accordion.panel-group(role='tablist', aria-multiselectable='true')
+                .panel.panel-primary
+                    #headingOne.panel-heading(role='tab')
+                        // .ul.nav.nav-pills.nav-stacked
+                        if session.level_user_id==2
+                            li.active
+                                h4.panel-title
+                                    a(style="color:white", role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseOne', aria-expanded='true', aria-controls='collapseOne')
+                                        i.fa.fa-cogs
+                                        | &nbsp; จัดการระบบพื้นฐาน
+                    #collapseOne.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingOne')
+                        .panel-body
+                            .ul.nav.nav-pills.nav-stacked
+                                if session.level_user_id==2
+                                    li
+                                        a(href="/program/risk_program")
+                                            i.fa.fa-cog
+                                            | &nbsp; โปรแกรมความเสี่ยง
+                                    li
+                                        a(href="/program/risk_group")
+                                            i.fa.fa-cog
+                                            | &nbsp; หมวดหมู่ อุบัติการณ์/ความเสี่ยง
+                                    li
+                                        a(href="/detail/risk_group_detail")
+                                            i.fa.fa-cog
+                                            | &nbsp;อุบัติการณ์/ความเสี่ยง
+                                    li
+                                        a(href="/users/user")
+                                            i.fa.fa-users
+                                            | &nbsp; จัดการผู้ใช้งาน
+                                    li
+                                        a(href="/users/department")
+                                            i.fa.fa-users
+                                            | &nbsp; จัดการแผนก
 
         .col-md-9
           block content

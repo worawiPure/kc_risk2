@@ -19,7 +19,7 @@ $(function() {
             }
             else {
 
-                html += '<a href="/user_senior_edit_risk/'+ v.id+'/'+ v.cc+'" data-toggle="tooltip" data-placement="top" title="แก้ไข" class="btn btn-warning"> <i class="glyphicon glyphicon-pencil"></i></a>  '+
+                html += '<a href="/user_senior_edit_risk/'+ v.id+'/'+ v.cc +'" data-toggle="tooltip" data-placement="top" title="แก้ไข" class="btn btn-warning"> <i class="glyphicon glyphicon-pencil"></i></a>  '+
                 '<a class="btn btn-primary" type="button", href="/risk_repeat/'+ v.id +'/'+ v.cc +'" data-toggle="tooltip" data-placement="top" title="ทบทวน"> <i class="glyphicon glyphicon-book"></i></a>';
             }
             html += '</div></td> '+

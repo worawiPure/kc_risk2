@@ -234,22 +234,13 @@ router.get('/risk_repeat/:id/:depcode',function(req,res){
     }else {
         var db = req.db;
         var id = req.params.id;
-        show_risk2.Chack_sesion_depcode(db,id,req.session.depcode)
-            .then(function(total){
-            if(total > 0) {
-                risk_repeat.getSubShowPast5(db, id)
-                    .then(function (rows) {
-                        var data = rows[0];
-                        res.render('page/risk_repeat', {rows: data, risk_id: id});
-                    }, function (err) {
-                        res.send({ok: false, msg: err})
-                    }
-                )
-            }else{
-                res.render('./page/access_denied')
-            }
-        })
-
+        risk_repeat.getSubShowPast5(db, id)
+            .then(function (rows) {
+                var data = rows[0];
+                res.render('page/risk_repeat', {rows: data, risk_id: id});
+            }, function (err) {
+                res.send({ok: false, msg: err})
+            })
     }
 });
 

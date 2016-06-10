@@ -134,12 +134,11 @@ module.exports = {
             .leftJoin('risk_sub_program as b', 'b.id', 's.risk_group')
             .leftJoin('risk_detail as e', 'e.id', 's.risk_sub_group')
             .leftJoin('type_report as r', 'r.id', 'u.type_report')
-            .whereIn('f.depcode', [depcode, sub_depcode])
-            .whereNotIn('u.depcode', [depcode, sub_depcode])
-            .orderBy('f.date_risk', 'DESC')
+            .whereIn('f.depcode', [depcode,sub_depcode])
+            .whereNotIn('u.depcode',[depcode])
+            .orderBy('f.date_risk','DESC')
             .limit(10)
             .offset(startpage)
-
         //db.raw(sql,[depcode,sub_depcode,depcode,sub_depcode,startpage])
             .then(function(rows){
                 q.resolve(rows)

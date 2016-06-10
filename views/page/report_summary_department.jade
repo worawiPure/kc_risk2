@@ -6,7 +6,7 @@ block content
     ol.breadcrumb
         li
             a(href="/abstract_risk") หน้าหลัก
-        li.active รายงานความเสี่ยงสรุปยอดตามวันที่
+        li.active รายงานสรุปยอดตามแผนกที่เกิดความเสี่ยง
     .alert.alert-warning(role="alert",style="display: none;")#divAlert
         i.fa.fa-warning
         | &nbsp; กรองข้อมูลวันที่ไม่ถูกต้อง
@@ -23,23 +23,22 @@ block content
                         | &nbsp;&nbsp;
                         input#Date_Searchrisk2(type="date").form-control
                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        label ประเภทความเสี่ยง
+                        label หน่วยงานที่เกิดความเสี่ยง
                             | &nbsp;&nbsp;
                             select.form-control#slDepartment
                                 option(value="") กรุณาเลือกรายการ....
                                 for a in data.departments
                                     option(value="#{a.depcode}") #{a.depname}
                             | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        
                         button#btnSearch(type="button").btn.btn-success.btn-sm ค้นหา
+                        button#btnPrint(type="button").btn.btn-success.btn-sm ปริ้น
 
     .panel.panel-primary
         .panel-heading
             h3.panel-title
                 i.fa.fa-comments-o
-                | &nbsp; รายงานความเสี่ยงสรุปยอดตามวันที่
+                | &nbsp; รายงานสรุปยอดตามแผนกที่เกิดความเสี่ยง
         .panel-body
-
             table.table.striped#tblReport_summary_department
                 thead
                     tr

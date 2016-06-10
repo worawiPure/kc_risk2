@@ -21,7 +21,7 @@ $(function() {
         });
         $('[data-toggle="tooltip"]').tooltip();
         }
-    $('#btnPrint').fadeOut('slow');
+        $('#btnPrint').fadeOut('slow');
         $('#btnSearch').on('click', function(e){
             e.preventDefault();
             var data = {};

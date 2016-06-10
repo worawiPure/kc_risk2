@@ -26,20 +26,20 @@ $(function() {
         });
         $('[data-toggle="tooltip"]').tooltip();
         }
+
+        $('#btnPrint').fadeOut('slow');
         $('#btnSearch').on('click', function(e){
             e.preventDefault();
             var data = {};
             var searchrisk1 = $('#Date_Searchrisk1').val();
             var searchrisk2 = $('#Date_Searchrisk2').val();
-
             data.date1 =  searchrisk1;
             data.date2 = searchrisk2;
-
-
             if(!data.date1 || !data.date2 ) {
                 $('#divAlert').fadeIn('slow');
             } else{
                 $('#divAlert').fadeOut('slow');
+                $('#btnPrint').fadeIn('slow');
                 NProgress.start();
                 console.log(data);
                     $.ajax({
@@ -57,4 +57,11 @@ $(function() {
                     })
             }
         });
+    $('#btnPrint').on('click', function(e){
+        e.preventDefault();
+        var data = {};
+        var searchrisk1 = $('#Date_Searchrisk1').val();
+        var searchrisk2 = $('#Date_Searchrisk2').val();
+        window.open('/prints/report_summary_date/' + searchrisk1 + '/' +searchrisk2)
+    });
 })

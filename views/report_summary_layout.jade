@@ -64,17 +64,17 @@ html
                 span.caret
               ul.dropdown-menu
                 li
-                  a(href="/report_risk")
-                    i.fa.fa-file
-                    | &nbsp;&nbsp;รายงานความเสี่ยงแยกประเภทคลีนิค
-                li
-                    a(href="/report_risk/terminal")
+                    a(href="/report_risk")
                         i.fa.fa-file
-                        | &nbsp;&nbsp;รายงานสรุปความเสี่ยง
+                        | &nbsp;&nbsp;รายงานความเสี่ยงแยกประเภทคลีนิค
                 li
                     a(href="/report_risk/level")
                         i.fa.fa-file
                         | &nbsp;&nbsp;รายงานความเสี่ยงแยกระดับความรุนแรง
+                li
+                    a(href="/report_risk/terminal")
+                        i.fa.fa-file
+                        | &nbsp;&nbsp;รายงานสรุปหัวข้อความเสี่ยงตามวันที่
                 li
                     a(href="/report_risk/summary_date")
                         i.fa.fa-file
@@ -82,7 +82,7 @@ html
                 li
                     a(href="/report_risk/summary_department")
                         i.fa.fa-file
-                        | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดแบบเลือกแผนก
+                        | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดแบบเลือกแผนกที่เกิดความเสี่ยง
           p.navbar-text.navbar-right #{session.fullname} | #{session.depname}
           ul.nav.navbar-nav.pull-right
             li.dropdown
