@@ -160,7 +160,7 @@ $(function() {
         }
 
 
-    $('#divSubProgram').fadeIn();
+    //$('#divSubProgram').fadeIn();
     $('#slProgram').on('change', function (e) {
         //   console.log($(this).val());
         var id = $(this).val();
@@ -178,8 +178,8 @@ $(function() {
                         $sl.append('<option value="' + v.id + '">' + v.name_sub_program + '</option> ');
                     });
                     $('#divSubProgram').fadeIn();
-                    $('#divSubGroup').fadeOut();
-                    $('#divSubGroup').val('');
+                    //$('#divSubGroup').fadeOut();
+                    //$('#divSubGroup').val('');
                 })
                 .error(function (xhr, status, err) {
                 })
@@ -325,7 +325,8 @@ $(function() {
         data.note = $('#txtNote').val();
 
         if(!data.risktype || !data.complaint || !data.topic || !data.date_risk || !data.time_risk
-            || !data.department || !data.program || !data.subprogram || !data.subgroup || !data.risk_detail || !data.risk_level || !data.type_report || !data.name_report ) {
+            || !data.department || !data.program || !data.subprogram || !data.subgroup ||
+            !data.risk_detail || !data.risk_level || !data.risk_correct || !data.type_report || !data.name_report ) {
             $('#divAlert').fadeIn('slow');
         } else{
             $.ajax({
@@ -334,7 +335,6 @@ $(function() {
                 contentType: 'application/json',
                 data:JSON.stringify({data: data})
             })
-
                 .success(function (data) {
                     alert('บันทึกข้อมูลเรียบร้อยแล้ว');
                     window.location.href="/risk_report";
