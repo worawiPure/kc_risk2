@@ -8,7 +8,7 @@ module.exports = {
         'LEFT JOIN risk_abstract r ON r.request_id = f.id                                 '+
         'LEFT JOIN department d ON u.depcode=d.depcode                             '+
         'LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
-        'ORDER BY f.id DESC  limit 15 offset ?';
+        'ORDER BY f.date_risk ASC  limit 15 offset ?';
         db.raw(sql,[startpage])
             .then(function (rows) {
                 q.resolve(rows[0])
