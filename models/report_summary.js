@@ -110,7 +110,8 @@ module.exports = {
         'LEFT JOIN risk_sub_program p ON p.id=d.risk_group              '+
         'LEFT JOIN risk_program r ON r.id=d.risk_program                ' +
         'HAVING M1 > 0 OR M2 > 0 OR M3 > 0 OR M4 > 0 OR M5 > 0 OR M6 > 0 '+
-        'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0 ';
+        'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0 '+
+        'ORDER BY p.id ASC ';
         db.raw(sql,[data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,
             data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,
             data.date1,data.date2,data.date1,data.date2,data.date1,data.date2])
@@ -179,7 +180,8 @@ module.exports = {
             'LEFT JOIN risk_sub_program p ON p.id=d.risk_group              '+
             'LEFT JOIN risk_program r ON r.id=d.risk_program                ' +
             'HAVING M1 > 0 OR M2 > 0 OR M3 > 0 OR M4 > 0 OR M5 > 0 OR M6 > 0 '+
-            'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0 ';
+            'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0  '+
+            'ORDER BY p.id ASC   ';
 
         db.raw(sql,[date1,date2,date1,date2,date1,date2,date1,date2,
             date1,date2,date1,date2,date1,date2,date1,date2,date1,date2,
@@ -249,7 +251,8 @@ module.exports = {
             'LEFT JOIN risk_sub_program p ON p.id=d.risk_group              '+
             'LEFT JOIN risk_program r ON r.id=d.risk_program                '+
             'HAVING M1 > 0 OR M2 > 0 OR M3 > 0 OR M4 > 0 OR M5 > 0 OR M6 > 0 '+
-            'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0  ';
+            'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0  '+
+            'ORDER BY p.id ASC ';
         db.raw(sql,[data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,
             data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,
             data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode])
@@ -318,7 +321,8 @@ module.exports = {
             'LEFT JOIN risk_sub_program p ON p.id=d.risk_group              '+
             'LEFT JOIN risk_program r ON r.id=d.risk_program                '+
             'HAVING M1 > 0 OR M2 > 0 OR M3 > 0 OR M4 > 0 OR M5 > 0 OR M6 > 0 '+
-            'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0  ';
+            'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0  '+
+            'ORDER BY p.id ASC  ';
         db.raw(sql,[date1,date2,depcode,date1,date2,depcode,date1,date2,depcode,date1,date2,depcode,
             date1,date2,depcode,date1,date2,depcode,date1,date2,depcode,date1,date2,depcode,
             date1,date2,depcode,date1,date2,depcode,date1,date2,depcode,date1,date2,depcode])
