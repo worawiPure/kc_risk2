@@ -275,6 +275,7 @@ $(function(){
         })
             .success(function(data){
                 setTable(data);
+                $('#paging').fadeOut();
             })
     });
     getAbstractRisk();
