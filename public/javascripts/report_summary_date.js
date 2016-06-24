@@ -7,7 +7,7 @@ $(function() {
             i++;
             var html = '<tr> ' +
                 '<td> ' + i + ' </td>'+
-                '<td> ' + v.risk_detail + ' </td>'+
+                '<td> ' + v.Name_risk + ' </td>'+
                 '<td>' + v.M1  + ' </td>'+
                 '<td>' + v.M2  + ' </td>'+
                 '<td>' + v.M3  + ' </td>'+

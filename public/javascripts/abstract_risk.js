@@ -239,7 +239,7 @@ $(function(){
             })
     });
     $('#paging').fadeIn();
-    $('#btnSearch').on('click', function(e){
+    $('#btnSearch_topic').on('click', function(e){
         e.preventDefault();
         var data = {};
         var search_topic = $('#txtSearch').val();
@@ -258,11 +258,13 @@ $(function(){
             })
     });
     $('#paging').fadeIn();
-    $('#Searchrisk').on('click', function(e) {
+    $('#btnSearch_date').on('click', function(e) {
         e.preventDefault();
         var data = {};
-        var date_searchrisk = $('#Date_Searchrisk').val();
-        data.date = date_searchrisk;
+        var date_searchrisk1 = $('#Date_Searchrisk1').val();
+        var date_searchrisk2 = $('#Date_Searchrisk2').val();
+        data.date1 = date_searchrisk1;
+        data.date2 = date_searchrisk2;
 
         $.ajax({
             type: "POST",
@@ -273,9 +275,7 @@ $(function(){
         })
             .success(function(data){
                 setTable(data);
-                $('#paging').fadeOut();
             })
     });
-
     getAbstractRisk();
 });

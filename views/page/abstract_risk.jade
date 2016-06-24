@@ -12,19 +12,19 @@ block content
     .well.well-sm#Block_Search
         div.form-inline
             .row
-                .col-md-5
+                .col-md-12
                     .form-group
-                        label วันที่
+                        label เลือกช่วงวันที่
+                        | &nbsp;&nbsp;&nbsp;&nbsp;
+                        input#Date_Searchrisk1(type="date").form-control
+                        | &nbsp;&nbsp;&nbsp;&nbsp;
+                        label ถึง
                         | &nbsp;&nbsp;
-                        input#Date_Searchrisk(type="date").form-control
-                        button#Searchrisk(type="button").btn.btn-success.btn-sm ค้นหา
-                .col-md-6
-                    .form-group
-                        label หัวข้อความเสี่ยง
-                        | &nbsp;&nbsp;
-                        input#txtSearch(type="text",placeholder="Search..").form-control
-                        button#btnSearch(type="button").btn.btn-success.btn-sm ค้นหา
+                        input#Date_Searchrisk2(type="date").form-control
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        button#btnSearch_date(type="button").btn.btn-success.btn-sm ค้นหา
             br
+        div.form-inline
             .row
                 .col-md-6
                     .form-group
@@ -35,6 +35,12 @@ block content
                             for p in data.abstracts
                                 option(value="#{p.depcode}") #{p.depname}
                         button#btnSearch_department(type="button").btn.btn-success.btn-sm ค้นหา
+                .col-md-6
+                    .form-group
+                        label หัวข้อความเสี่ยง
+                        | &nbsp;&nbsp;
+                        input#txtSearch(type="text",placeholder="Search..").form-control
+                        button#btnSearch_topic(type="button").btn.btn-success.btn-sm ค้นหา
     .panel.panel-primary
         .panel-heading
             h3.panel-title

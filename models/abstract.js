@@ -147,15 +147,14 @@ module.exports = {
             ' LEFT OUTER JOIN risk_abstract r ON r.id = f.id   '+
             ' LEFT OUTER JOIN department d ON f.depcode=d.depcode  '+
             ' LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
-            ' WHERE f.date_risk = ?    '+
-            ' ORDER BY f.date_risk DESC';
-        db.raw(sql,[data.date])
+            ' WHERE f.date_risk between ? and ?    '+
+            ' ORDER BY f.date_risk ASC';
+        db.raw(sql,[data.date1,data.date2])
             //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
             .then(function(rows){
                 console.log(rows[0]);
                 q.resolve(rows[0])
             })
-
             .catch(function(err){
                 console.log(err);
                 q.reject(err)

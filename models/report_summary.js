@@ -57,7 +57,7 @@ module.exports = {
 
     getReport_summary_date: function(db,data){
         var q = Q.defer();
-        var sql = 'SELECT r.program_risk,p.name_sub_program,d.risk_detail,        '+
+        var sql = 'SELECT concat(SUBSTR(r.program_risk,1,3),SUBSTR(p.name_sub_program,7),SUBSTR(d.risk_detail,9) ) as Name_risk,        '+
         '(select count(*) FROM risk_request_first f                     '+
         'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
         'WHERE f.date_risk BETWEEN ? and ?            '+
@@ -126,7 +126,7 @@ module.exports = {
 
     getReport_summary_date2: function(db,date1,date2){
         var q = Q.defer();
-        var sql = 'SELECT r.program_risk,p.name_sub_program,d.risk_detail,        '+
+        var sql = 'SELECT concat(SUBSTR(r.program_risk,1,3),SUBSTR(p.name_sub_program,7),SUBSTR(d.risk_detail,9) ) as Name_risk,        '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?            '+
@@ -196,7 +196,7 @@ module.exports = {
 
     getReport_summary_department: function(db,data){
         var q = Q.defer();
-        var sql = 'SELECT r.program_risk,p.name_sub_program,d.risk_detail,        '+
+        var sql = 'SELECT concat(SUBSTR(r.program_risk,1,3),SUBSTR(p.name_sub_program,7),SUBSTR(d.risk_detail,9) ) as Name_risk,        '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?          '+
@@ -265,7 +265,7 @@ module.exports = {
 
     getReport_summary_department2: function(db,date1,date2,depcode){
         var q = Q.defer();
-        var sql = 'SELECT r.program_risk,p.name_sub_program,d.risk_detail,        '+
+        var sql = 'SELECT concat(SUBSTR(r.program_risk,1,3),SUBSTR(p.name_sub_program,7),SUBSTR(d.risk_detail,9) ) as Name_risk,        '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?          '+
