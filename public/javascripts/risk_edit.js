@@ -161,6 +161,7 @@ $(function() {
         data.date_finished = $('#txtDate_finished').val();
         data.note = $('#txtNote').val();
         //data.sentinel = $('#checkboxSentinel').val()?'Y':'N';
+        console.log(data);
         if(!data.risktype || !data.complaint || !data.topic || !data.date_risk || !data.time_risk
             || !data.department || !data.program || !data.subprogram || !data.subgroup ||
             !data.risk_detail || !data.risk_level || !data.type_report || !data.name_report ) {

@@ -379,7 +379,7 @@ router.get('/edit_risk/:id', function(req,res){
                         .then(function (rows) {
                             console.log(rows);
                             data.detail = rows[0];
-                            data.detail.date_risk = moment(data.detail.date_risk).format('YYYY-MM-DD');
+                            data.detail.date_risk = moment(data.detail.date_risk).format('DD/MM/YYYY');
                             data.detail.date_report_risk = moment(data.detail.date_report_risk).format('YYYY-MM-DD');
                             return department.getList(db)
                         })
@@ -577,6 +577,7 @@ router.post('/save_request', function(req,res){
     var db = req.db;
     var data = req.body.data;
     data.username = req.session.username;
+    data.date_risk=moment(data.date_risk, 'DD/MM/YYYY').format('YYYY-MM-DD');
     if(data){
         request.Save_part1(db,data)
             .then(function(id){
@@ -607,6 +608,8 @@ router.post('/edit_request', function(req,res){
     var db = req.db;
     var data = req.body.data;
     //data.username = req.session.username;
+    data.date_risk=moment(data.date_risk, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(data.date_risk);
     if(data){
         request.update_part1(db,data)
             .then(function(){
