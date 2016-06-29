@@ -25,51 +25,57 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="edit_risk.jade" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/page/edit_risk.jade">
+      <file leaf-file-name="risk_report.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/risk_report.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.2" vertical-offset="884" max-vertical-offset="5236">
-              <caret line="67" column="73" selection-start-line="59" selection-start-column="20" selection-end-line="67" selection-end-column="73" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3400">
+              <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+              <folding>
+                <marker date="1467181438883" expanded="true" signature="477:490" placeholder="..." />
+                <marker date="1467181438883" expanded="true" signature="1675:1688" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user_senior_risk_report.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/user_senior_risk_report.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="3451">
+              <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+              <folding>
+                <marker date="1467182381954" expanded="true" signature="477:490" placeholder="..." />
+                <marker date="1467182381954" expanded="true" signature="1730:1743" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user_senior_layout.jade" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/user_senior_layout.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7710197" vertical-offset="1269" max-vertical-offset="1853">
+              <caret line="100" column="23" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="request.jade" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/page/request.jade">
+      <file leaf-file-name="report_risk.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/report_risk.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-50.32" vertical-offset="0" max-vertical-offset="4471">
-              <caret line="74" column="30" selection-start-line="74" selection-start-column="30" selection-end-line="74" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1972" max-vertical-offset="5049">
+              <caret line="130" column="45" selection-start-line="130" selection-start-column="45" selection-end-line="130" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="risk_report.jade" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/page/risk_report.jade">
+      <file leaf-file-name="user_senior_report.jade" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/page/user_senior_report.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.608229" vertical-offset="0" max-vertical-offset="867">
-              <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="request.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/request.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5219" max-vertical-offset="6069">
-              <caret line="333" column="22" selection-start-line="333" selection-start-column="22" selection-end-line="333" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="risk_edit.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/risk_edit.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1507" max-vertical-offset="3264">
-              <caret line="175" column="32" selection-start-line="175" selection-start-column="32" selection-end-line="175" selection-end-column="32" />
+            <state vertical-scroll-proportion="-12.92" vertical-offset="0" max-vertical-offset="952">
+              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -78,8 +84,18 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="9697" max-vertical-offset="13702">
-              <caret line="585" column="14" selection-start-line="585" selection-start-column="14" selection-end-line="585" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2516" max-vertical-offset="13702">
+              <caret line="68" column="32" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="layout.jade" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/layout.jade">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.84" vertical-offset="1617" max-vertical-offset="2176">
+              <caret line="114" column="62" selection-start-line="114" selection-start-column="62" selection-end-line="114" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -90,7 +106,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/views/page/report_summary.jade" />
         <option value="$PROJECT_DIR$/views/page/terminal.jade" />
         <option value="$PROJECT_DIR$/templates/report_terminal.jade" />
         <option value="$PROJECT_DIR$/templates/report_level.jade" />
@@ -102,7 +117,6 @@
         <option value="$PROJECT_DIR$/views/page/user.jade" />
         <option value="$PROJECT_DIR$/views/page/register.jade" />
         <option value="$PROJECT_DIR$/public/javascripts/register.js" />
-        <option value="$PROJECT_DIR$/views/user_senior_layout.jade" />
         <option value="$PROJECT_DIR$/routes/users.js" />
         <option value="$PROJECT_DIR$/views/page/user_senior_risk_report_feedback.jade" />
         <option value="$PROJECT_DIR$/public/javascripts/user_senior_risk_report_feedback.js" />
@@ -119,7 +133,6 @@
         <option value="$PROJECT_DIR$/models/risk_report.js" />
         <option value="$PROJECT_DIR$/views/admin_layout.jade" />
         <option value="$PROJECT_DIR$/views/report_summary_layout.jade" />
-        <option value="$PROJECT_DIR$/public/javascripts/user_senior_risk_report.js" />
         <option value="$PROJECT_DIR$/views/page/admin_show_detail.jade" />
         <option value="$PROJECT_DIR$/views/page/report_summary_department.jade" />
         <option value="$PROJECT_DIR$/routes/prints.js" />
@@ -141,6 +154,9 @@
         <option value="$PROJECT_DIR$/views/page/request.jade" />
         <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/views/page/risk_report.jade" />
+        <option value="$PROJECT_DIR$/public/javascripts/risk_report.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/user_senior_risk_report.js" />
+        <option value="$PROJECT_DIR$/views/user_senior_layout.jade" />
       </list>
     </option>
   </component>
@@ -307,10 +323,14 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -318,10 +338,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -369,20 +385,20 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24776785" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25223213" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -406,20 +422,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/views/register_layout.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.76" vertical-offset="166" max-vertical-offset="748">
-          <caret line="30" column="41" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/register.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07578254" vertical-offset="498" max-vertical-offset="1173">
-          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/page/register.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.7817869" vertical-offset="0" max-vertical-offset="1139">
@@ -511,13 +513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/user_senior_layout.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50343645" vertical-offset="1271" max-vertical-offset="1853">
-          <caret line="92" column="67" selection-start-line="92" selection-start-column="67" selection-end-line="92" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/page/user_senior_risk_report.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.92" vertical-offset="0" max-vertical-offset="850">
@@ -557,13 +552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.5377855" vertical-offset="553" max-vertical-offset="3128">
           <caret line="84" column="20" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/user_senior_risk_report.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6296296" vertical-offset="0" max-vertical-offset="3451">
-          <caret line="22" column="74" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="74" />
         </state>
       </provider>
     </entry>
@@ -648,7 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4217" max-vertical-offset="4879">
           <caret line="278" column="14" selection-start-line="278" selection-start-column="14" selection-end-line="278" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -656,7 +643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="5508" max-vertical-offset="12308">
           <caret line="324" column="40" selection-start-line="324" selection-start-column="40" selection-end-line="324" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -683,22 +669,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/layout.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="70" max-vertical-offset="2176">
-          <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/report_risk.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31164384" vertical-offset="3184" max-vertical-offset="5049">
-          <caret line="198" column="29" selection-start-line="198" selection-start-column="29" selection-end-line="198" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/risk_report.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5083">
@@ -711,24 +681,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2295" max-vertical-offset="10200">
           <caret line="230" column="50" selection-start-line="230" selection-start-column="50" selection-end-line="230" selection-end-column="50" />
-          <folding>
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1465541888485" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -736,18 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1846" max-vertical-offset="6273">
           <caret line="120" column="4" selection-start-line="120" selection-start-column="4" selection-end-line="120" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/risk_report.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6273063" vertical-offset="612" max-vertical-offset="3400">
-          <caret line="56" column="34" selection-start-line="56" selection-start-column="34" selection-end-line="56" selection-end-column="49" />
-          <folding>
-            <marker date="1458992081156" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1458992081156" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -761,23 +702,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/request.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5219" max-vertical-offset="6069">
-          <caret line="333" column="22" selection-start-line="333" selection-start-column="22" selection-end-line="333" selection-end-column="35" />
+        <state vertical-scroll-proportion="2.416096" vertical-offset="4199" max-vertical-offset="6069">
+          <caret line="330" column="15" selection-start-line="330" selection-start-column="15" selection-end-line="330" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
+    <entry file="file://$PROJECT_DIR$/views/page/risk_report.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="9697" max-vertical-offset="13702">
-          <caret line="585" column="14" selection-start-line="585" selection-start-column="14" selection-end-line="585" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.1431127" vertical-offset="260" max-vertical-offset="867">
+          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/page/request.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-50.32" vertical-offset="0" max-vertical-offset="4471">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1258" max-vertical-offset="4471">
           <caret line="74" column="30" selection-start-line="74" selection-start-column="30" selection-end-line="74" selection-end-column="30" />
           <folding />
         </state>
@@ -785,16 +726,78 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/page/edit_risk.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.2" vertical-offset="884" max-vertical-offset="5236">
+        <state vertical-scroll-proportion="0.44658494" vertical-offset="884" max-vertical-offset="5236">
           <caret line="67" column="73" selection-start-line="59" selection-start-column="20" selection-end-line="67" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/page/risk_report.jade">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/risk_report.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.608229" vertical-offset="0" max-vertical-offset="867">
-          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3400">
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+          <folding>
+            <marker date="1467181438883" expanded="true" signature="477:490" placeholder="..." />
+            <marker date="1467181438883" expanded="true" signature="1675:1688" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/user_senior.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="584">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/user_senior_risk_report.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="3451">
+          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+          <folding>
+            <marker date="1467182381954" expanded="true" signature="477:490" placeholder="..." />
+            <marker date="1467182381954" expanded="true" signature="1730:1743" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2516" max-vertical-offset="13702">
+          <caret line="68" column="32" selection-start-line="68" selection-start-column="32" selection-end-line="68" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/report_risk.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1972" max-vertical-offset="5049">
+          <caret line="130" column="45" selection-start-line="130" selection-start-column="45" selection-end-line="130" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layout.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.84" vertical-offset="1617" max-vertical-offset="2176">
+          <caret line="114" column="62" selection-start-line="114" selection-start-column="62" selection-end-line="114" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/page/user_senior_report.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.92" vertical-offset="0" max-vertical-offset="952">
+          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/user_senior_layout.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7710197" vertical-offset="1269" max-vertical-offset="1853">
+          <caret line="100" column="23" selection-start-line="100" selection-start-column="23" selection-end-line="100" selection-end-column="23" />
           <folding />
         </state>
       </provider>
