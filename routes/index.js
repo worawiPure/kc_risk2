@@ -464,7 +464,8 @@ router.get('/user_senior_edit_risk/:id/:cc', function(req,res){
                         .then(function (rows) {
                             console.log(rows);
                             data.detail = rows[0];
-                            data.detail.date_risk = moment(data.detail.date_risk).format('YYYY-MM-DD');
+                            data.detail.date_risk = moment(data.detail.date_risk).format('DD/MM/YYYY');
+                            //data.detail.date_risk = moment(data.detail.date_risk).format('YYYY-MM-DD');
                             data.detail.date_report_risk = moment(data.detail.date_report_risk).format('YYYY-MM-DD');
                             return department.getList(db)
                         })
