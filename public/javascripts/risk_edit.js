@@ -17,8 +17,8 @@ $(function() {
                         $sl.append('<option value="' + v.id + '">' + v.name_sub_program + '</option> ');
                     });
                     $('#divSubProgram').fadeIn();
-                    $('#divSubGroup').fadeOut();
-                    $('#divSubGroup').val('');
+                   // $('#divSubGroup').fadeOut();
+                   // $('#divSubGroup').val('');
                 })
                 .error(function (xhr, status, err) {
 

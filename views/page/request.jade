@@ -146,9 +146,9 @@ block content
                                 select#slRisk_level.form-control.css-require
                     .row
                         .col-md-12
-                            .form-group
+                            .form-group.has-feedback
                                 label(for="txtRisk_correct") การแก้ไขปัญหาทันที
-                                textarea#txtRisk_correct(type="text" rows="3" placeholder="การแก้ไขปัญหาทันที").form-control
+                                textarea#txtRisk_correct(type="text" rows="3" placeholder="การแก้ไขปัญหาทันที").form-control.css-require
 
 
         #part3.tab-pane(role='tabpanel')
@@ -250,8 +250,8 @@ block content
                                     for m in data.depcodes
                                         option(value="#{m.depcode}") #{m.depname}
 
+            button(type="button").btn.btn-success#btnSave บันทึก
 
-    button(type="button").btn.btn-success#btnSave บันทึก
 
 
 

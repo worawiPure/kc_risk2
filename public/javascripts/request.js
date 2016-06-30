@@ -128,6 +128,16 @@ $(function() {
             }
         });
 
+        $('#txtRisk_correct').on('click', function (e) {
+            if($(this).val().length){
+                $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
+                $(this).next(".glyphicon").removeClass("glyphicon-warning-sign").addClass("glyphicon-ok");
+            }else{
+                $(this).parent(".form-group").removeClass("has-success").addClass("has-error");
+                $(this).next(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-warning-sign");
+            }
+        });
+
         $('#txtType_report').on('click', function (e) {
             if($(this).val().length){
                 $(this).parent(".form-group").removeClass("has-error").addClass("has-success");
@@ -178,8 +188,6 @@ $(function() {
                         $sl.append('<option value="' + v.id + '">' + v.name_sub_program + '</option> ');
                     });
                     $('#divSubProgram').fadeIn();
-                    //$('#divSubGroup').fadeOut();
-                    //$('#divSubGroup').val('');
                 })
                 .error(function (xhr, status, err) {
                 })

@@ -25,37 +25,71 @@ block content
                             .form-group
                                 label(for="txtDate_repeat") วันที่ทบทวน
                                 if rows.date_repeat
-                                    input#txtDate_repeat(type="date", value="#{rows.date_repeat}").form-control
+                                    //input#txtDate_repeat(type="date", value="#{rows.date_repeat}").form-control
+                                    #datetimepicker1.input-group(data-datepicker)
+                                        input#txtDate_repeat.form-control(type='text', value="#{rows.date_repeat}")
+                                        span.input-group-addon
+                                            span.glyphicon.glyphicon-calendar
                                 else
-                                    input#txtDate_repeat(type="date").form-control
+                                    //input#txtDate_repeat(type="date").form-control
+                                    #datetimepicker1.input-group(data-datepicker)
+                                        input#txtDate_repeat.form-control(type='text')
+                                        span.input-group-addon
+                                            span.glyphicon.glyphicon-calendar
                     .row
                         .col-md-8
                             .form-group
                                 label(for="txtName_repeat") ผู้ทบทวน
-                                input#txtName_repeat(type="text", placeholder="ชื่อผู้ทบทวน").form-control
+                                if rows.name_repeat
+                                    input#txtName_repeat(type="text", value="#{rows.name_repeat}").form-control
+                                else
+                                    input#txtName_repeat(type="text", placeholder="ชื่อผู้ทบทวน").form-control
                     .row
                         .col-md-8
                             .form-group
                                 label(for="txtResult_repeat") ผลทบทวน
-                                textarea#txtResult_repeat(type="text" rows="3", placeholder="ผลการทบทวน").form-control
+                                if rows.result_repeat
+                                    textarea#txtResult_repeat(type="text" rows="3").form-control #{rows.result_repeat}
+                                else
+                                    textarea#txtResult_repeat(type="text" rows="3", placeholder="ผลการทบทวน").form-control
                     .row
                         .col-md-8
                             .form-group
                                 label(for="txtDepcode_connected") ชื่อหหน่วยงานที่เกี่ยวข้อง
-                                textarea#txtDepcode_connected(type="text" rows="3", placeholder="ชื่อหน่วยงานที่เกี่ยวข้อง").form-control
+                                if rows.depcode_connected
+                                    textarea#txtDepcode_connected(type="text" rows="3").form-control #{rows.depcode_connected}
+                                else
+                                    textarea#txtDepcode_connected(type="text" rows="3", placeholder="ชื่อหน่วยงานที่เกี่ยวข้อง").form-control
                     .row
                         .col-md-8
                             .form-group
                                 label(for="txtEdit_system") การแก้ไขเชิงระบบ
-                                textarea#txtEdit_system(type="text" rows="3", placeholder="การแก้ไขเชิงระบบ").form-control
+                                if rows.edit_system
+                                    textarea#txtEdit_system(type="text" rows="3").form-control #{rows.edit_system}
+                                else
+                                    textarea#txtEdit_system(type="text" rows="3", placeholder="การแก้ไขเชิงระบบ").form-control
                     .row
                         .col-md-3
                             .form-group
                                 label(for="txtDate_finished") วันที่สิ้นสุดการแก้ไข
-                                input#txtDate_finished(type="date").form-control
+                                //input#txtDate_finished(type="date").form-control
+                                if rows.date_finished
+                                    #datetimepicker2.input-group(data-datepicker)
+                                        input#txtDate_finished.form-control(type='text',value="#{rows.date_finished}")
+                                        span.input-group-addon
+                                            span.glyphicon.glyphicon-calendar
+                                else
+                                    #datetimepicker2.input-group(data-datepicker)
+                                        input#txtDate_finished.form-control(type='text')
+                                        span.input-group-addon
+                                            span.glyphicon.glyphicon-calendar
                     .row
                         .col-md-8
                             .form-group
                                 label(for="txtNote") หมายเหตุ
-                                textarea#txtNote(type="text" rows="3", placeholder="หมายเหตุ" ).form-control
+                                if rows.note
+                                    textarea#txtNote(type="text" rows="3").form-control #{rows.note}
+                                else
+                                    textarea#txtNote(type="text" rows="3", placeholder="หมายเหตุ" ).form-control
+
     button(type="button").btn.btn-success#btnRepeat บันทึก

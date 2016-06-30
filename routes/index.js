@@ -237,6 +237,8 @@ router.get('/risk_repeat/:id/:depcode',function(req,res){
         risk_repeat.getSubShowPast5(db, id)
             .then(function (rows) {
                 var data = rows[0];
+                data.date_repeat = moment(data.date_repeat).format('DD/MM/YYYY');
+                data.date_finished = moment(data.date_finished).format('DD/MM/YYYY');
                 res.render('page/risk_repeat', {rows: data, risk_id: id});
             }, function (err) {
                 res.send({ok: false, msg: err})
@@ -251,6 +253,8 @@ router.post('/update_part5', function(req,res) {
     }else {
         var db = req.db;
         var data = req.body.data;
+        data.date_repeat=moment(data.date_repeat, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        data.date_finished=moment(data.date_finished, 'DD/MM/YYYY').format('YYYY-MM-DD');
         console.log(data.id);
         update_part1.Update_part1(db, data.id)
             .then(function () {
