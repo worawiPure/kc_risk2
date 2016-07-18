@@ -1,0 +1,51 @@
+extends  ../admin_layout
+block scripts
+    script(src="/javascripts/risk_news_admin.js")
+block content
+    br
+    .panel.panel-primary#show_detail
+        .panel-heading
+            h3.panel-title
+                i.fa.fa-newspaper-o
+                | &nbsp; ข่าวประชาสัมพันธ์
+        .panel-body
+            buton.btn.btn-primary.btn-sm.pull-right#btnShowModal
+                i.fa.fa-plus
+                | &nbsp; เพิ่มข่าว
+            table.table.table-hover#tblRisk_news
+                thead
+                    tr
+                        td.h4 ลำดับ
+                        td.h4 วันที่
+                        td.h4 หัวข้อประชาสัมพันธ์
+                        td(style="width : 50px")
+                            i.fa.fa-cog.fa-spin.fa-3w.fa-fw
+                    tbody
+            ul.pagination#paging
+    .modal.fade#mdlNew(tabindex="-1",role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-lable='Close')
+                        span(aria-hidden='true') &times;
+                    h4.modal-title  เพิ่ม/แก้ไขรายการ
+                .modal-body(style="padding-top: 20px;")
+                    input(type="hidden")#txtId
+                    .form-group
+                        label(for="txtDate") รายการ
+                        #datetimepicker1.input-group(data-datepicker)
+                            input#txtDate.form-control(type='text')
+                            span.input-group-addon
+                                span.glyphicon.glyphicon-calendar
+                    .form-group
+                        label(for="txtTopic") หัวข้อข่าว
+                        input(type="text")#txtTopic.form-control
+                    .form-group
+                        label(for="txtDetail") รายละเอียด
+                        textarea(type="text")#txtDetail.form-control
+                    .modal-footer
+                        button.btn.btn-primary#btnAdd
+                            i.fa.fa-save
+                            | &nbsp; บันทึก
+                        button.btn.btn-danger(data-dismiss="modal")
+                            | &nbsp; ปิดหน้าต่าง

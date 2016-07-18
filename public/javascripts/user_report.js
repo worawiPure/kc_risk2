@@ -8,9 +8,7 @@ $(function() {
             var html = '<tr> ' +
                 '<td> ' + i + ' </td>'+
                 '<td> ' + moment(v.Date_Time).format('DD/MM/YYYY HH:mm') + ' </td>'+
-                '<td>' + v.risk_detail  + ' </td>'+
-                '<td>' + v.name_sub_program  + ' </td>'+
-                '<td>' + v.program_risk  + ' </td>'+
+                '<td>' + v.topic_risk  + ' </td>'+
                 '<td>' + v.Type  + ' </td>'+
                 '<td>' + v.Leve  + ' </td>'+
                 '<td>' + v.depname  + ' </td>'+
@@ -27,10 +25,8 @@ $(function() {
             var data = {};
             var searchrisk1 = $('#Date_Searchrisk1').val();
             var searchrisk2 = $('#Date_Searchrisk2').val();
-
             data.date1 =  searchrisk1;
             data.date2 = searchrisk2;
-
             if(!data.date1 || !data.date2 ) {
                 $('#divAlert').fadeIn('slow');
             } else{
@@ -58,8 +54,10 @@ $(function() {
         var data = {};
         var searchrisk1 = $('#Date_Searchrisk1').val();
         var searchrisk2 = $('#Date_Searchrisk2').val();
+        data.date1=moment(searchrisk1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        data.date2=moment(searchrisk2, 'DD/MM/YYYY').format('YYYY-MM-DD');
 
-        window.open('/prints/report_user/' + searchrisk1 + '/' +searchrisk2)
+        window.open('/prints/report_user/' + data.date1 + '/' + data.date2)
 
         });
 

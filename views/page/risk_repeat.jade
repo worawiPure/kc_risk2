@@ -5,9 +5,12 @@ block content
     br
     ol.breadcrumb
         li
-            a(href="/user_senior_risk_report") หน้าหลัก
-        li.active ทบทวนความเสี่ยง
-        li #{rows.topic_risk}
+            a(href="/user_senior_risk_report")
+                i.fa.fa-home
+                | &nbsp; หน้าหลัก
+        li
+            i.fa.fa-check-square
+            | &nbsp; ทบทวนความเสี่ยง : #{rows.topic_risk}
     .alert.alert-warning(role="alert",style="display: none;")#divAlert
         i.fa.fa-warning
         | &nbsp; กรอกข้อมูลไม่สมบูรณ์
@@ -92,4 +95,4 @@ block content
                                 else
                                     textarea#txtNote(type="text" rows="3", placeholder="หมายเหตุ" ).form-control
 
-    button(type="button").btn.btn-success#btnRepeat บันทึก
+    button(type="button").btn.btn-inverse#btnRepeat บันทึก

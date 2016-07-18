@@ -5,18 +5,29 @@ block content
     br
     ol.breadcrumb
         li
-            a(href="/user_senior_risk_report") หัวข้อความเสี่ยง
-        li.active รายละเอียดความเสี่ยง
-        li #{rows.topic_risk}
+            a(href="/user_senior_risk_report")
+                i.fa.fa-home
+                | &nbsp; หัวข้อความเสี่ยง
+        li
+            i.fa.fa-search
+            | &nbsp; รายละเอียดความเสี่ยง : #{rows.topic_risk}
     ul.nav.nav-tabs(role="tablist")
         li.active(role='presentation')
-            a(href="#part1", aria-controls="part1", role="tab", data-toggle="tab") ส่วนที่ 1
+            a(href="#part1", aria-controls="part1", role="tab", data-toggle="tab")
+                | ส่วนที่ 1 &nbsp;
+                i.fa.fa-arrow-right
         li(role='presentation')
-            a(href='#part2', aria-controls='part2', role='tab', data-toggle='tab') ส่วนที่ 2
+            a(href='#part2', aria-controls='part2', role='tab', data-toggle='tab')
+                | ส่วนที่ 2 &nbsp;
+                i.fa.fa-arrow-right
         li(role='presentation')
-            a(href='#part3', aria-controls='part3', role='tab', data-toggle='tab') ส่วนที่ 3
+            a(href='#part3', aria-controls='part3', role='tab', data-toggle='tab')
+                | ส่วนที่ 3 &nbsp;
+                i.fa.fa-arrow-right
         li(role='presentation')
-            a(href='#part4', aria-controls='part4', role='tab', data-toggle='tab') ส่วนที่ 4
+            a(href='#part4', aria-controls='part4', role='tab', data-toggle='tab')
+                | ส่วนที่ 4 &nbsp;
+                i.fa.fa-arrow-right
         li(role='presentation')
             a(href='#part5', aria-controls='part5', role='tab', data-toggle='tab') ส่วนที่ 5
     .tab-content
@@ -228,7 +239,7 @@ block content
                             input(type="hidden" value="#{risk_id}")#riskid
                             .form-group
                                 label(for="txtDate_repeat") วันที่ทบทวน
-                                    input(type="text", value="#{rows.date_repeat}", readonly).form-control
+                                input(type="text", value="#{rows.date_repeat}", readonly).form-control
                     .row
                         .col-md-8
                             .form-group

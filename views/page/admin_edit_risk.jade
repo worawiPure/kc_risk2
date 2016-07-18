@@ -1,16 +1,16 @@
-extends  ../layout
+extends  ../admin_layout
 block scripts
-    script(src="/javascripts/risk_edit.js")
+    script(src="/javascripts/admin_risk_edit.js")
 block content
     br
     ol.breadcrumb
         li
-            a(href="/risk_report")
+            a(href="/abstract_risk")
                 i.fa.fa-home
                 | &nbsp; หน้าหลัก
         li
-            i.fa.fa-check-square
-            | &nbsp; หัวข้อความเสี่ยง : #{data.detail.topic_risk}
+                i.fa.fa-edit
+                | &nbsp; แก้ไขความเสี่ยง :  #{data.detail.topic_risk}
     .alert.alert-warning(role="alert",style="display: none;")#divAlert
         i.fa.fa-warning
         | &nbsp; กรอกข้อมูลไม่สมบูรณ์
@@ -25,10 +25,14 @@ block content
                 i.fa.fa-arrow-right
         li(role='presentation')
             a(href='#part3', aria-controls='part3', role='tab', data-toggle='tab')
-                | ส่วนที่ 2 &nbsp;
+                | ส่วนที่ 3 &nbsp;
                 i.fa.fa-arrow-right
         li(role='presentation')
-            a(href='#part4', aria-controls='part4', role='tab', data-toggle='tab') ส่วนที่ 4
+            a(href='#part4', aria-controls='part4', role='tab', data-toggle='tab')
+                | ส่วนที่ 4 &nbsp;
+                i.fa.fa-arrow-right
+        li(role='presentation')
+            a(href='#part5', aria-controls='part5', role='tab', data-toggle='tab') ส่วนที่ 5
     .tab-content
         br
         #part1.tab-pane.active(role='tabpanel')
@@ -71,11 +75,10 @@ block content
                             .form-group
                                 label(for="txtDate_risk") วันที่เกิดเหตุ
                                 //input#txtDate_risk(type="date", value="#{data.detail.date_risk}").form-control
-                                #datetimepicker1.input-group(data-datepicker)
+                                #datetimepicker5.input-group(data-datepicker)
                                     input#txtDate_risk.form-control(type='text',value="#{data.detail.date_risk}")
                                     span.input-group-addon
                                         span.glyphicon.glyphicon-calendar
-
                         .col-md-3
                             .form-group
                                 label(for="txtTime_risk") เวลาที่เกิดเหตุ
@@ -93,17 +96,17 @@ block content
                             .form-group
                                 label(for="txtTime_report_risk") เวลาที่รายงาน
                                 input#txtTime_report_risk(type="time").form-control
-
                     .row
                         .col-md-4
                             .form-group
-                                label(for="slDepartment") หน่วยงาน
+                                label(for="slDepartment") หน่วยงานที่เกิดความเสี่ยง
                                 select#slDepartment.form-control
                                     for f in data.departments
-                                        if f.depcode == data.detail.depcode
+                                        if f.id == data.detail.depcode
                                             option(value="#{f.depcode}", selected="selected") #{f.depname}
                                         else
                                             option(value="#{f.depcode}") #{f.depname}
+
                         //.col-md-8
                             .form-group
                                 label(for="txtArea_risk") บริเวณที่เกิดความเสี่ยง
@@ -208,21 +211,25 @@ block content
                                             label(value="OPD")
                                                 input#radioOPD(type='radio', name='sone', checked)
                                                 | OPD
+                                                | &nbsp;&nbsp;&nbsp;
                                             label(value="IPD")
                                                 input#radioIPD(type='radio', name='sone')
                                                 | IPD
+                                                | &nbsp;&nbsp;&nbsp;
                                         else
                                             label(value="OPD")
                                                 input#radioOPD(type='radio', name='sone')
                                                 | OPD
+                                                | &nbsp;&nbsp;&nbsp;
                                             label(value="IPD")
                                                 input#radioIPD(type='radio', name='sone', checked)
                                                 | IPD
-                            .col-md-6
+                                                | &nbsp;&nbsp;&nbsp;
+                            .col-md-3
                                 .form-group
                                     label(for="txtHn") HN
                                     input#txtHn(type="text", value="#{data.detail.hn}").form-control
-                            .col-md-6
+                            .col-md-3
                                 .form-group
                                     label(for="txtAn") AN
                                     input#txtAn(type="text", value="#{data.detail.an}").form-control
@@ -290,23 +297,99 @@ block content
                                 label(for="txtPosition") ตำแหน่ง
                                 input#txtPosition(type="text", value="#{data.detail.position}").form-control
                     .row
-
                         .col-md-4
                             .form-group
                                 label(for="slDepartment2") หน่วยงาน
                                 select#slDepartment2.form-control
                                     for m in data.depcodes
-                                        if m.id == data.detail.depcode
+                                        if m.depcode == data.detail.depcode
                                             option(value="#{m.depcode}", selected="selected") #{m.depname}
                                         else
                                             option(value="#{m.depcode}") #{m.depname}
+        #part5.tab-pane(role='tabpanel')
+            .panel.panel-primary
+                .panel-heading
+                    h3.panel-title
+                        i.fa.fa-file-text
+                        | &nbsp; ส่วนที่ 5 ทบทวนการเกิดอุบัติการณ์ (กรรมการความเสี่ยง/หัวหน้า)
+                .panel-body
+                    .row
+                        .col-md-3
+                            .form-group
+                                label(for="txtDate_repeat") วันที่ทบทวน
+                                if data.detail.date_repeat
+                                    //input#txtDate_repeat(type="date", value="#{rows.date_repeat}").form-control
+                                    #datetimepicker4.input-group(data-datepicker)
+                                        input#txtDate_repeat.form-control(type='text', value="#{data.detail.date_repeat}")
+                                        span.input-group-addon
+                                            span.glyphicon.glyphicon-calendar
+                                else
+                                    //input#txtDate_repeat(type="date").form-control
+                                    #datetimepicker5.input-group(data-datepicker)
+                                        input#txtDate_repeat.form-control(type='text')
+                                        span.input-group-addon
+                                            span.glyphicon.glyphicon-calendar
+                    .row
+                        .col-md-8
+                            .form-group
+                                label(for="txtName_repeat") ผู้ทบทวน
+                                if data.detail.name_repeat
+                                    input#txtName_repeat(type="text", value="#{data.detail.name_repeat}").form-control
+                                else
+                                    input#txtName_repeat(type="text", placeholder="ชื่อผู้ทบทวน").form-control
+                    .row
+                        .col-md-8
+                            .form-group
+                                label(for="txtResult_repeat") ผลทบทวน
+                                if data.detail.result_repeat
+                                    textarea#txtResult_repeat(type="text" rows="3").form-control #{data.detail.result_repeat}
+                                else
+                                    textarea#txtResult_repeat(type="text" rows="3", placeholder="ผลการทบทวน").form-control
+                    .row
+                        .col-md-8
+                            .form-group
+                                label(for="txtDepcode_connected") ชื่อหหน่วยงานที่เกี่ยวข้อง
+                                if data.detail.depcode_connected
+                                    textarea#txtDepcode_connected(type="text" rows="3").form-control #{data.detail.depcode_connected}
+                                else
+                                    textarea#txtDepcode_connected(type="text" rows="3", placeholder="ชื่อหน่วยงานที่เกี่ยวข้อง").form-control
+                    .row
+                        .col-md-8
+                            .form-group
+                                label(for="txtEdit_system") การแก้ไขเชิงระบบ
+                                if data.detail.edit_system
+                                    textarea#txtEdit_system(type="text" rows="3").form-control #{data.detail.edit_system}
+                                else
+                                    textarea#txtEdit_system(type="text" rows="3", placeholder="การแก้ไขเชิงระบบ").form-control
+                    .row
+                        .col-md-3
+                            .form-group
+                                label(for="txtDate_finished") วันที่สิ้นสุดการแก้ไข
+                                //input#txtDate_finished(type="date").form-control
+                                if data.detail.date_finished
+                                    #datetimepicker2.input-group(data-datepicker)
+                                        input#txtDate_finished.form-control(type='text',value="#{data.detail.date_finished}")
+                                        span.input-group-addon
+                                            span.glyphicon.glyphicon-calendar
+                                else
+                                    #datetimepicker2.input-group(data-datepicker)
+                                        input#txtDate_finished.form-control(type='text')
+                                        span.input-group-addon
+                                            span.glyphicon.glyphicon-calendar
+                    .row
+                        .col-md-8
+                            .form-group
+                                label(for="txtNote") หมายเหตุ
+                                if data.detail.note
+                                    textarea#txtNote(type="text" rows="3").form-control #{data.detail.note}
+                                else
+                                    textarea#txtNote(type="text" rows="3", placeholder="หมายเหตุ" ).form-control
 
-    button(type="button").btn.btn-success#btnEdit บันทึก
+    button(type="button").btn.btn-primary#btnEdit บันทึก
 
-
-   // label(for="checkboxSentinel") Sentinel event case
+  //  label(for="checkboxSentinel") Sentinel event case
         | &nbsp;&nbsp;&nbsp;
         if data.detail.sentinel=="Y"
             input#checkboxSentinel(type="checkbox", checked="checked")
         else
-            input#checkboxSentinel(type="checkbox") -->
+            input#checkboxSentinel(type="checkbox")

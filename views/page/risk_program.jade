@@ -3,27 +3,33 @@ block scripts
     script(src="/javascripts/program.js")
 block content
     br
-    ol.breadcrumb
-        li
-            a(href="#") หน้าหลัก
-        li.active โปรแกรมความเสี่ยง
-    .well.well-sm
-        div.form-inline
-            .row
-                .col-md-6
-                    label หัวข้อความเสี่ยง
-                        | &nbsp;&nbsp;
-                    .input-group
-                        .input-group-btn
-                            input#txtSearch(type="text",placeholder="Search..").form-control
-                            button#btnSearch(type="button").btn.btn-success.btn-sm ค้นหา
-    .panel.panel-primary
+    .row
+        .col-md-6
+            .well.well-sm#show_search
+                div.form-inline
+                    .row
+                        .col-md-12
+                            button.close(type='button', aria-label='Close')#close_search
+                                span(aria-hidden='true') &times;
+                    .row
+                        .col-md-12
+                            label หัวข้อความเสี่ยง :
+                                | &nbsp;&nbsp;
+                            .input-group
+                                .input-group-btn
+                                    input#txtSearch(type="text",placeholder="Search..").form-control
+                                    | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    button#btnSearch(type="button").btn.btn-primary.btn-sm ค้นหา
+    .panel.panel-primary#show_detail
         .panel-heading
             h3.panel-title
                 i.fa.fa-comments-o
                 | &nbsp; รายการโปรแกรมความเสี่ยง
         .panel-body
-            buton.btn.btn-success.btn-sm.pull-right#btnShowModal
+            button.btn.btn-sm.btn-primary.pull-right#btnShowSearch
+                i.fa.fa-search.fa-lg
+                | &nbsp; ค้นหา
+            buton.btn.btn-primary.btn-sm.pull-right#btnShowModal
                 i.fa.fa-plus
                 | &nbsp; เพิ่มรายการ
             table.table.striped#tblRiskProgram
@@ -31,7 +37,8 @@ block content
                     tr
                         td ลำดับ
                         td รายการ
-                        td แก้ไข/ลบ
+                        td(style="width : 20px")
+                            i.fa.fa-cog.fa-spin.fa-3w.fa-fw
                     tbody
             ul.pagination#paging
 

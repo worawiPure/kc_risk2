@@ -34,12 +34,9 @@ $(function() {
             var searchrisk1 = $('#Date_Searchrisk1').val();
             var searchrisk2 = $('#Date_Searchrisk2').val();
             var depcode = $('#slDepartment').val();
-
             data.date1 =  searchrisk1;
             data.date2 = searchrisk2;
             data.depcode = depcode;
-
-
             if(!data.date1 || !data.date2 || !data.depcode ) {
                 $('#divAlert').fadeIn('slow');
             } else{
@@ -69,7 +66,9 @@ $(function() {
             var searchrisk1 = $('#Date_Searchrisk1').val();
             var searchrisk2 = $('#Date_Searchrisk2').val();
             var depcode = $('#slDepartment').val();
-            window.open('/prints/report_summary_department/' + searchrisk1 + '/' +searchrisk2+ '/' +depcode)
+            data.date1=moment(searchrisk1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            data.date2=moment(searchrisk2, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            window.open('/prints/report_summary_department/' + data.date1 + '/' +data.date2+ '/' +depcode)
 
         });
 

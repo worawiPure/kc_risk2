@@ -7,12 +7,12 @@ var group = require('../models/risk_detail');
 /* GET users listing. */
 
 router.get('/risk_group_detail' ,function(req,res) {
-    if (req.session.level_user_id != 2 && req.session.level_user_id != 2 ){
+    if (req.session.level_user_id != 2 && req.session.level_user_id != 3 ){
         res.render('./page/access_denied')
     }else {
         var db = req.db;
         var data = {};
-        program.getList(db)
+        program.getList_program_group(db)
             .then(function (rows) {
                 data.programs = rows;
                 return group.getListDetail(db)
@@ -27,7 +27,6 @@ router.get('/risk_group_detail' ,function(req,res) {
             })
     }
 });
-
 
 router.post('/get_risk_detail' ,function(req,res) {
     var db = req.db;
@@ -136,7 +135,5 @@ router.post('/search_detail',function(req,res){
         })
 
 });
-
-
 
 module.exports = router;

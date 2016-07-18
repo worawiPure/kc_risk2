@@ -235,10 +235,9 @@ module.exports = {
         var q = Q.defer();
         var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.`name` as aa FROM  risk_request_first f  '+
         'LEFT JOIN risk_type t ON f.type_risk=t.id '+
-        'WHERE f.date_risk = ?  '+
+        'WHERE f.date_risk between ? and ?  '+
         'and f.username = ? ';
-
-         db.raw(sql,[data.date,data.username])
+         db.raw(sql,[data.date1,data.date2,data.username])
              //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
             .then(function(rows){
                 console.log(rows[0]);
@@ -254,19 +253,18 @@ module.exports = {
 
     user_senior_search_date: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.`name` as aa FROM  risk_request_first f  '+
+        var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.name as aa FROM  risk_request_first f  '+
         'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
         'LEFT JOIN risk_type t ON f.type_risk=t.id '+
-        'WHERE f.date_risk = ? '+
+        'WHERE f.date_risk between ? and ? '+
         'and u.depcode = ? ';
 
-         db.raw(sql,[data.date,data.depcode])
+         db.raw(sql,[data.date1,data.date2,data.depcode])
              //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
             .then(function(rows){
                 console.log(rows[0]);
                 q.resolve(rows[0])
             })
-
             .catch(function(err){
                 console.log(err)
                 q.reject(err)
@@ -281,10 +279,9 @@ module.exports = {
             .innerJoin('risk_request_fourth as u', 'u.risk_request_id', 'f.id')
             .leftJoin('risk_type as t','t.id','f.type_risk')
             .leftJoin('department as d', 'd.depcode', 'u.depcode')
-            .where('f.date_risk',[data.date])
+            .whereBetween('f.date_risk',[data.date1,data.date2])
             .whereIn('f.depcode',[data.depcode,data.sub_depcode])
             .whereNotIn('u.depcode',[data.depcode,data.sub_depcode])
-
             .then(function(rows){
                 console.log(rows);
                 q.resolve(rows)

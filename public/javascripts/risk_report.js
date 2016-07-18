@@ -14,19 +14,17 @@ $(function() {
                 '<div class="btn-group btn-group-sm" role="group"> '+
                 '<a class="btn btn-success" type="button" href="/show_risk/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ดูรายละเอียด"> <i class="fa fa-search"></i></a>';
             //if (v.confirm == 1){
-
              //   html += '<a href="#" data-toggle="tooltip" data-placement="top" title="แก้ไข" class="btn btn-warning" disabled="disabled"> <i class="glyphicon glyphicon-pencil"></i></a>  ';
                 //'<a class="btn btn-primary" type="button", href="#" disabled="disabled" data-toggle="tooltip" data-placement="top" title="ทบทวน"> <i class="glyphicon glyphicon-book"></i></a>';
           // }
           //  else {
-
             html += '<a href="/edit_risk/'+ v.id+'" data-toggle="tooltip" data-placement="top" title="แก้ไข" class="btn btn-warning"> <i class="glyphicon glyphicon-pencil"></i></a>  ';
                 //'<a class="btn btn-primary" type="button", href="/risk_repeat/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ทบทวน"> <i class="glyphicon glyphicon-book"></i></a>';
             //}
-            html += '</div></td> '+
-                '<td style="width: 110px;"> '+
-                '<div class="btn-group btn-group-sm" role="group"> '+
-                '<a class="btn btn-primary" type="button" href="/prints/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ปริ้นรายละเอียด" class="btn btn-warning"> <i class="fa fa-print"></i></a>'+
+            //html += '</div></td> '+
+             //   '<td style="width: 110px;"> '+
+             //   '<div class="btn-group btn-group-sm" role="group"> '+
+                html +=    '<a class="btn btn-primary" type="button" href="/prints/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ปริ้นรายละเอียด" class="btn btn-warning"> <i class="fa fa-print"></i></a>'+
                 '</div></td> ';
 
             $tblRisk.append(html);
@@ -123,6 +121,28 @@ $(function() {
                 });
             });
 
+        $('#show_search').fadeOut();
+        $('#close_search').on('click',function(e){
+            $('#show_detail').fadeIn();
+            $('#show_search').fadeOut();
+            $('#Date_Searchrisk1').val('');
+            $('#Date_Searchrisk2').val('');
+            $('#txtSearch').val('');
+        });
+
+        $('#btnShowSearch').on('click',function(e){
+            $('#show_search').fadeIn();
+            $('#show_detail').fadeOut();
+        });
+
+        $('#btnSearch').on('click',function(e){
+            $('#show_detail').fadeIn();
+        });
+
+        $('#Searchrisk').on('click',function(e){
+            $('#show_detail').fadeIn();
+        });
+
         $('#btnRepeat').on('click', function(e){
             var data = {};
             data.id = $('#riskid').val();
@@ -156,8 +176,10 @@ $(function() {
         $('#Searchrisk').on('click', function(e){
             e.preventDefault();
             var data = {};
-            var date_searchrisk = $('#Date_Searchrisk').val();
-            data.date = date_searchrisk;
+            var date_searchrisk1 = $('#Date_Searchrisk1').val();
+            var date_searchrisk2 = $('#Date_Searchrisk2').val();
+            data.date_searchrisk1 = date_searchrisk1;
+            data.date_searchrisk2 = date_searchrisk2;
 
             $.ajax({
                 type: "POST",

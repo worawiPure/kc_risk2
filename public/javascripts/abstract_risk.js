@@ -13,15 +13,18 @@ $(function(){
                 '<td> ' + v.department_risk + ' </td>'+
                 '<td> '+
                 '   <div class="btn-group btn-group-sm" role="group"> '+
-                '<a class="btn btn-success" type="button" href="/abstract_risk/show_risk/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ดูรายละเอียด"> <i class="fa fa-search"></i></a> '+
+                '<a class="btn btn-success" type="button" href="/abstract_risk/show_risk/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ดูรายละเอียด">' +
+                ' <i class="fa fa-search"></i></a> '+
+                '<a class="btn btn-warning" type="button" href="/abstract_risk/edit_risk/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="แก้ไขรายละเอียด"> ' +
+                '<i class="glyphicon glyphicon-pencil"></i></a> '+
                 '<a class="btn btn-primary" href="#" data-action="Addabstract" data-id="'+ v.id +'" data-toggle="tooltip" data-placement="top" title="สรุปรายละเอียด" > '+
-                '<i class="glyphicon glyphicon-pencil"> </i></a> '+
+                '<i class="fa fa-check"> </i></a> '+
                 '<a class="btn btn-danger" href="#" data-action="Removeabstract" data-id="'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ลบอุบัติการณ์" > '+
                 '<i class="glyphicon glyphicon-trash"> </i></a> '+
                 '</div> '+
                 '<td> '+
                 '   <div class="btn-group btn-group-sm" role="group"> '+
-                '<a class="btn btn-primary" type="button" href="/prints/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ปริ้นรายละเอียด"> <i class="fa fa-print"></i></a>';
+                '<a class="btn btn-info" type="button" href="/prints/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ปริ้นรายละเอียด"> <i class="fa fa-print"></i></a>';
             if (v.abstract == 1){
                 html += '<a href="/prints/abstract_report/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ปริ้นสรุปอุบัติการณ์" class="btn btn-warning"><i class="fa fa-print"></i></a>  ';
             }
@@ -124,9 +127,31 @@ $(function(){
             })
     };
 
-    $('#Block_Search').fadeOut();
+    $('#show_search').fadeOut();
+    $('#close_search').on('click',function(e){
+        $('#show_detail').fadeIn();
+        $('#show_search').fadeOut();
+        $('#Date_Searchrisk1').val('');
+        $('#Date_Searchrisk2').val('');
+        $('#slDepartment').val('');
+        $('#txtSearch').val('');
+    });
+
     $('#btnShowSearch').on('click',function(e){
-    $('#Block_Search').fadeIn();
+        $('#show_search').fadeIn();
+        $('#show_detail').fadeOut();
+    });
+
+    $('#btnSearch_date').on('click',function(e){
+        $('#show_detail').fadeIn();
+    });
+
+    $('#btnSearch_department').on('click',function(e){
+        $('#show_detail').fadeIn();
+    });
+
+    $('#btnSearch_topic').on('click',function(e){
+        $('#show_detail').fadeIn();
     });
 
     $(document).on('click', 'a[data-action="Addabstract"]', function (e) {
@@ -225,7 +250,6 @@ $(function(){
         var data = {};
         var department = $('#slDepartment').val();
         data.department = department;
-
         $.ajax({
             type: "POST",
             url: "/abstract_risk/search_department",

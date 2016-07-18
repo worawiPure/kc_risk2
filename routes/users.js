@@ -6,6 +6,7 @@ var program = require('../models/risk_group');
 var user = require('../models/users');
 var layer = require('../models/level_user');
 var pname = require('../models/users');
+var count_today = require('../models/users');
 /* GET users listing. */
 
 router.get('/user' ,function(req,res) {
@@ -109,7 +110,7 @@ router.get('/department',function(req,res){
                 res.render('page/department', {data: {departments: []}})
             })
     }
-})
+});
 
 router.post('/get_department',function(req,res){
     var db = req.db;
@@ -122,7 +123,6 @@ router.post('/get_department',function(req,res){
         }
     )
 });
-
 
 router.post('/save_department', function(req,res){
     var db = req.db;
@@ -221,7 +221,6 @@ router.post('/get_comfirm_users',function(req,res){
     )
 });
 
-
 router.post('/save_user', function(req,res){
     var db = req.db;
     var username = req.body.username;
@@ -243,7 +242,6 @@ router.post('/save_user', function(req,res){
         res.send({ok:false,msg:'ข้อมูลไม่สมบูรณ์'})
     }
 });
-
 
 router.post('/remove_users', function(req,res){
     var db = req.db;
@@ -274,8 +272,6 @@ router.post('/remove_department', function(req,res){
         res.send({ok:false,msg:'ข้อมูลไม่สมบูรณ์'})
     }
 });
-
-
 
 router.post('/update_users', function(req,res){
     var db = req.db;
@@ -382,37 +378,32 @@ router.post('/login',function(req,res){
       .join('department as d','d.depcode','u.depcode')
       .where({user:username, password:encryptPass, comfirm: 'Y'})
       .then(function(rows){
-          console.log(rows);
-        if(rows.length>0){
-        req.session.logged=true;
-        req.session.level_user_id=rows[0].level_user_id
-        req.session.username=username;
-        req.session.depcode=rows[0].depcode;
-        req.session.sub_depcode=rows[0].sub_depcode;
-        req.session.fullname=rows[0].fname + ' ' + rows[0].lname;
-        req.session.depname=rows[0].depname;
-
+              console.log(rows);
+            if(rows.length>0){
+            req.session.logged=true;
+            req.session.level_user_id=rows[0].level_user_id
+            req.session.username=username;
+            req.session.depcode=rows[0].depcode;
+            req.session.sub_depcode=rows[0].sub_depcode;
+            req.session.fullname=rows[0].fname + ' ' + rows[0].lname;
+            req.session.depname=rows[0].depname;
             if (req.session.level_user_id == 1){
-                res.redirect('/risk_report'); }
+                res.redirect('/risk_news'); }
             if (req.session.level_user_id == 2){
-                res.redirect('/abstract_risk');
-            }
+                res.redirect('/risk_news_admin');}
             if (req.session.level_user_id == 3){
-                res.redirect('/abstract_risk');
-            }
+                res.redirect('/risk_news_admin');}
             if (req.session.level_user_id == 4){
-                res.redirect('/user_senior_risk_report')
+                res.redirect('/risk_news_senior')}
+            }else{
+              res.render('page/login',{error:true});
             }
-        }else{
-          res.render('page/login',{error:true});
-        }
-      })
+          })
       .catch(function(err){
         console.log(err);
-        res.render('page/login',{
-            departments:[]
-        });
+        res.render('page/login',{departments:[]});
       });
+
 });
 
 router.get('/user_profile',function(req,res){
@@ -486,6 +477,5 @@ router.get('/admin_profile',function(req,res){
             res.render('page/admin_profile',{data:{users:[],pnames:[],departments:[]}});
         })
 });
-
 
 module.exports = router;

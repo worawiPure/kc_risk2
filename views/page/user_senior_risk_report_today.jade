@@ -1,9 +1,9 @@
 extends  ../user_senior_layout
 block scripts
-    script(src="/javascripts/user_senior_risk_report_feedback.js")
+    script(src="/javascripts/user_senior_risk_report_today.js")
 block content
     br
-    .well.well-sm#show_search
+    //.well.well-sm#show_search
         div.form-inline
             .row
                 .col-md-12
@@ -27,6 +27,7 @@ block content
                                 span.glyphicon.glyphicon-calendar
                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         button#Searchrisk(type="button").btn.btn-primary.btn-sm ค้นหา
+            .row
                 .col-md-12
                     .form-group
                         label หัวข้อความเสี่ยง
@@ -38,20 +39,20 @@ block content
         .panel-heading
             h3.panel-title
                 i.fa.fa-comments-o
-                | &nbsp; ความเสี่ยงที่หน่วยงานอื่นรายงานเกี่ยวกับแผนกเรา
+                | &nbsp; รายการอุบัติการณ์ความเสี่ยง
         .panel-body
-            button.btn.btn-xs.btn-primary.pull-right#btnShowSearch
+            //button.btn.btn-xs.btn-primary.pull-right#btnShowSearch
                 i.fa.fa-search.fa-lg
                 | &nbsp; ค้นหา
-            table.table.table-hover#tblRisk_report_feedback
+            table.table.table-hover#tblRisk_report
                 thead
                     tr
                         td.h4 ลำดับ
                         td.h4 วันที่
                         td.h4 ประเภท
                         td.h4 หัวข้อความเสี่ยง
-                        td.h4 หน่วยงานที่รายงาน
-                        td(style="width : 100px")
+                        td(style="width : 150px")
                             i.fa.fa-cog.fa-spin.fa-3w.fa-fw
+                            i.fa.fa-print
                     tbody
             ul.pagination#paging

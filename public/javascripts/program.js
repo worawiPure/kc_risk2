@@ -113,6 +113,21 @@ $(function(){
             })
     };
 
+    $('#show_search').fadeOut();
+    $('#close_search').on('click',function(e){
+        $('#show_detail').fadeIn();
+        $('#show_search').fadeOut();
+        $('#txtSearch').val('');
+    });
+
+    $('#btnShowSearch').on('click',function(e){
+        $('#show_search').fadeIn();
+        $('#show_detail').fadeOut();
+    });
+
+    $('#btnSearch').on('click',function(e){
+        $('#show_detail').fadeIn();
+    });
 
     $(document).on('click','a[data-action="remove"]', function(e){
         e.preventDefault();

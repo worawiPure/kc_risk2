@@ -62,6 +62,8 @@ $(function() {
         var data = {};
         var searchrisk1 = $('#Date_Searchrisk1').val();
         var searchrisk2 = $('#Date_Searchrisk2').val();
-        window.open('/prints/report_summary_date/' + searchrisk1 + '/' +searchrisk2)
+        data.date1=moment(searchrisk1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        data.date2=moment(searchrisk2, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        window.open('/prints/report_summary_date/' + data.date1 + '/' +data.date2)
     });
 })

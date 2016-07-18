@@ -1,21 +1,32 @@
 $(function() {
     var setTable = function(data){
-        var $tblRisk = $('#tblRisk_report_feedback > tbody');
+        var $tblRisk = $('#tblRisk_report > tbody');
         $tblRisk.empty();
         var i=0;
         _.forEach(data.rows, function(v){
-            console.log(v);
             i++;
             var html = '<tr> ' +
                 '<td> ' + i + ' </td>'+
                 '<td> ' + moment(v.date_risk).format('DD/MM/YYYY') + ' </td>'+
                 '<td> ' + v.aa + '</td>'+
                 '<td> ' + v.topic_risk + '</td>'+
-                '<td> ' + v.mm + '</td>'+
                 '<td style="width: 190px;"> '+
                 '<div class="btn-group btn-group-sm" role="group"> '+
-                '<a class="btn btn-primary" type="button" href="/user_senior_show_risk_feedback/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ดูรายละเอียด"> <i class="fa fa-search"></i></a>';
-            html += '</div></td> ';
+                '<a class="btn btn-success" type="button" href="/user_senior_show_risk/'+ v.id +'/'+ v.cc +'" data-toggle="tooltip" data-placement="top" title="ดูรายละเอียด"> <i class="fa fa-search"></i></a>';
+            //if (v.confirm == 1){
+            //    html += '<a href="#" data-toggle="tooltip" data-placement="top" title="แก้ไข" class="btn btn-warning" disabled="disabled"> <i class="glyphicon glyphicon-pencil"></i></a>  '+
+            //    '<a class="btn btn-primary" type="button", href="#" disabled="disabled" data-toggle="tooltip" data-placement="top" title="ทบทวน"> <i class="glyphicon glyphicon-book"></i></a>';
+            //}
+            //else {
+
+            html += '<a href="/user_senior_edit_risk/'+ v.id+'/'+ v.cc +'" data-toggle="tooltip" data-placement="top" title="แก้ไข" class="btn btn-warning"> <i class="glyphicon glyphicon-pencil"></i></a>  '+
+                '<a class="btn btn-primary" type="button", href="/risk_repeat/'+ v.id +'/'+ v.cc +'" data-toggle="tooltip" data-placement="top" title="ทบทวน"> <i class="glyphicon glyphicon-book"></i></a>';
+            //}
+            //html += '</div></td> '+
+            //    '<td style="width: 110px;"> '+
+            //    '<div class="btn-group btn-group-sm" role="group"> '+
+            html += '<a class="btn btn-info" type="button" href="/prints/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ปริ้นรายละเอียด" class="btn btn-warning"> <i class="fa fa-print"></i></a>'+
+                '</div></td> ';
 
             $tblRisk.append(html);
         });
@@ -26,7 +37,7 @@ $(function() {
     var risk_report  = function(){
         $.ajax({
             method:'POST',
-            url:'/user_senior_get_risk_report_feedback_total',
+            url:'/user_senior_get_risk_report_total_today',
             dataType:'json'
         })
             .success(function(data){
@@ -41,13 +52,12 @@ $(function() {
                         console.log(this.slice);
                         $.ajax({
                             method:'POST',
-                            url:'/user_senior_get_risk_feedback_report',
+                            url:'/user_senior_get_risk_report_today',
                             dataType:'json',
                             contentType:'application/json',
                             data: JSON.stringify({startRecord:startRecord})
                         })
                             .success(function(data){
-                                console.log(data);
                                 setTable(data);
                             })
                         // Index.getService(start, end, startRecord, function (err, rows) {
@@ -134,6 +144,36 @@ $(function() {
             $('#show_detail').fadeIn();
         });
 
+        $('#btnRepeat').on('click', function(e){
+            var data = {};
+            data.id = $('#riskid').val();
+            data.date_repeat = $('#txtDate_repeat').val();
+            data.name_repeat = $('#txtName_repeat').val();
+            data.result_repeat = $('#txtResult_repeat').val();
+            data.depcode_connected = $('#txtDepcode_connected').val();
+            data.edit_system = $('#txtEdit_system').val();
+            data.date_finished = $('#txtDate_finished').val();
+            data.note = $('#txtNote').val();
+
+            if(!data.date_repeat || !data.name_repeat || !data.result_repeat ) {
+                $('#divAlert').fadeIn('slow');
+            } else{
+                $.ajax({
+                    type: "POST",
+                    url: "/update_part5",
+                    contentType: 'application/json',
+                    data:JSON.stringify({data: data})
+                })
+                    .success(function(data) {
+                        alert('บันทึกข้อมูลเรียบร้อยแล้ว');
+                        window.location.href="/user_senior_risk_report";
+                    })
+                    .error(function (xhr, status, err) {
+                        alert(err);
+                    })
+            }
+        });
+
         $('#paging').fadeIn();
         $('#Searchrisk').on('click', function(e){
             e.preventDefault();
@@ -142,9 +182,10 @@ $(function() {
             var date_searchrisk2 = $('#Date_Searchrisk2').val();
             data.date_searchrisk1 = date_searchrisk1;
             data.date_searchrisk2 = date_searchrisk2;
+
             $.ajax({
                 type: "POST",
-                url: "/user_senior_search_date_risk_feedback",
+                url: "/user_senior_search_date_risk",
                 contentType:'application/json',
                 dataType:'json',
                 data: JSON.stringify(data)
@@ -164,7 +205,7 @@ $(function() {
 
             $.ajax({
                 type: "POST",
-                url: "/user_senior_search_topic_risk_feedback",
+                url: "/user_senior_search_topic_risk",
                 contentType:'application/json',
                 dataType:'json',
                 data: JSON.stringify(data)

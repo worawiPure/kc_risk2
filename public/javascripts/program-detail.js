@@ -111,6 +111,53 @@ $(function(){
                 });
             })
     };
+
+    $('#show_search').fadeOut();
+    $('#close_search').on('click',function(e){
+        $('#show_detail').fadeIn();
+        $('#show_search').fadeOut();
+        $('#txtSearch_detail').val('');
+        $('#slDetail_risk').val('');
+    });
+
+    $('#btnShowSearch').on('click',function(e){
+        $('#show_search').fadeIn();
+        $('#show_detail').fadeOut();
+    });
+
+    $('#btnSearch_detail_risk').on('click',function(e){
+        $('#show_detail').fadeIn();
+    });
+
+    $('#btnSearch_detail').on('click',function(e){
+        $('#show_detail').fadeIn();
+    });
+
+    $('#divSubProgram').fadeOut();
+    $('#slProgram').on('change', function (e) {
+        var id = $(this).val();
+        if (id) {
+            $.ajax({
+                url: '/sub_program',
+                method: 'POST',
+                data: {id: id}
+            })
+                .success(function (data) {
+                    var $sl = $('#slGroup');
+                    $sl.empty();
+                    //$sl.append('<option value="">ไม่มี</option> ');
+                    _.forEach(data.rows, function (v) {
+                        $sl.append('<option value="' + v.id + '">' + v.name_sub_program + '</option> ');
+                    });
+                    $('#divSubProgram').fadeIn();
+                })
+                .error(function (xhr, status, err) {
+                })
+        } else {
+            alert('กรุณาเลือกโปรแกรมความเสี่ยง');
+        }
+    });
+
     $(document).on('click','a[data-action="remove"]', function(e){
         e.preventDefault();
         var id = $(this).data('id');
@@ -138,7 +185,8 @@ $(function(){
                 })
         }
 
-    })
+    });
+
     $(document).on('click','a[data-action="edit"]',function(e){
         e.preventDefault();
         var risk_program = $(this).data('risk_program');
@@ -175,7 +223,6 @@ $(function(){
         var name = $('#txtName').val();
         var id = $('#txtId').val();
         console.log(risk_program,risk_group,name,id);
-
         if( name && risk_program){
             if(id){
                 $.ajax({
@@ -183,7 +230,6 @@ $(function(){
                     url:'/detail/update_group',
                     dataType:'json',
                     data:{
-
                         risk_program:risk_program,
                         risk_group:risk_group,
                         name:name,

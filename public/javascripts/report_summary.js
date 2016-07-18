@@ -7,15 +7,13 @@ $(function() {
             i++;
             var html = '<tr> ' +
                 '<td> ' + i + ' </td>'+
-                '<td>' + v.risk_detail  + ' </td>'+
-                '<td>' + v.name_sub_program  + ' </td>'+
-                '<td>' + v.program_risk  + ' </td>'+
+                '<td> ' + moment(v.Date_Time).format('DD/MM/YYYY HH:mm') + ' </td>'+
+                '<td>' + v.topic_risk + ' </td>'+
                 '<td>' + v.risk_level  + ' </td>'+
                 '<td>' + v.depname  + ' </td>'+
-                '<td> ' + moment(v.Date_Time).format('DD/MM/YYYY HH:mm') + ' </td>'+
                 '<td style="width: 150px;"> '+
                 '<div class="btn-group btn-group-sm" role="group"> '+
-                '<a class="btn btn-success" type="button" href="/prints/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ปริ้นเอกสาร"> <i class="fa fa-print"></i></a>';
+                '<a class="btn btn-info" type="button" href="/prints/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ปริ้นเอกสาร"> <i class="fa fa-print"></i></a>';
 
             html += '</div></td> ';
 
@@ -23,19 +21,15 @@ $(function() {
         });
         $('[data-toggle="tooltip"]').tooltip();
         }
-
-
         $('#btnSearch').on('click', function(e){
             e.preventDefault();
             var data = {};
             var searchrisk1 = $('#Date_Searchrisk1').val();
             var searchrisk2 = $('#Date_Searchrisk2').val();
             var risk_type = $('#slRisk_type').val();
-
             data.date1 =  searchrisk1;
             data.date2 = searchrisk2;
             data.risk_type = risk_type;
-
             if(!data.date1 || !data.date2 || !data.risk_type ) {
                 $('#divAlert').fadeIn('slow');
             } else{

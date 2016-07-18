@@ -1,4 +1,3 @@
-
 doctype html
 html
   head
@@ -39,75 +38,82 @@ html
 
     block scripts
   body
-    nav.navbar.navbar-inverse.navbar-fixed-top
-      .container
-        .navbar-header
-          button(type="button", data-toggle="collapse", data-taget="#navbar",
-          aria-expanded="false", aria-controls="navbar").navbar-toggle.collapsed
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand(href="#")
-            i.fa.fa-exclamation-triangle
-            | &nbsp; KC Risk
-        #navbar.navbar-collapse.collapse
-          ul.nav.navbar-nav
-            li.active
-              a(href="/user_senior_risk_report") หน้าแรก
-            li.dropdown
-              a(href="#", data-toggle="dropdown", role="button",
-              aria-haspopup="true", aria-expanded="false").dropdown-toggle
-                | กิจกรรม
-                span.caret
-              ul.dropdown-menu
-                //li
-                        a(href="/user_senior_request") บันทึกความเสี่ยง
-                li
-                  a(href="/report_risk/user_senior_report") สรุป/รายงาน
-          p.navbar-text.navbar-right #{session.fullname} | #{session.depname}
-          ul.nav.navbar-nav.pull-right
-                li.dropdown
-                    a(href="#", data-toggle="dropdown", role="button",
-                    aria-haspopup="true", aria-expanded="false").dropdown-toggle
-                        i.fa.fa-user
-                    ul.dropdown-menu
-                        li
-                            a(href="/users/user_senior_profile")
-                                i.fa.fa-edit
-                                    | &nbsp;&nbsp; ข้อมูลส่วนตัว
-                        li
-                            a(href="/users/logout")
-                                i.fa.fa-power-off
-                                | &nbsp;&nbsp;ออกจากระบบ
-    .container
-      .row
-        .col-md-3
-            br
-            .panel.panel-default
-                .panel-body
-                    .ul.nav.nav-pills.nav-stacked
-                          if session.level_user_id==4
-                              li.active
-                                a(href="#")
-                                  i.fa.fa-tags
-                                  | &nbsp; เมนูหลัก
-                              //li
-                                a(href="/user_senior_request")
-                                  i.fa.fa-file-text
-                                  | &nbsp; รายงานความเสี่ยง
-                              li
-                                a(href="/user_senior_risk_report")
-                                  i.fa.fa-file-text
-                                  | &nbsp; หัวข้อความเสี่ยงที่รายงาน
-                              li
-                                a(href="/user_senior_risk_report_feedback")
-                                  i.fa.fa-file-text
-                                  | &nbsp; ความเสี่ยงที่หน่วยงานอื่นรายงานเกี่ยวกับแผนกเรา
-                              li
-                                a(href="/report_risk/user_senior_report")
-                                  i.fa.fa-bar-chart-o
-                                  | &nbsp; สรุปรายงานความเสี่ยง
-        .col-md-9
-          block content
+        nav.navbar.navbar-default.navbar-fixed-top
+              .container
+                    .navbar-header
+                          button(type="button", data-toggle="collapse", data-taget="#navbar",
+                          aria-expanded="false", aria-controls="navbar").navbar-toggle.collapsed
+                                span.sr-only Toggle navigation
+                                span.icon-bar
+                                span.icon-bar
+                          a.navbar-brand(href="#")
+                                i.fa.fa-exclamation-triangle
+                                | &nbsp; KC Risk
+                    #navbar.navbar-collapse.collapse
+                          ul.nav.navbar-nav
+                                li
+                                    a(href="/risk_news_senior") หน้าแรก
+                                li.dropdown
+                                      a(href="#", data-toggle="dropdown", role="button",
+                                      aria-haspopup="true", aria-expanded="false").dropdown-toggle
+                                        | กิจกรรม
+                                        span.caret
+                                      ul.dropdown-menu
+                                            //li
+                                                a(href="/user_senior_request") บันทึกความเสี่ยง
+                                            li
+                                                a(href="/report_risk/user_senior_report")
+                                                      i.fa.fa-bar-chart-o
+                                                      | &nbsp; : สรุปรายงานความเสี่ยง
+                          p.navbar-text.navbar-right #{session.fullname} | #{session.depname}
+                          ul.nav.navbar-nav.pull-right
+                                li.dropdown
+                                    a(href="#", data-toggle="dropdown", role="button",
+                                    aria-haspopup="true", aria-expanded="false").dropdown-toggle
+                                        i.fa.fa-user
+                                    ul.dropdown-menu
+                                        li
+                                            a(href="/users/user_senior_profile")
+                                                i.fa.fa-edit
+                                                    | &nbsp;&nbsp; ข้อมูลส่วนตัว
+                                        li
+                                            a(href="/users/logout")
+                                                i.fa.fa-power-off
+                                                | &nbsp;&nbsp;ออกจากระบบ
+        .container
+            .row
+                .col-md-3
+                    br
+                    .panel.panel-primary
+                        .panel-heading
+                            h3.panel-title
+                                i.fa.fa-tag
+                                | &nbsp; รายการกิจกรรม
+                        .panel-body
+                            .ul.nav.nav-pills.nav-stacked
+                                  if session.level_user_id==4
+                                          //li
+                                            a(href="/user_senior_request")
+                                              i.fa.fa-file-text
+                                              | &nbsp; รายงานความเสี่ยง
+                                      li
+                                            a(href="/user_senior_risk_today")
+                                                i.fa.fa-file-text
+                                                | &nbsp; : หัวข้อความเสี่ยงวันนี้
+                                                .badge  #{total}
+                                      li
+                                            a(href="/user_senior_risk_report")
+                                                  i.fa.fa-file-text
+                                                  | &nbsp; : หัวข้อความเสี่ยงที่รายงาน
+                                      li
+                                            a(href="/user_senior_risk_report_feedback")
+                                                  i.fa.fa-eye
+                                                  | &nbsp; : ความเสี่ยงที่หน่วยงานอื่นรายงานเกี่ยวกับแผนกเรา
+                                      li
+                                            a(href="/report_risk/user_senior_report")
+                                                  i.fa.fa-bar-chart-o
+                                                  | &nbsp; : สรุปรายงานความเสี่ยง
+                .col-md-9
+                  block content
 
 

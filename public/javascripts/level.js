@@ -36,9 +36,7 @@ $(function() {
             var html = '<tr> ' +
                 '<td> ' + i + ' </td>'+
                 '<td> ' + moment(v.Date_Time).format('DD/MM/YYYY HH:mm') + ' </td>'+
-                '<td>' + v.risk_detail  + ' </td>'+
-                '<td>' + v.name_sub_program  + ' </td>'+
-                '<td>' + v.program_risk  + ' </td>'+
+                '<td>' + v.topic_risk  + ' </td>'+
                 '<td>' + v.Type  + ' </td>'+
                 '<td>' + v.Leve  + ' </td>'+
                 '<td>' + v.depname  + ' </td>'+
@@ -93,9 +91,9 @@ $(function() {
             var searchrisk2 = $('#Date_Searchrisk2').val();
             var risk_type = $('#slRisk_type').val();
             var risk_level = $('#divlevel').val();
-
-            window.open('/prints/report_level/' + searchrisk1 + '/' + searchrisk2 + '/' + risk_type + '/' + risk_level)
-
+            data.date1=moment(searchrisk1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            data.date2=moment(searchrisk2, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            window.open('/prints/report_level/' + data.date1 + '/' + data.date2 + '/' + risk_type + '/' + risk_level)
         });
 
 

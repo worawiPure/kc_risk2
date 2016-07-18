@@ -2,7 +2,7 @@ doctype html
 html
     head
         meta(charset="utf-8")
-        title รายงานใบสรุปอุบัติการณ์ความเสี่ยง
+        title รายงานสรุปอุบัติการณ์ความเสี่ยง
         style.
             html, body {
                 margin: 0;
@@ -214,8 +214,6 @@ html
                     th ลำดับ
                     th วัน/เวลา
                     th อุบัติการณ์ความเสี่ยง
-                    th หมวดหมู่ความเสี่ยง
-                    th โปรแกรมความเสี่ยง
                     th ประเภท
                     th ระดับความรุนแรง
                     th หน่วยงานที่เกิดความเสี่ยง
@@ -227,9 +225,7 @@ html
                     tr
                         td(style="width: 10px;") #{y}
                         td #{d.Date_Time}
-                        td #{d.risk_detail}
-                        td #{d.name_sub_program}
-                        td #{d.program_risk}
+                        td #{d.topic_risk}
                         td #{d.Type}
                         td #{d.Leve}
                         td #{d.depname}

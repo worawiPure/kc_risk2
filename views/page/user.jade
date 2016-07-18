@@ -3,10 +3,6 @@ block scripts
     script(src="/javascripts/users.js")
 block content
     br
-    ol.breadcrumb
-        li
-            a(href="#") หน้าหลัก
-        li.active รายการผู้ใช้งาน
     .panel.panel-primary
         .panel-heading
             h3.panel-title
@@ -21,9 +17,6 @@ block content
                 button.btn.btn-danger
                     i.fa.fa-check
                     | &nbsp; ยืนยันผู้ใช้งาน
-            //button.btn.btn-success.pull-right#btnShowModal
-                i.fa.fa-plus
-                | &nbsp; เพิ่มผู้ใช้งาน
             table.table.striped#tblRiskUsers
                 thead
                     tr

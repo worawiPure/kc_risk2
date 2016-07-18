@@ -169,7 +169,7 @@ module.exports = {
        ' LEFT OUTER JOIN risk_abstract r ON r.id = f.id   '+
        ' LEFT OUTER JOIN department d ON f.depcode=d.depcode  '+
        ' LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
-       ' WHERE u.depcode = ?    '+
+       ' WHERE f.depcode = ?    '+
        ' ORDER BY f.date_risk DESC';
         db.raw(sql,[data.department])
             //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
@@ -275,9 +275,33 @@ module.exports = {
                 q.reject(err);
             });
         return q.promise;
+    },
+
+    save_news: function(db,date_news,topic_news,detail_news){
+        var q = Q.defer();
+        db('news')
+            .insert({date_news:date_news,topic_news:topic_news,detail_news:detail_news})
+            .then(function(){
+                q.resolve();
+            })
+            .catch(function(err){
+                q.reject(err);
+            });
+        return q.promise;
+    },
+
+    update_news: function(db,id,date_news,topic_news,detail_news){
+        var q = Q.defer();
+        db('news')
+            .update({date_news:date_news,topic_news:topic_news,detail_news:detail_news})
+            .where('id',id)
+            .then(function(){
+                q.resolve();
+            })
+            .catch(function(err){
+                q.reject(err);
+            });
+        return q.promise;
     }
 
-
-
-
-}
+};

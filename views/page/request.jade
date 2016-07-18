@@ -7,8 +7,12 @@ block content
     br
     ol.breadcrumb
         li
-            a(href="#") หน้าหลัก
-        li.active รายงานความเสี่ยง
+            a(href="/risk_report")
+                i.fa.fa-home
+                | &nbsp; หน้าหลัก
+        li.active
+            i.fa.fa-minus-square
+            | &nbsp; รายงานความเสี่ยง
     .alert.alert-warning(role="alert",style="display: none;")#divAlert
         i.fa.fa-warning
         | &nbsp; กรอกข้อมูลไม่สมบูรณ์
@@ -17,11 +21,17 @@ block content
         | &nbsp; กรุณาเลือกข้อมูล (เหตุการณ์ที่ต้องรอใน 24 ชม.)
     ul.nav.nav-tabs(role="tablist")
         li.active(role='presentation')
-            a(href="#part1", aria-controls="part1", role="tab", data-toggle="tab") ส่วนที่ 1
+            a(href="#part1", aria-controls="part1", role="tab", data-toggle="tab")
+                | ส่วนที่ 1 &nbsp;
+                i.fa.fa-arrow-right
         li(role='presentation')
-            a(href='#part2', aria-controls='part2', role='tab', data-toggle='tab') ส่วนที่ 2
+            a(href='#part2', aria-controls='part2', role='tab', data-toggle='tab')
+                | ส่วนที่ 2 &nbsp;
+                i.fa.fa-arrow-right
         li(role='presentation')
-            a(href='#part3', aria-controls='part3', role='tab', data-toggle='tab') ส่วนที่ 3
+            a(href='#part3', aria-controls='part3', role='tab', data-toggle='tab')
+                | ส่วนที่ 3 &nbsp;
+                i.fa.fa-arrow-right
         li(role='presentation')
             a(href='#part4', aria-controls='part4', role='tab', data-toggle='tab') ส่วนที่ 4
 

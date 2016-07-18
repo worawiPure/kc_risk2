@@ -5,37 +5,40 @@ block scripts
 
 block content
     br
-    ol.breadcrumb
-        li
-            a(href="#") หน้าหลัก
-        li.active รายการอุบัติการณ์ความเสี่ยง
-    .well.well-sm
+    .well.well-sm#show_search
         div.form-inline
             .row
                 .col-md-12
-                    label ค้นหาจากหมวดหมู่อุบัติการณ์/ความเสี่ยง
+                    button.close(type='button', aria-label='Close')#close_search
+                        span(aria-hidden='true') &times;
+            .row
+                .col-md-12
+                    label ค้นหาจากหมวดหมู่ความเสี่ยง :
                         | &nbsp;&nbsp;
                     select.form-control#slDetail_risk
                         option(value="") กรุณาเลือกรายการ....
                         for p in data.groups
                             option(value="#{p.id}") #{p.name_sub_program}
-                    button#btnSearch_detail_risk(type="button").btn.btn-success.btn-sm ค้นหา
+                    button#btnSearch_detail_risk(type="button").btn.btn-primary.btn-sm ค้นหา
             br
             .row
                 .col-md-12
-                    label รายการอุบัติการณ์/ความเสี่ยง
+                    label รายการความเสี่ยง :
                         | &nbsp;&nbsp;
                     .input-group
                         .input-group-btn
                             input#txtSearch_detail(type="text",placeholder="Search..").form-control
-                            button#btnSearch_detail(type="button").btn.btn-success.btn-sm ค้นหา
-    .panel.panel-primary
+                            button#btnSearch_detail(type="button").btn.btn-primary.btn-sm ค้นหา
+    .panel.panel-primary#show_detail
         .panel-heading
             h3.panel-title
                 i.fa.fa-comments-o
                 | &nbsp; รายการอุบัติการณ์ความเสี่ยง
         .panel-body
-            buton.btn.btn-success.btn-sm.pull-right#btnShowModal
+            button.btn.btn-sm.btn-primary.pull-right#btnShowSearch
+                i.fa.fa-search.fa-lg
+                | &nbsp; ค้นหา
+            buton.btn.btn-primary.btn-sm.pull-right#btnShowModal
                 i.fa.fa-plus
                 | &nbsp; เพิ่มรายการ
             table.table.striped#tblRiskDetail
@@ -43,8 +46,9 @@ block content
                     tr
                         td ลำดับ
                         td รายการ
-                        td กลุ่ม
-                        td แก้ไข/ลบ
+                        td หมวดหมู่
+                        td(style="width : 20px")
+                            i.fa.fa-cog.fa-spin.fa-3w.fa-fw
                     tbody
             ul.pagination#paging
 
@@ -58,19 +62,17 @@ block content
                 .modal-body(style="padding-top: 20px;")
                     input(type="hidden")#txtId
                     .form-group
-                        label(for="txtName") รายการ
-                        input(type="text")#txtName.form-control
-                    .form-group
-                        label(for="slGroup") กลุ่มความเสี่ยง
-                        select.form-control#slGroup
-                            option(value="") ไม่มี
-                            for g in data.groups
-                                option(value="#{g.id}") #{g.name_sub_program}
-                    .form-group
                         label(for="slProgram") โปรแกรมความเสี่ยง
                         select.form-control#slProgram
+                            option(value="") กรุณาเลือกรายการ....
                             for p in data.programs
                                 option(value="#{p.id}") #{p.program_risk}
+                    .form-group#divSubProgram
+                        label(for="slGroup") กลุ่มความเสี่ยง
+                        select#slGroup.form-control.css-require
+                    .form-group
+                        label(for="txtName") รายการ
+                        input(type="text")#txtName.form-control
                     .modal-footer
                         button.btn.btn-primary#btnAdd
                             i.fa.fa-save

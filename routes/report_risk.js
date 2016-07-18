@@ -9,7 +9,6 @@ var level =require('../models/risk_type');
 var department = require('../models/department');
 
 /* GET home page. */
-// /a/
 
 router.get('/', function(req, res, next) {
     if (req.session.level_user_id != 2 && req.session.level_user_id != 3){
@@ -158,6 +157,8 @@ router.post('/report_summary',function(req,res){
     data.date1 = req.body.date1;
     data.date2 = req.body.date2;
     data.risk_type = req.body.risk_type;
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(data);
     report_summary.getReport_summary(db,data)
         .then(function(rows){
@@ -176,6 +177,8 @@ router.post('/report_terminal',function(req,res){
     var data = {};
     data.date1 = req.body.date1;
     data.date2 = req.body.date2;
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(data);
     report_summary.getReport_terminal(db,data)
         .then(function(rows){
@@ -194,6 +197,8 @@ router.post('/report_summary_date',function(req,res){
     var data = {};
     data.date1 = req.body.date1;
     data.date2 = req.body.date2;
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(data);
     report_summary.getReport_summary_date(db,data)
         .then(function(rows){
@@ -213,6 +218,8 @@ router.post('/report_summary_department',function(req,res){
     data.date1 = req.body.date1;
     data.date2 = req.body.date2;
     data.depcode = req.body.depcode;
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(data);
     report_summary.getReport_summary_department(db,data)
         .then(function(rows){
@@ -223,7 +230,6 @@ router.post('/report_summary_department',function(req,res){
             console.log(err);
             res.send({ok:false,msg:err})
         })
-
 });
 
 router.post('/report_level',function(req,res){
@@ -233,7 +239,8 @@ router.post('/report_level',function(req,res){
     data.date2 = req.body.date2;
     data.risk_type = req.body.risk_type;
     data.risk_level = req.body.risk_level;
-
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(data);
     report_summary.getReport_level(db,data)
         .then(function(rows){
@@ -244,7 +251,6 @@ router.post('/report_level',function(req,res){
             console.log(err);
             res.send({ok:false,msg:err})
         })
-
 });
 
 router.post('/report_senior',function(req,res){
@@ -254,7 +260,8 @@ router.post('/report_senior',function(req,res){
     data.depcode = depcode2;
     data.date1 = req.body.date1;
     data.date2 = req.body.date2;
-
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(data);
     report_summary.getReport_user_senior(db,data)
         .then(function(rows){
@@ -265,7 +272,6 @@ router.post('/report_senior',function(req,res){
             console.log(err);
             res.send({ok:false,msg:err})
         })
-
 });
 
 router.post('/report_user',function(req,res){
@@ -275,7 +281,8 @@ router.post('/report_user',function(req,res){
     data.username = username;
     data.date1 = req.body.date1;
     data.date2 = req.body.date2;
-
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(data);
     report_summary.getReport_user(db,data)
         .then(function(rows){
@@ -286,7 +293,6 @@ router.post('/report_user',function(req,res){
             console.log(err);
             res.send({ok:false,msg:err})
         })
-
 });
 
 module.exports = router;

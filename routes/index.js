@@ -19,6 +19,7 @@ var risk_repeat = require('../models/risk_report');
 var update_part1 = require('../models/risk_report');
 var update_part2 = require('../models/risk_report');
 var level_user = require('../models/users');
+var news = require('../models/abstract');
 
 /* GET home page. */
 
@@ -35,7 +36,6 @@ router.get('/user_senior', function(req, res, next) {
     }else{
         res.render('user_senior');}
 });
-
 
 router.get('/admin', function(req, res, next) {
         if (req.session.level_user_id != 2 && req.session.level_user_id != 3){
@@ -60,6 +60,34 @@ router.get('/risk_report', function(req, res, next) {
         res.render('./page/access_denied')
     }else{
     res.render('page/risk_report');}
+});
+
+router.get('/risk_news', function(req, res, next) {
+    if (req.session.level_user_id != 1){
+        res.render('./page/access_denied')
+    }else{
+        res.render('page/risk_news');}
+});
+
+router.get('/risk_news_senior', function(req, res, next) {
+    if (req.session.level_user_id != 4){
+        res.render('./page/access_denied')
+    }else{
+        res.render('page/risk_news_senior');}
+});
+
+router.get('/risk_news_admin', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id != 3 ){
+        res.render('./page/access_denied')
+    }else{
+        res.render('page/risk_news_admin');}
+});
+
+router.get('/user_senior_risk_today', function(req, res, next) {
+    if (req.session.level_user_id != 4){
+        res.render('./page/access_denied')
+    }else{
+        res.render('page/user_senior_risk_report_today');}
 });
 
 router.get('/user_senior_risk_report', function(req, res, next) {
@@ -101,6 +129,29 @@ router.post('/get_risk_report_total' ,function(req,res) {
     )
 });
 
+router.post('/get_risk_news' ,function(req,res) {
+    var db = req.db;
+    var startpage  = parseInt(req.body.startRecord);
+    show_risk.getNews(db,startpage)
+        .then(function(rows) {
+            res.send({ok:true,rows:rows})
+        },function(err){
+            res.send({ok:false,msg:err})
+        }
+    )
+});
+
+router.post('/get_risk_news_total' ,function(req,res) {
+    var db = req.db;
+    show_risk.getNews_total(db)
+        .then(function(total) {
+            res.send({ok:true,total:total})
+        },function(err){
+            res.send({ok:false,msg:err})
+        }
+    )
+});
+
 router.post('/user_senior_get_risk_report' ,function(req,res) {
     var db = req.db;
     var depcode = req.session.depcode;
@@ -118,8 +169,37 @@ router.post('/user_senior_get_risk_report' ,function(req,res) {
 router.post('/user_senior_get_risk_report_total' ,function(req,res) {
     var db = req.db;
     var depcode = req.session.depcode;
-    console.log(depcode)
+    console.log(depcode);
     show_risk.getSubAllDetail_user_senior_total(db,req.session.depcode)
+        .then(function(total) {
+            res.send({ok:true,total:total})
+        },function(err){
+            res.send({ok:false,msg:err})
+        }
+    )
+});
+
+router.post('/user_senior_get_risk_report_today' ,function(req,res) {
+    var db = req.db;
+    var depcode = req.session.depcode;
+    var startpage = parseInt(req.body.startRecord);
+    var date_today = moment().format('YYYY-MM-DD');
+    console.log(depcode,date_today)
+    show_risk.getSubAllDetail_user_senior_today(db,req.session.depcode,date_today,startpage)
+        .then(function(rows) {
+            res.send({ok:true,rows:rows})
+        },function(err){
+            res.send({ok:false,msg:err})
+        }
+    )
+});
+
+router.post('/user_senior_get_risk_report_total_today' ,function(req,res) {
+    var db = req.db;
+    var depcode = req.session.depcode;
+    var date_today = moment().format('YYYY-MM-DD');
+    console.log(depcode,date_today)
+    show_risk.getSubAllDetail_user_senior_total_today(db,req.session.depcode,date_today)
         .then(function(total) {
             res.send({ok:true,total:total})
         },function(err){
@@ -156,7 +236,6 @@ router.post('/user_senior_get_risk_report_feedback_total' ,function(req,res) {
         }
     )
 });
-
 
 router.get('/show_risk/:id',function(req,res){
     if (req.session.level_user_id != 1){
@@ -318,7 +397,9 @@ router.get('/request', function(req,res){
                 });
             });
     }
-});router.get('/user_senior_request', function(req,res){
+});
+
+router.get('/user_senior_request', function(req,res){
     var db = req.db;
     var data = {};
     if (req.session.level_user_id != 4){
@@ -665,7 +746,10 @@ router.get('/risk_group_sub',function(req,res){
 router.post('/search_date_risk',function(req,res){
     var db = req.db;
     var data = {};
-    data.date = req.body.date;
+    data.date1 = req.body.date_searchrisk1;
+    data.date2 = req.body.date_searchrisk2;
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     data.username = req.session.username;
 
     console.log(data);
@@ -684,7 +768,10 @@ router.post('/search_date_risk',function(req,res){
 router.post('/user_senior_search_date_risk',function(req,res){
     var db = req.db;
     var data = {};
-    data.date = req.body.date;
+    data.date1 = req.body.date_searchrisk1;
+    data.date2 = req.body.date_searchrisk2;
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     data.depcode = req.session.depcode;
 
     console.log(data);
@@ -702,7 +789,10 @@ router.post('/user_senior_search_date_risk',function(req,res){
 router.post('/user_senior_search_date_risk_feedback',function(req,res){
     var db = req.db;
     var data = {};
-    data.date = req.body.date;
+    data.date1 = req.body.date_searchrisk1;
+    data.date2 = req.body.date_searchrisk2;
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     data.depcode = req.session.depcode;
     data.sub_depcode = req.session.sub_depcode;
     console.log(data);
@@ -774,32 +864,43 @@ router.post('/user_senior_search_topic_risk_feedback',function(req,res){
 
 });
 
-
-
-router.get('/hello/:fname/:lname/:age', function (req,res) {
-  var data = req.params;
-  res.render('page/main',{
-    fname:data.fname,
-    lname:data.lname,
-    age:data.age
-  });
+router.post('/save_news',function(req,res){
+    var db = req.db;
+    var date = req.body.date_news;
+    var topic_news = req.body.topic_news;
+    var detail_news = req.body.detail_news;
+    var date_news=moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(req.body.id,date_news,req.body.topic_news,req.body.detail_news);
+    if(topic_news && detail_news){
+        news.save_news(db,date_news,topic_news,detail_news)
+            .then(function(){
+                res.send({ok:true})
+            },function(err){
+                res.send({ok:false,msg:err})
+            })
+    } else {
+        res.send({ok:false,msg:'ข้อมูลไม่สมบูรณ์'})
+    }
 });
 
-router.get('/about', function(reg, res){
-  var  fruits = [1,2,3,4];
-  var animal = [{id:1 , name: 'cat'},
-    {id:2,name:'bat'},
-    {id:3,name:'rat'}];
-  var person = [{id:1 ,name:'worawit'},
-    {id:2,name:'somsri'},
-    {id:3,name:'somchai'}];
-  res.render('page/about',{msg:'เกี่ยวกับผู้จัดทำ',fruits:fruits,animal:animal,person:person});
+router.post('/update_news',function(req,res){
+    var db = req.db;
+    var date = req.body.date_news;
+    var topic_news = req.body.topic_news;
+    var detail_news = req.body.detail_news;
+    var id = req.body.id;
+    var date_news=moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(req.body.id,date_news,req.body.topic_news,req.body.detail_news);
+    if(topic_news && id){
+        news.update_news(db,id,date_news,topic_news,detail_news)
+            .then(function(){
+                res.send({ok:true})
+            },function(err){
+                res.send({ok:false,msg:err})
+            })
+    } else {
+        res.send({ok:false,msg:'ข้อมูลไม่สมบูรณ์'})
+    }
 });
 
-router.get('/contact',function(req,res){
-  var tel = [{id:1,moo:'1',tumb:'โคกพระ',post:'44150'},
-    {id:2,moo:'9',tumb:'คันธาร์',post:'44151'},
-    {id:3,moo:'4',tumb:'โคกพระ',post:'44152'}];
-  res.render('page/contact',{tel:tel});
-});
 module.exports = router;

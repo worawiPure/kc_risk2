@@ -62,6 +62,7 @@ module.exports = {
         var q = Q.defer();
         db('risk_sub_program')
             .select()
+            .orderBy('program_id')
             .where('program_id',id)
             .then(function(rows){
                 q.resolve(rows);

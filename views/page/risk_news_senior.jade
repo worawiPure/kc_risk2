@@ -1,0 +1,43 @@
+extends  ../user_senior_layout
+block scripts
+    script(src="/javascripts/risk_news_senior.js")
+block content
+    br
+    .panel.panel-primary#show_detail
+        .panel-heading
+            h3.panel-title
+                i.fa.fa-newspaper-o
+                | &nbsp; ข่าวประชาสัมพันธ์
+        .panel-body
+            table.table.table-hover#tblRisk_news
+                thead
+                    tr
+                        td.h4 ลำดับ
+                        td.h4 วันที่
+                        td.h4 หัวข้อประชาสัมพันธ์
+                        td(style="width : 50px")
+                            i.fa.fa-cog.fa-spin.fa-3w.fa-fw
+                    tbody
+            ul.pagination#paging
+    .modal.fade#mdlNew(tabindex="-1",role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') &times;
+                    h4.modal-title ข่าวประชาสัมพันธ์
+                .modal-body(style="padding-top: 20px;")
+                    input(type="hidden")#txtId
+                    .form-group
+                        label(for="txtDate_news") วันที่
+                        input(type="text",readonly)#txtDate_news.form-control
+                    .form-group
+                        label(for="txtTopic_news") หัวข้อข่าว
+                        input(type="text",readonly)#txtTopic_news.form-control
+                    .form-group
+                        label(for="txtDetail_news") รายละเอียด
+                        textarea#txtDetail_news(type="text", rows="3", readonly).form-control
+                .modal-footer
+                    button.btn.btn-danger(data-dismiss="modal")
+                        i.fa.fa-close
+                        | &nbsp; ปิดหน้าต่าง

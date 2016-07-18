@@ -3,47 +3,56 @@ block scripts
     script(src="/javascripts/user_senior_risk_report.js")
 block content
     br
-    ol.breadcrumb
-        li
-            a(href="/user_senior_risk_report") หน้าหลัก
-        li.active รายการอุบัติการณ์ความเสี่ยง
-    .well.well-sm
+    .well.well-sm#show_search
         div.form-inline
             .row
-                .col-md-5
+                .col-md-12
+                    button.close(type='button', aria-label='Close')#close_search
+                        span(aria-hidden='true') &times;
+            .row
+                .col-md-12
                     .form-group
                         label วันที่
-                        | &nbsp;&nbsp;
-                        input#Date_Searchrisk(type="date").form-control
-                        button#Searchrisk(type="button").btn.btn-success.btn-sm ค้นหา
-                        //#datetimepicker3.input-group(data-datepicker)
-                            input#Date_Searchrisk.form-control(type='text')
+                        | &nbsp;&nbsp;&nbsp;&nbsp;
+                        #datetimepicker1.input-group(data-datepicker)
+                            input#Date_Searchrisk1.form-control(type='text')
                             span.input-group-addon
                                 span.glyphicon.glyphicon-calendar
-                            button#Searchrisk(type="button").btn.btn-success.btn-sm ค้นหา
-                .col-md-6
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        label ถึง
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #datetimepicker2.input-group(data-datepicker)
+                            input#Date_Searchrisk2.form-control(type='text')
+                            span.input-group-addon
+                                span.glyphicon.glyphicon-calendar
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        button#Searchrisk(type="button").btn.btn-primary.btn-sm ค้นหา
+            .row
+                .col-md-12
                     .form-group
                         label หัวข้อความเสี่ยง
                         | &nbsp;&nbsp;
                         input#txtSearch(type="text",placeholder="Search..").form-control
-                        button#btnSearch(type="button").btn.btn-success.btn-sm ค้นหา
-    .panel.panel-primary
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        button#btnSearch(type="button").btn.btn-primary.btn-sm ค้นหา
+    .panel.panel-primary#show_detail
         .panel-heading
             h3.panel-title
                 i.fa.fa-comments-o
                 | &nbsp; รายการอุบัติการณ์ความเสี่ยง
         .panel-body
-
-            table.table.striped#tblRisk_report
+            button.btn.btn-xs.btn-primary.pull-right#btnShowSearch
+                i.fa.fa-search.fa-lg
+                | &nbsp; ค้นหา
+            table.table.table-hover#tblRisk_report
                 thead
                     tr
-                        td ลำดับ
-                        td วันที่
-                        td ประเภท
-                        td หัวข้อความเสี่ยง
+                        td.h4 ลำดับ
+                        td.h4 วันที่
+                        td.h4 ประเภท
+                        td.h4 หัวข้อความเสี่ยง
                         td(style="width : 150px")
-                            i.fa.fa-cog
-                        td
+                            i.fa.fa-cog.fa-spin.fa-3w.fa-fw
                             i.fa.fa-print
                     tbody
             ul.pagination#paging

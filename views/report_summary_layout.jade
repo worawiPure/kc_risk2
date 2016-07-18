@@ -10,6 +10,7 @@ html
     link(rel="stylesheet", href="/libs/bootstrap-material-design/dist/css/material.min.css")
     link(rel="stylesheet", href="/libs/bootstrap-material-design/dist/css/ripples.min.css")
     link(rel="stylesheet", href="/libs/bootstrap-material-design/dist/css/roboto.min.css")
+    link(rel="stylesheet", href="/libs/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css")
     link(rel="stylesheet", href="/stylesheets/style.css")
     script(src="/libs/jquery/dist/jquery.min.js")
     script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
@@ -20,6 +21,8 @@ html
     script(src="/libs/moment/moment.js")
     script(src="/libs/nprogress/nprogress.js")
     script(src="/javascripts/app.js")
+    script(src="/libs/moment/min/moment-with-locales.js")
+    script(src="/libs/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")
 
 
     script.
@@ -27,12 +30,19 @@ html
             $('[data-toggle="tooltip"]').tooltip();
             $('input[readonly]').css('background-color', 'white');
             $('input[disabled="disabled"]').css('background-color', 'white');
+            $('[data-datepicker]').datetimepicker({
+                locale: 'th',
+                format: 'DD/MM/YYYY'
+            });
+            $('[data-timepicker]').datetimepicker({
+                format: 'HH:mm'
+            });
         })
 
     block scripts
 
   body
-    nav.navbar.navbar-success.navbar-fixed-top
+    nav.navbar.navbar-primary.navbar-fixed-top
       .container
         .navbar-header
           button(type="button", data-toggle="collapse", data-taget="#navbar",
@@ -45,8 +55,8 @@ html
             | &nbsp; KC Risk
         #navbar.navbar-collapse.collapse
           ul.nav.navbar-nav
-            li.active
-              a(href="/abstract_risk") หน้าแรก
+            li
+              a(href="/risk_news_admin") หน้าแรก
             li.dropdown
               a(href="#", data-toggle="dropdown", role="button",
               aria-haspopup="true", aria-expanded="false").dropdown-toggle

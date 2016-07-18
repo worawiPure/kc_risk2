@@ -5,19 +5,28 @@ block content
     br
     ol.breadcrumb
         li
-            a(href="/user_senior_risk_report") หัวข้อความเสี่ยง
-        li.active รายละเอียดความเสี่ยง
-        li #{data.detail.topic_risk}
+            a(href="/user_senior_risk_report")
+                i.fa.fa-home
+                | &nbsp; หน้าหลัก
+        li
+                i.fa.fa-edit
+                | &nbsp; แก้ไขความเสี่ยง :  #{data.detail.topic_risk}
     .alert.alert-warning(role="alert",style="display: none;")#divAlert
         i.fa.fa-warning
         | &nbsp; กรอกข้อมูลไม่สมบูรณ์
     ul.nav.nav-tabs(role="tablist")
         li.active(role='presentation')
-            a(href="#part1", aria-controls="part1", role="tab", data-toggle="tab") ส่วนที่ 1
+            a(href="#part1", aria-controls="part1", role="tab", data-toggle="tab")
+                | ส่วนที่ 1 &nbsp;
+                i.fa.fa-arrow-right
         li(role='presentation')
-            a(href='#part2', aria-controls='part2', role='tab', data-toggle='tab') ส่วนที่ 2
+            a(href='#part2', aria-controls='part2', role='tab', data-toggle='tab')
+                | ส่วนที่ 2 &nbsp;
+                i.fa.fa-arrow-right
         li(role='presentation')
-            a(href='#part3', aria-controls='part3', role='tab', data-toggle='tab') ส่วนที่ 3
+            a(href='#part3', aria-controls='part3', role='tab', data-toggle='tab')
+                | ส่วนที่ 3 &nbsp;
+                i.fa.fa-arrow-right
         li(role='presentation')
             a(href='#part4', aria-controls='part4', role='tab', data-toggle='tab') ส่วนที่ 4
     .tab-content
@@ -295,7 +304,7 @@ block content
                                             option(value="#{m.depcode}") #{m.depname}
 
 
-    button(type="button").btn.btn-success#btnEdit บันทึก
+    button(type="button").btn.btn-primary#btnEdit บันทึก
 
   //  label(for="checkboxSentinel") Sentinel event case
         | &nbsp;&nbsp;&nbsp;

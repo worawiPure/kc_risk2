@@ -1,19 +1,15 @@
 extends  ../layout
-
 block scripts
     script(src="/javascripts/user_profile.js")
-
 block content
     br
     .alert.alert-warning(role="alert",style="display: none;")#divAlert
         i.fa.fa-warning
         | &nbsp; กรอกข้อมูลไม่สมบูรณ์
-
     .alert.alert-danger.alert-dismissable(role="alert", style="display: none;")#divDuplicated1
         button(type="button",data-dismiss="alert",aria-label="Close").close
             span(aria-hidden="true")
         p Username/Password นี้มีแล้วในฐานข้อมูล
-
     .panel.panel-primary
         .panel-heading
             h3.panel-title
@@ -59,12 +55,8 @@ block content
                                     option(value="#{p.depcode}", selected="selected") #{p.depname}
                                 else
                                     option(value="#{p.depcode}") #{p.depname}
-
-
     button.btn.btn-success(type="button")#btnEdit แก้ไขรายละเอียด
-
     .modal.fade#mdlNew(tabindex="-1",role="dialog")
-
         p Username/Password นี้มีแล้วในฐานข้อมูล
         .modal-dialog
             .modal-content
@@ -72,7 +64,6 @@ block content
                     button.close(type='button', data-dismiss='modal', aria-lable='Close')
                         span(aria-hidden='true') &times;
                     h4.modal-title  แก้ไข USERNAME / PASSWORD
-
                 .modal-body(style="padding-top: 20px;")
                     .alert.alert-danger.alert-dismissable(role="alert", style="display: none;")#divDuplicated
                         button(type="button",data-dismiss="alert",aria-label="Close").close
@@ -91,4 +82,3 @@ block content
                             | &nbsp; บันทึก
                         button.btn.btn-danger(data-dismiss="modal")
                             | &nbsp; ปิดหน้าต่าง
-
