@@ -1,6 +1,24 @@
 var Q = require('q');
 
 module.exports = {
+
+    getRisk_today_senior: function(db,date_today,depcode){
+        var q = Q.defer();
+        var sql =   'SELECT count(*) as total FROM risk_request_first f '+
+        'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id      '+
+        'where f.date_report_risk = ?     '+
+        'and u.depcode = ? ';
+        db.raw(sql,[date_today,depcode])
+            .then(function(rows){
+                q.resolve(rows[0][0].total)
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
     getNews: function(db,startpage){
         var q = Q.defer();
         var sql =   ' SELECT * FROM news ORDER BY date_news DESC limit 10 offset ?';
@@ -169,6 +187,40 @@ module.exports = {
         return q.promise;
     },
 
+    getSubAllDetail_admin_today: function(db,date_today,startpage){
+        var q = Q.defer();
+        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,' +
+            'd2.depname as department_risk,r.detail,f.confirm,f.abstract FROM risk_request_first f '+
+            'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id                     '+
+            'LEFT JOIN risk_abstract r ON r.request_id = f.id                                 '+
+            'LEFT JOIN department d ON u.depcode=d.depcode                             '+
+            'LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
+            'where f.date_report_risk = ? '+
+            'ORDER BY f.date_risk ASC  limit 15 offset ? ';
+        db.raw(sql,[date_today,startpage])
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    getSubAllDetail_admin_total_today: function(db,date_today){
+        var q = Q.defer();
+        var sql = 'SELECT count(*) as total FROM risk_request_first WHERE date_report_risk = ? ';
+        db.raw(sql,[date_today])
+            .then(function (rows) {
+                q.resolve(rows[0][0].total)
+            })
+            .catch(function (err) {
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;;
+    },
 
     getSubAllDetail_user_senior_feedback: function(db,depcode,sub_depcode,startpage){
         var q = Q.defer();

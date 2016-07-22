@@ -9,7 +9,7 @@ $(function(){
                 '<td> ' + i + ' </td>'+
                 '<td> ' + v.Nameuser + ' </td>'+
                 '<td> ' + v.user + ' </td>'+
-                '<td> ' + v.level_username + ' </td>'+
+                '<td> ' + v.th_level + ' </td>'+
                 '<td> ' + v.depname + ' </td>'+
                 '<td> '+
                 '   <div class="btn-group btn-group-sm" role="group"> '+

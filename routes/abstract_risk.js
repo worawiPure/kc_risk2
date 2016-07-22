@@ -144,7 +144,6 @@ router.post('/search_date_risk',function(req,res){
             console.log(err);
             res.send({ok:false,msg:err})
         })
-
 });
 
 router.post('/search_topic',function(req,res){
@@ -324,6 +323,26 @@ router.post('/admin_edit_request', function(req,res){
     } else {
         res.send({ok:false,msg:'ข้อมูลไม่สมบูรณ์'})
     }
+});
+
+router.post('/search_date_chart',function(req,res){
+    var db = req.db;
+    var data = {};
+    data.date1 = req.body.date1;
+    data.date2 = req.body.date2;
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(data);
+    abstract.search_date_chart(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
+
 });
 
 module.exports = router;

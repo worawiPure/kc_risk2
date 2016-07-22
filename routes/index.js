@@ -73,7 +73,8 @@ router.get('/risk_news_senior', function(req, res, next) {
     if (req.session.level_user_id != 4){
         res.render('./page/access_denied')
     }else{
-        res.render('page/risk_news_senior');}
+        res.render('page/risk_news_senior');
+    }
 });
 
 router.get('/risk_news_admin', function(req, res, next) {
@@ -81,6 +82,56 @@ router.get('/risk_news_admin', function(req, res, next) {
         res.render('./page/access_denied')
     }else{
         res.render('page/risk_news_admin');}
+});
+
+router.post('/risk_today_senior', function(req, res, next) {
+    if (req.session.level_user_id != 4){
+        res.render('./page/access_denied')
+    }else{
+        var db = req.db;
+        var depcode = req.session.depcode;
+        var date_today = moment().format('YYYY-MM-DD');
+        db('risk_request_first as f')
+            .count('* as total')
+            .innerJoin('risk_request_fourth as u','f.id','u.risk_request_id')
+            .where('f.date_report_risk', date_today)
+            .where('u.depcode', depcode)
+            .then(function(rows){
+                console.log(rows[0].total);
+                var data = rows[0].total;
+                res.send({ok:true,total:data})
+            },function(err){
+                res.send({ok:false,msg:err})
+            }
+        )
+    }
+});
+
+router.post('/risk_today_admin', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id != 3 ){
+        res.render('./page/access_denied')
+    }else{
+        var db = req.db;
+        var date_today = moment().format('YYYY-MM-DD');
+        db('risk_request_first as f')
+            .count('* as total')
+            .where('f.date_report_risk', date_today)
+            .then(function(rows){
+                console.log(rows[0].total);
+                var data = rows[0].total;
+                res.send({ok:true,total:data})
+            },function(err){
+                res.send({ok:false,msg:err})
+            }
+        )
+    }
+});
+
+router.get('/admin_risk_today', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id !=3){
+        res.render('./page/access_denied')
+    }else{
+        res.render('page/admin_risk_report_today');}
 });
 
 router.get('/user_senior_risk_today', function(req, res, next) {
@@ -102,6 +153,13 @@ router.get('/user_senior_risk_report_feedback', function(req, res, next) {
         res.render('./page/access_denied')
     }else{
         res.render('page/user_senior_risk_report_feedback');}
+});
+
+router.get('/chart_risk', function(req, res, next) {
+    if (req.session.level_user_id != 2){
+        res.render('./page/access_denied')
+    }else{
+        res.render('page/risk_chart');}
 });
 
 router.post('/get_risk_report' ,function(req,res) {
@@ -200,6 +258,33 @@ router.post('/user_senior_get_risk_report_total_today' ,function(req,res) {
     var date_today = moment().format('YYYY-MM-DD');
     console.log(depcode,date_today)
     show_risk.getSubAllDetail_user_senior_total_today(db,req.session.depcode,date_today)
+        .then(function(total) {
+            res.send({ok:true,total:total})
+        },function(err){
+            res.send({ok:false,msg:err})
+        }
+    )
+});
+
+router.post('/admin_get_risk_report_today' ,function(req,res) {
+    var db = req.db;
+    var startpage = parseInt(req.body.startRecord);
+    var date_today = moment().format('YYYY-MM-DD');
+    console.log(date_today);
+    show_risk.getSubAllDetail_admin_today(db,date_today,startpage)
+        .then(function(rows) {
+            res.send({ok:true,rows:rows})
+        },function(err){
+            res.send({ok:false,msg:err})
+        }
+    )
+});
+
+router.post('/admin_get_risk_report_total_today' ,function(req,res) {
+    var db = req.db;
+    var date_today = moment().format('YYYY-MM-DD');
+    console.log(date_today);
+    show_risk.getSubAllDetail_admin_total_today(db,date_today)
         .then(function(total) {
             res.send({ok:true,total:total})
         },function(err){

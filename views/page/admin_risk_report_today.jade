@@ -1,7 +1,7 @@
-extends  ../user_senior_layout
+extends  ../admin_layout
 block scripts
-    script(src="/javascripts/risk_today_senior.js")
-    script(src="/javascripts/user_senior_risk_report_today.js")
+    script(src="/javascripts/risk_today_admin.js")
+    script(src="/javascripts/admin_risk_report_today.js")
 block content
     br
     //.well.well-sm#show_search
@@ -45,15 +45,17 @@ block content
             //button.btn.btn-xs.btn-primary.pull-right#btnShowSearch
                 i.fa.fa-search.fa-lg
                 | &nbsp; ค้นหา
-            table.table.table-hover#tblRisk_report
+            table.table.table-hover#tblAbstractRisk
                 thead
                     tr
                         td.h4 ลำดับ
                         td.h4 วันที่
-                        td.h4 ประเภท
                         td.h4 หัวข้อความเสี่ยง
-                        td(style="width : 150px")
+                        td.h4 หน่วยที่รายงาน
+                        td.h4 หน่วยที่เกิดความเสี่ยง
+                        td(style="width : 200px")
                             i.fa.fa-cog.fa-spin.fa-3w.fa-fw
+                        td(style="width : 90px")
                             i.fa.fa-print
                     tbody
             ul.pagination#paging

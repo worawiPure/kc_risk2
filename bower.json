@@ -17,6 +17,8 @@
     "bootstrap-material-design": "~0.3.0",
     "paging": "~1.2.0",
     "nprogress": "~0.2.0",
-    "eonasdan-bootstrap-datetimepicker": "~4.17.37"
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37",
+    "highcharts": "~4.2.5",
+    "highchartTable": "~2.0.0"
   }
 }

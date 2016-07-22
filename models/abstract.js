@@ -302,6 +302,26 @@ module.exports = {
                 q.reject(err);
             });
         return q.promise;
+    },
+
+    search_date_chart: function(db,data){
+        var q = Q.defer();
+        var sql =   'select concat(m.month," ",year(f.date_risk)) as "Date",count(f.id) as cc from risk_request_first f '+
+        'LEFT JOIN risk_month m ON m.id=month(f.date_risk)               '+
+        'where  f.date_risk between  ?  and  ?                           '+
+        'group by Date   '+
+        'order by m.id';
+        db.raw(sql,[data.date1,data.date2])
+            //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
+            .then(function(rows){
+                console.log(rows[0]);
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err);
+                q.reject(err)
+            });
+        return q.promise;
     }
 
 };

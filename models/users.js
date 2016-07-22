@@ -44,7 +44,9 @@ module.exports = {
     save_user2: function(db,data){
         var q = Q.defer();
         db('risk_user')
-            .insert({user:data.username,password:data.password,level_user_id:1,pname:data.pname,fname:data.fname,lname:data.lname,depcode:data.department})
+            .insert({user:data.username,password:data.password,
+                level_user_id:1,pname:data.pname,fname:data.fname,
+                lname:data.lname,depcode:data.department,sub_depcode:data.sub_department})
             .then(function (rows) {
                 q.resolve(rows);
             })
@@ -126,7 +128,7 @@ module.exports = {
 
     getSubAll: function(db,startpage){
         var q = Q.defer();
-        var sql =   'SELECT u.*,concat(p.name,u.fname," ",u.lname) as Nameuser,u.user,u.password,r.level_username,d.depname FROM risk_user u '+
+        var sql =   'SELECT u.*,concat(p.name,u.fname," ",u.lname) as Nameuser,u.user,u.password,r.level_username,r.th_level,d.depname FROM risk_user u '+
         'LEFT OUTER JOIN pname p ON p.id=u.pname '+
         'LEFT OUTER JOIN risk_leveluser r ON r.level_user_id=u.level_user_id '+
         'LEFT OUTER JOIN department d ON d.depcode=u.depcode  '+

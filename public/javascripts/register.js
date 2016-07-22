@@ -29,6 +29,7 @@ $(function(){
         data.fname = $('#txtName').val();
         data.lname = $('#txtLname').val();
         data.department = $('#slDepartment').val();
+        data.sub_department = $('#slDepartment2').val();
 
         if(!data.username|| !data.password || !data.pname|| !data.fname || !data.lname || !data.department ) {
             $('#divAlert').fadeIn('slow');

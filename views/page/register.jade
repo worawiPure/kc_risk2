@@ -23,7 +23,7 @@ block content
             .row
                 .col-md-12
                     .form-group
-                        label(for="txtUsername") ชื่อผู้ใช้
+                        label(for="txtUsername") Username
                         input(type="text",name="username",placeholder="ชื่อผู้ใช้งาน")#txtUsername.form-control
             .row
                 .col-md-12
@@ -31,7 +31,7 @@ block content
                         lable(for="txtPassword") รหัสผ่าน
                         input(type="password",name="password",placeholder="รหัสผ่าน")#txtPassword.form-control
             .row
-                .col-md-12
+                .col-md-5
                     .form-group
                         label(for="slPname") คำนำหน้า
                         select.form-control#slPname
@@ -54,6 +54,14 @@ block content
                         label(for="slDepartment") แผนก
                             select#slDepartment.form-control
                                 option(value="") กรุณาเลือกรายการ....
+                                for d in data.departments
+                                    option(value="#{d.depcode}") #{d.depname}
+            .row
+                .col-md-12
+                    .form-group
+                        label(for="slDepartment") กลุ่มงาน
+                            select#slDepartment2.form-control
+                                option(value="")
                                 for d in data.departments
                                     option(value="#{d.depcode}") #{d.depname}
     button.btn.btn-primary(type="button")#btnSaveregister บันทึก

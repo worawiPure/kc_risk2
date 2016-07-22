@@ -1,5 +1,6 @@
 extends  ../user_senior_layout
 block scripts
+    script(src="/javascripts/risk_today_senior.js")
     script(src="/javascripts/user_senior_risk_report.js")
 block content
     br
@@ -95,4 +96,4 @@ block content
                                 else
                                     textarea#txtNote(type="text" rows="3", placeholder="หมายเหตุ" ).form-control
 
-    button(type="button").btn.btn-inverse#btnRepeat บันทึก
+    button(type="button").btn.btn-primary#btnRepeat บันทึก

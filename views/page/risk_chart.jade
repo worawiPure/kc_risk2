@@ -1,7 +1,7 @@
-extends  ../user_senior_layout
+extends  ../admin_layout
 block scripts
-    script(src="/javascripts/risk_today_senior.js")
-    script(src="/javascripts/user_senior_risk_report_today.js")
+    script(src="/javascripts/risk_today_admin.js")
+    script(src="/javascripts/risk_chart.js")
 block content
     br
     //.well.well-sm#show_search
@@ -28,32 +28,19 @@ block content
                                 span.glyphicon.glyphicon-calendar
                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         button#Searchrisk(type="button").btn.btn-primary.btn-sm ค้นหา
-            .row
-                .col-md-12
-                    .form-group
-                        label หัวข้อความเสี่ยง
-                        | &nbsp;&nbsp;
-                        input#txtSearch(type="text",placeholder="Search..").form-control
-                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        button#btnSearch(type="button").btn.btn-primary.btn-sm ค้นหา
     .panel.panel-primary#show_detail
         .panel-heading
             h3.panel-title
                 i.fa.fa-comments-o
-                | &nbsp; รายการอุบัติการณ์ความเสี่ยงที่รายงานวันนี้
+                | &nbsp; กราฟแสดงความเสี่ยง
         .panel-body
-            //button.btn.btn-xs.btn-primary.pull-right#btnShowSearch
-                i.fa.fa-search.fa-lg
-                | &nbsp; ค้นหา
-            table.table.table-hover#tblRisk_report
-                thead
-                    tr
-                        td.h4 ลำดับ
-                        td.h4 วันที่
-                        td.h4 ประเภท
-                        td.h4 หัวข้อความเสี่ยง
-                        td(style="width : 150px")
-                            i.fa.fa-cog.fa-spin.fa-3w.fa-fw
-                            i.fa.fa-print
+            table.highchart(data-graph-container-before='1', data-graph-type='line')
+                caption Column example
+                    thead
+                        tr
+                            td เดือน/ปี
+                            td จำนวนครั้ง
                     tbody
-            ul.pagination#paging
+                        tr
+                            td January
+                            td 8000
