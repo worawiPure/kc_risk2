@@ -10,9 +10,10 @@ block content
                 i.fa.fa-newspaper-o
                 | &nbsp; ข่าวประชาสัมพันธ์
         .panel-body
-            buton.btn.btn-primary.btn-sm.pull-right#btnShowModal
-                i.fa.fa-plus
-                | &nbsp; เพิ่มข่าว
+            if session.level_user_id==2
+                buton.btn.btn-primary.btn-sm.pull-right#btnShowModal
+                    i.fa.fa-plus
+                    | &nbsp; เพิ่มข่าว
             table.table.table-hover#tblRisk_news
                 thead
                     tr

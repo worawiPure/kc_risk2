@@ -15,6 +15,20 @@ module.exports = {
         return q.promise;
     },
 
+    getList_depcode: function(db,depcode){
+        var q = Q.defer();
+        db('risk_user')
+            .select()
+            .where('depcode',depcode)
+            .then(function (rows){
+                q.resolve(rows);
+            })
+            .catch(function(err){
+                q.reject(err);
+            }) ;
+        return q.promise;
+    },
+
     getPname: function(db){
         var q = Q.defer();
         db('pname')

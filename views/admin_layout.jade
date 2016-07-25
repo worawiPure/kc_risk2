@@ -83,7 +83,7 @@ html
                                             a(href="/report_risk/summary_department")
                                                 i.fa.fa-file
                                                 | &nbsp;&nbsp; : รายงานความเสี่ยงสรุปยอดแบบเลือกแผนกที่เกิดความเสี่ยง
-                          p.navbar-text.navbar-right #{session.fullname}
+                          p.navbar-text.navbar-right #{session.fullname} | #{session.depname}
                           ul.nav.navbar-nav.pull-right
                                 li.dropdown
                                     a(href="#", data-toggle="dropdown", role="button",
@@ -110,17 +110,19 @@ html
                                   | &nbsp; รายการกิจกรรม
                           .panel-body
                               .ul.nav.nav-pills.nav-stacked
-                                  if session.level_user_id==2
+                                  if session.level_user_id==2 || session.level_user_id==3
                                       li
                                           a(href="/admin_risk_today")
                                               i.fa.fa-spinner.fa-pulse.fa-lg.fa-fw
                                               | &nbsp; รายงานความเสี่ยงวันนี้
                                               .badge
                                                   span#dataTotal
+                                  if session.level_user_id==2
                                       li
                                           a(href="/abstract_risk")
                                               i.fa.fa-list-alt
                                               | &nbsp; รายการความเสี่ยง
+                                  if session.level_user_id==2 || session.level_user_id==3
                                       li.dropdown
                                           a(href="#", data-toggle="dropdown", role="button",
                                           aria-haspopup="true", aria-expanded="false").dropdown-toggle
@@ -147,11 +149,30 @@ html
                                                   a(href="/report_risk/summary_department")
                                                       i.fa.fa-file
                                                       | &nbsp;&nbsp; : รายงานความเสี่ยงสรุปยอดแบบเลือกแผนกที่เกิดความเสี่ยง
-                                      //li
-                                          a(href="/chart_risk")
-                                              i.fa.fa-bar-chart
-                                              | &nbsp; กราฟความเสี่ยง
+                                      li.dropdown
+                                          a(href="#", data-toggle="dropdown", role="button",
+                                          aria-haspopup="true", aria-expanded="false").dropdown-toggle
+                                              i.fa.fa-area-chart
+                                              | &nbsp;&nbsp;กราฟความเสี่ยง
+                                          ul.dropdown-menu
+                                              li
+                                                  a(href="/chart_risk_month")
+                                                      i.fa.fa-bar-chart-o
+                                                      | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกรายเดือน
+                                              li
+                                                  a(href="/chart_risk_department")
+                                                      i.fa.fa-bar-chart-o
+                                                      | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกแผนก
+                                              li
+                                                  a(href="/chart_risk_level_clinic")
+                                                      i.fa.fa-bar-chart-o
+                                                      | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกระดับความรุนแรงทาง Clinic
+                                              li
+                                                  a(href="/chart_risk_level_nonclinic")
+                                                      i.fa.fa-bar-chart-o
+                                                      | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกระดับความรุนแรงทาง Non-Clinic
                               | &nbsp;
+                          if session.level_user_id==2
                               #accordion.panel-group(role='tablist', aria-multiselectable='true')
                                   .panel.panel-primary
                                       #headingOne.panel-heading(role='tab')
@@ -165,7 +186,6 @@ html
                                       #collapseOne.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingOne')
                                           .panel-body
                                               .ul.nav.nav-pills.nav-stacked
-                                                  if session.level_user_id==2
                                                       li
                                                           a(href="/program/risk_program")
                                                               i.fa.fa-cog.fa-spin.fa-3w.fa-fw

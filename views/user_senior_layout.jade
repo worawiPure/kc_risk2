@@ -21,6 +21,8 @@ html
     script(src="/libs/lodash/lodash.min.js")
     script(src="/libs/moment/min/moment-with-locales.js")
     script(src="/libs/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")
+    script(src="/libs/highcharts/highcharts.js")
+    script(src="/libs/highchartTable/jquery.highchartTable.js")
 
     script.
         $(function(){
@@ -114,6 +116,10 @@ html
                                             a(href="/report_risk/user_senior_report")
                                                   i.fa.fa-bar-chart-o
                                                   | &nbsp; : สรุปรายงานความเสี่ยง
+                                      li
+                                            a(href="/chart_risk_month_senior")
+                                                  i.fa.fa-area-chart
+                                                  | &nbsp; กราฟแสดงการเกิดความเสี่ยงแยกรายเดือน
                 .col-md-9
                   block content
 

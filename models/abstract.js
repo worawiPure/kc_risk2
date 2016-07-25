@@ -304,14 +304,98 @@ module.exports = {
         return q.promise;
     },
 
-    search_date_chart: function(db,data){
+    search_month_chart_senior: function(db,data){
         var q = Q.defer();
-        var sql =   'select concat(m.month," ",year(f.date_risk)) as "Date",count(f.id) as cc from risk_request_first f '+
+        var sql =   'select concat(m.month," ",YEAR(f.date_risk)) as aa,count(f.id) as cc from risk_request_first f '+
+        'LEFT JOIN risk_month m ON m.id=month(f.date_risk)                           '+
+        'WHERE f.date_risk between  ?  and  ?                '+
+        'AND (f.depcode = ?                                        '+
+        'OR f.depcode = ?   )                                 '+
+        'group by aa                '+
+        'order by m.id ';
+        db.raw(sql,[data.date_chart1,data.date_chart2,data.sub_depcode,data.depcode])
+            //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err);
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    search_month_chart: function(db,data){
+        var q = Q.defer();
+        var sql =   'select concat(m.month," ",YEAR(f.date_risk)) as aa,count(f.id) as cc from risk_request_first f '+
         'LEFT JOIN risk_month m ON m.id=month(f.date_risk)               '+
         'where  f.date_risk between  ?  and  ?                           '+
-        'group by Date   '+
-        'order by m.id';
-        db.raw(sql,[data.date1,data.date2])
+        'group by aa   '+
+        'order by m.id ';
+        db.raw(sql,[data.date_chart1,data.date_chart2])
+            //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err);
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    search_department_chart: function(db,data){
+        var q = Q.defer();
+        var sql =   'select d.depname as aa,count(f.id) as cc from risk_request_first f '+
+        'LEFT JOIN department d ON d.depcode=f.depcode                   '+
+        'where  f.date_risk between  ?  and  ?   '+
+        'group by aa                    '+
+        'order by d.depcode ';
+        db.raw(sql,[data.date_chart1,data.date_chart2])
+            //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
+            .then(function(rows){
+                console.log(rows[0]);
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err);
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    search_level_clinic_chart: function(db,data){
+        var q = Q.defer();
+        var sql =   'select  SUBSTR(l.risk_level,1,2) as aa,count(f.id) as cc from risk_request_first f '+
+        'INNER JOIN risk_request_second s ON s.risk_request_id=f.id    '+
+        'LEFT JOIN clinic_level l ON l.id=s.risk_level              '+
+        'WHERE f.date_risk between  ?  and  ?                   '+
+        'AND f.type_risk = 1                            '+
+        'group by aa                    '+
+        'order by aa ';
+        db.raw(sql,[data.date_chart1,data.date_chart2])
+            //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
+            .then(function(rows){
+                console.log(rows[0]);
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err);
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    search_level_nonclinic_chart: function(db,data){
+        var q = Q.defer();
+        var sql =   'select  SUBSTR(l.risk_level,11) as aa,count(f.id) as cc from risk_request_first f '+
+            'INNER JOIN risk_request_second s ON s.risk_request_id=f.id    '+
+            'LEFT JOIN clinic_level l ON l.id=s.risk_level              '+
+            'WHERE f.date_risk between  ?  and  ?                   '+
+            'AND f.type_risk = 2                            '+
+            'group by aa                    '+
+            'order by aa ';
+        db.raw(sql,[data.date_chart1,data.date_chart2])
             //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
             .then(function(rows){
                 console.log(rows[0]);

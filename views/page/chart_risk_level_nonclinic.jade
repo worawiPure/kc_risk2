@@ -1,0 +1,37 @@
+extends  ../admin_layout
+block scripts
+    script(src="/javascripts/risk_today_admin.js")
+    script(src="/javascripts/chart_risk_level_nonclinic.js")
+block content
+    br
+    .well.well-sm#show_search
+        div.form-inline
+            .row
+                .col-md-12
+                    button.close(type='button', aria-label='Close')#close_search
+                        span(aria-hidden='true') &times;
+            .row
+                .col-md-12
+                    .form-group
+                        label วันที่
+                        | &nbsp;&nbsp;&nbsp;&nbsp;
+                        #datetimepicker1.input-group(data-datepicker)
+                            input#Date_Searchrisk1.form-control(type='text')
+                            span.input-group-addon
+                                span.glyphicon.glyphicon-calendar
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        label ถึง
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #datetimepicker2.input-group(data-datepicker)
+                            input#Date_Searchrisk2.form-control(type='text')
+                            span.input-group-addon
+                                span.glyphicon.glyphicon-calendar
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        button#Searchrisk(type="button").btn.btn-primary.btn-sm ค้นหา
+    .panel.panel-primary#show_detail
+        .panel-heading
+            h3.panel-title
+                i.fa.fa-area-chart
+                | &nbsp; กราฟแสดงการเกิดความเสี่ยงแยกระดับความรุนแรงทาง Non-Clinic
+        .panel-body
+            #container(style='width:100%; height:400px;')

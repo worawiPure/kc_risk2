@@ -325,15 +325,17 @@ router.post('/admin_edit_request', function(req,res){
     }
 });
 
-router.post('/search_date_chart',function(req,res){
+router.post('/search_month_chart_senior',function(req,res){
     var db = req.db;
     var data = {};
     data.date1 = req.body.date1;
     data.date2 = req.body.date2;
-    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
-    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.sub_depcode = req.session.sub_depcode;
+    data.depcode = req.session.depcode;
+    data.date_chart1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date_chart2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(data);
-    abstract.search_date_chart(db,data)
+    abstract.search_month_chart_senior(db,data)
         .then(function(rows){
             console.log(rows);
             res.send({ok: true,rows:rows});
@@ -342,7 +344,81 @@ router.post('/search_date_chart',function(req,res){
             console.log(err);
             res.send({ok:false,msg:err})
         })
-
 });
 
+router.post('/search_month_chart',function(req,res){
+    var db = req.db;
+    var data = {};
+    data.date1 = req.body.date1;
+    data.date2 = req.body.date2;
+    data.date_chart1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date_chart2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(data);
+    abstract.search_month_chart(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
+});
+
+router.post('/search_department_chart',function(req,res){
+    var db = req.db;
+    var data = {};
+    data.date1 = req.body.date1;
+    data.date2 = req.body.date2;
+    data.date_chart1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date_chart2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(data);
+    abstract.search_department_chart(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
+});
+
+router.post('/search_level_clinic_chart',function(req,res){
+    var db = req.db;
+    var data = {};
+    data.date1 = req.body.date1;
+    data.date2 = req.body.date2;
+    data.date_chart1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date_chart2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(data);
+    abstract.search_level_clinic_chart(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
+});
+
+router.post('/search_level_nonclinic_chart',function(req,res){
+    var db = req.db;
+    var data = {};
+    data.date1 = req.body.date1;
+    data.date2 = req.body.date2;
+    data.date_chart1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date_chart2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(data);
+    abstract.search_level_nonclinic_chart(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
+});
 module.exports = router;

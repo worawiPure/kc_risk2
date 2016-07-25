@@ -151,16 +151,46 @@ router.get('/user_senior_risk_report', function(req, res, next) {
 router.get('/user_senior_risk_report_feedback', function(req, res, next) {
     if (req.session.level_user_id != 4){
         res.render('./page/access_denied')
-    }else{
+    }else {
         res.render('page/user_senior_risk_report_feedback');}
 });
 
-router.get('/chart_risk', function(req, res, next) {
-    if (req.session.level_user_id != 2){
+router.get('/chart_risk_month_senior', function(req, res, next) {
+    if (req.session.level_user_id != 4){
+        res.render('./page/access_denied')
+    } else {
+        res.render('page/risk_chart_month_senior')
+        }
+});
+
+router.get('/chart_risk_month', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id !=3){
         res.render('./page/access_denied')
     }else{
-        res.render('page/risk_chart');}
+        res.render('page/risk_chart_month');}
 });
+
+router.get('/chart_risk_department', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id !=3){
+        res.render('./page/access_denied')
+    }else{
+        res.render('page/risk_chart_department');}
+});
+
+router.get('/chart_risk_level_clinic', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id !=3){
+        res.render('./page/access_denied')
+    }else{
+        res.render('page/chart_risk_level_clinic');}
+});
+
+router.get('/chart_risk_level_nonclinic', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id !=3){
+        res.render('./page/access_denied')
+    }else{
+        res.render('page/chart_risk_level_nonclinic');}
+});
+
 
 router.post('/get_risk_report' ,function(req,res) {
     var db = req.db;
