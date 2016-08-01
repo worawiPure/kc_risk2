@@ -1,10 +1,10 @@
 $(function() {
     var chartOptions = {
         chart: {
-            type: 'line'
+            type: 'column'
         },
         title: {
-            text: 'กราฟแสดงการเกิดความเสี่ยงแยกรายเดือน'
+            text: 'กราฟแสดงการเกิดความเสี่ยงแยกรายเดือนแบบเลือกโปรแกรมความเสี่ยง'
         },
         xAxis: {
             categories: []
@@ -19,22 +19,22 @@ $(function() {
             data: []
         }]
     };
-
-            $('#show_detail').fadeOut('slow');
-   $('#btnSearchrisk').on('click', function(e) {
-            e.preventDefault();
-            $('#show_detail').fadeIn('slow');
+    $('#show_detail').fadeOut('slow');
+   $('#Searchrisk').on('click', function(e) {
+           e.preventDefault();
+       $('#show_detail').fadeIn('slow');
             chartOptions.xAxis.categories=[];
             chartOptions.series[0].data=[];
-           var data = {};
-           //var sub_depcode  =   $('#txtSub_depcode').val();
-           var date_searchrisk1 = $('#Date_Searchrisk1').val();
-           var date_searchrisk2 = $('#Date_Searchrisk2').val();
+            var data = {};
+            var date_searchrisk1 = $('#Date_Searchrisk1').val();
+            var date_searchrisk2 = $('#Date_Searchrisk2').val();
+            var sl_program = $('#slProgram').val();
            data.date1 = date_searchrisk1;
            data.date2 = date_searchrisk2;
+           data.sl_program = sl_program;
                  $.ajax({
                         type: "POST",
-                        url: "/abstract_risk/search_month_chart_senior",
+                        url: "/abstract_risk/search_program_select_chart",
                         contentType:'application/json',
                         dataType:'json',
                         data: JSON.stringify(data)
@@ -46,7 +46,6 @@ $(function() {
                              chartOptions.series[0].data.push(v.cc);
                          });
                                 $('#container').highcharts(chartOptions);
-                         //$('#tblList >  tbody').empty();
                      })
    });
 });

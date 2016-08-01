@@ -1,7 +1,7 @@
 extends  ../admin_layout
 block scripts
     script(src="/javascripts/risk_today_admin.js")
-    script(src="/javascripts/risk_chart_department.js")
+    script(src="/javascripts/risk_chart_select_program.js")
     script(src="/javascripts/risk_level_month.js")
 block content
     br
@@ -28,6 +28,15 @@ block content
                             span.input-group-addon
                                 span.glyphicon.glyphicon-calendar
                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            | &nbsp;&nbsp;
+            .row
+                .col-md-6
+                    .form-group.has-feedback
+                        label(for="slProgram") Program
+                        select#slProgram.form-control.css-require
+                            option(value="") กรุณาเลือกรายการ....
+                            for p in data.programs
+                                option(value="#{p.id}") #{p.program_risk}
                         button#Searchrisk(type="button").btn.btn-primary.btn-sm ค้นหา
     .panel.panel-primary#show_detail
         .panel-heading

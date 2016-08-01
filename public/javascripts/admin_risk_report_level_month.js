@@ -1,6 +1,6 @@
 $(function(){
     var setTable = function(data){
-        var $tblRisk = $('#tblAbstractRisk > tbody');
+        var $tblRisk = $('#tblLevel_month > tbody');
         $tblRisk.empty();
         var i=0;
         _.forEach(data.rows, function(v){
@@ -32,19 +32,19 @@ $(function(){
                 html += '<a href="#" data-toggle="tooltip" data-placement="top" title="ปริ้นสรุปอุบัติการณ์" class="btn btn-warning" disabled="disabled"><i class="fa fa-print"></i></a>  ';
             }
             html += '</div></td> '+
-                '</div> ';
+            '</div> ';
             $tblRisk.append(html);
         })
     }
 
-    var getAbstractRisk = function(){
+    var getAdmin_Risk_level_month = function(){
         $.ajax({
             method:'POST',
-            url:'/abstract_risk/abstract_risk_total',
+            url:'/admin_get_risk_report_total_level_month',
             dataType:'json'
         })
             .success(function(data){
-               //setTable(data);
+                //setTable(data);
 
                 $("#paging").paging(data.total, {
                     format: "< . (qq -) nnncnnn (- pp) . >",
@@ -56,7 +56,7 @@ $(function(){
                         console.log(this.slice);
                         $.ajax({
                             method:'POST',
-                            url:'/abstract_risk/',
+                            url:'/admin_get_risk_report_level_month',
                             dataType:'json',
                             contentType:'application/json',
                             data: JSON.stringify({startRecord:startRecord})
@@ -140,10 +140,6 @@ $(function(){
     $('#btnShowSearch').on('click',function(e){
         $('#show_search').fadeIn();
         $('#show_detail').fadeOut();
-        $('#Date_Searchrisk1').val('');
-        $('#Date_Searchrisk2').val('');
-        $('#slDepartment').val('');
-        $('#txtSearch').val('');
     });
 
     $('#btnSearch_date').on('click',function(e){
@@ -165,10 +161,10 @@ $(function(){
         $('#txtId').val(id);
         $.ajax('/abstract_risk/detail/'+ id)
             .success(function(data){
-              if(data.rows.length){
-                  $('#txtdetail').val(data.rows[0].detail);
-                  $('#txtId_detail').val(data.rows[0].id);
-              }
+                if(data.rows.length){
+                    $('#txtdetail').val(data.rows[0].detail);
+                    $('#txtId_detail').val(data.rows[0].id);
+                }
                 $("#mdlNew").modal({
                     backdrop:'static',
                     keyboard:false
@@ -203,16 +199,13 @@ $(function(){
                     alert('กรุณาตรวจสอบการเชื่อมต่อกับแม่ข่าย')
                 })
         }
-
     });
-
 
     $('#mdlNew').on('hidden.bs.modal', function (e) {
         $('#txtdetail').val('');
         $('#txtId_detail').val('');
         $('#txtId').val('');// do something...
     });
-
 
     $('#btnAdd').on('click',function(e) {
         e.preventDefault();
@@ -232,7 +225,7 @@ $(function(){
                     if (data.ok) {
                         alert('แก้ไขเสร็จเรีนบร้อยแล้ว');
                         $('#mdlNew').modal('hide');
-                        getAbstractRisk();
+                        getAdmin_Risk_today();
                     } else {
                         console.log(data.msg);
                         alert('ไม่สามารถบันทึได้')
@@ -242,7 +235,6 @@ $(function(){
                     console.log(err);
                     alert('กรุณาตรวจสอบการเชื่อมต่อกับแม่ข่าย')
                 })    //save
-
         } else {
             alert('กรุณากรอกรายละเอียดสรุปความเสี่ยง')
         }
@@ -262,7 +254,7 @@ $(function(){
             data: JSON.stringify(data)
         })
             .success(function(data){
-               setTable(data);
+                setTable(data);
                 $('#paging').fadeOut();
             })
     });
@@ -306,5 +298,5 @@ $(function(){
                 $('#paging').fadeOut();
             })
     });
-    getAbstractRisk();
+    getAdmin_Risk_level_month();
 });

@@ -170,6 +170,27 @@ module.exports = {
                 q.reject(err)
             });
         return q.promise;
-    }
+    },
+
+    search_risk_show: function(db,data){
+        var q = Q.defer();
+        var sql = 'SELECT d.risk_detail,s.name_sub_program,p.program_risk FROM risk_detail d '+
+        'INNER JOIN risk_sub_program s ON s.id=d.risk_group '+
+        'INNER JOIN risk_program p ON p.id=d.risk_program   '+
+        'WHERE d.risk_program = ?   '+
+        'AND d.risk_group = ? ';
+        db.raw(sql,[data.search_program,data.search_sub_program])
+            //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
+            .then(function(rows){
+                console.log(rows[0]);
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
 
 };

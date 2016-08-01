@@ -1,0 +1,44 @@
+extends  ../user_senior_layout
+
+block scripts
+    script(src="/javascripts/search_risk_show_senior.js")
+    script(src="/javascripts/risk_today_senior.js")
+block content
+    br
+    .well.well-sm#show_search
+            .row
+                .col-md-6
+                    .form-group
+                        label โปรแกรม :
+                        | &nbsp;&nbsp;
+                        select.form-control#slProgram
+                            option(value="") กรุณาเลือกรายการ....
+                            for p in data.programs
+                                option(value="#{p.id}") #{p.program_risk}
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            .row
+                .col-md-6#divSubProgram
+                    .form-group.has-feedback
+                        label(for="slSubProgram") หมวดหมู่ความเสี่ยง :
+                        select#slSubProgram.form-control.css-require
+            button#btnSearch_risk(type="button").btn.btn-primary.btn-sm ค้นหา
+    .panel.panel-primary#show_detail
+        .panel-heading
+            h3.panel-title
+                i.fa.fa-comments-o
+                | &nbsp; แสดงตารางโปรแกรมความเสี่ยง
+        .panel-body
+            table.table.table-hover#tblShowRisk
+                thead
+                    tr
+                        td ลำดับ
+                        td รายละเอียดความเสี่ยง
+                        td กลุ่มความเสี่ยง
+                        td โปรแกรมความเสี่ยง
+                    tbody
+            ul.pagination#paging
+
+
+
+
+

@@ -1,7 +1,7 @@
 extends  ../admin_layout
 block scripts
     script(src="/javascripts/risk_today_admin.js")
-    script(src="/javascripts/risk_chart_department.js")
+    script(src="/javascripts/risk_chart_program.js")
     script(src="/javascripts/risk_level_month.js")
 block content
     br
@@ -28,11 +28,12 @@ block content
                             span.input-group-addon
                                 span.glyphicon.glyphicon-calendar
                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        button#Searchrisk(type="button").btn.btn-primary.btn-sm ค้นหา
+                        button#btnSearchrisk(type="button").btn.btn-primary.btn-sm ค้นหา
     .panel.panel-primary#show_detail
         .panel-heading
             h3.panel-title
                 i.fa.fa-area-chart
-                | &nbsp; กราฟแสดงการเกิดความเสี่ยงแยกแผนก
+                | &nbsp; กราฟแสดงการเกิดความเสี่ยงแยกตามโปรแกรมความเสี่ยง
         .panel-body
             #container(style='width:100%; height:400px;')
+

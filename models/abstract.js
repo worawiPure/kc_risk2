@@ -143,10 +143,11 @@ module.exports = {
 
     search_date: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,d2.depname as department_risk,r.detail FROM risk_request_first f '+
-            ' LEFT OUTER JOIN risk_abstract r ON r.id = f.id   '+
-            ' LEFT OUTER JOIN department d ON f.depcode=d.depcode  '+
-            ' LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
+        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,d2.depname as department_risk,r.detail,f.confirm,f.abstract FROM risk_request_first f '+
+        'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id                     '+
+        'LEFT JOIN risk_abstract r ON r.request_id = f.id                                 '+
+        'LEFT JOIN department d ON u.depcode=d.depcode                             '+
+        'LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
             ' WHERE f.date_risk between ? and ?    '+
             ' ORDER BY f.date_risk ASC';
         db.raw(sql,[data.date1,data.date2])
@@ -164,11 +165,11 @@ module.exports = {
 
     search_department: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,d2.depname as department_risk,r.detail FROM risk_request_first f '+
-       ' INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id                     '+
-       ' LEFT OUTER JOIN risk_abstract r ON r.id = f.id   '+
-       ' LEFT OUTER JOIN department d ON f.depcode=d.depcode  '+
-       ' LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
+        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,d2.depname as department_risk,r.detail,f.confirm,f.abstract FROM risk_request_first f '+
+        'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id                     '+
+        'LEFT JOIN risk_abstract r ON r.request_id = f.id                                 '+
+        'LEFT JOIN department d ON u.depcode=d.depcode                             '+
+        'LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
        ' WHERE f.depcode = ?    '+
        ' ORDER BY f.date_risk DESC';
         db.raw(sql,[data.department])
@@ -187,10 +188,11 @@ module.exports = {
 
     search_topic: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,d2.depname as department_risk,r.detail FROM risk_request_first f '+
-            ' LEFT OUTER JOIN risk_abstract r ON r.id = f.id   '+
-            ' LEFT OUTER JOIN department d ON f.depcode=d.depcode '+
-            ' LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
+        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,d2.depname as department_risk,r.detail,f.confirm,f.abstract FROM risk_request_first f '+
+            'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id                     '+
+            'LEFT JOIN risk_abstract r ON r.request_id = f.id                                 '+
+            'LEFT JOIN department d ON u.depcode=d.depcode                             '+
+            'LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
             ' WHERE f.topic_risk Like ? '+
             ' ORDER BY f.date_risk DESC';
         var query = '%'+data.topic+'%';
@@ -396,6 +398,135 @@ module.exports = {
             'group by aa                    '+
             'order by aa ';
         db.raw(sql,[data.date_chart1,data.date_chart2])
+            //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
+            .then(function(rows){
+                console.log(rows[0]);
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err);
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    search_program_chart: function(db,data){
+        var q = Q.defer();
+        var sql =   'SELECT p.program_risk,                        '+
+        '(select count(*) FROM risk_request_first f  '+
+        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id  '+
+        'WHERE f.date_risk BETWEEN ? and ?   '+
+        'and month(f.date_risk) = 1 and s.risk_program = p.id ) as M1, '+
+        '(select count(*) FROM risk_request_first f  '+
+        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id  '+
+        'WHERE f.date_risk BETWEEN ? and ?   '+
+        'and month(f.date_risk) = 2 and s.risk_program = p.id) as M2, '+
+        '(select count(*) FROM risk_request_first f   '+
+        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+        'WHERE f.date_risk BETWEEN ? and ? '+
+        'and month(f.date_risk) = 3 and s.risk_program = p.id) as M3, '+
+        '(select count(*) FROM risk_request_first f  '+
+        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+        'WHERE f.date_risk BETWEEN ? and ?  '+
+        'and month(f.date_risk) = 4 and s.risk_program = p.id) as M4, '+
+        '(select count(*) FROM risk_request_first f  '+
+        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+        'WHERE f.date_risk BETWEEN ? and ?   '+
+        'and month(f.date_risk) = 5 and s.risk_program = p.id) as M5, '+
+        '(select count(*) FROM risk_request_first f  '+
+        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+        'WHERE f.date_risk BETWEEN ? and ? '+
+        'and month(f.date_risk) = 6 and s.risk_program = p.id) as M6, '+
+        '(select count(*) FROM risk_request_first f  '+
+        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id  '+
+        'WHERE f.date_risk BETWEEN ? and ? '+
+        'and month(f.date_risk) = 7 and s.risk_program = p.id) as M7, '+
+        '(select count(*) FROM risk_request_first f  '+
+        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+        'WHERE f.date_risk BETWEEN ? and ?   '+
+        'and month(f.date_risk) = 8 and s.risk_program = p.id) as M8, '+
+        '(select count(*) FROM risk_request_first f   '+
+        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+        'WHERE f.date_risk BETWEEN ? and ? '+
+        'and month(f.date_risk) = 9 and s.risk_program = p.id) as M9, '+
+        '(select count(*) FROM risk_request_first f  '+
+        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+        'WHERE f.date_risk BETWEEN ? and ?   '+
+        'and month(f.date_risk) = 10 and s.risk_program = p.id) as M10, '+
+        '(select count(*) FROM risk_request_first f   '+
+        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+        'WHERE f.date_risk BETWEEN ? and ? '+
+        'and month(f.date_risk) = 11 and s.risk_program = p.id) as M11, '+
+        '(select count(*) FROM risk_request_first f '+
+        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+        'WHERE f.date_risk BETWEEN ? and ? '+
+        'and month(f.date_risk) = 12 and s.risk_program = p.id) as M12 '+
+        'from risk_program  p '+
+        'ORDER BY p.id ASC               ';
+        db.raw(sql,[data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,
+            data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,
+            data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,data.date1,data.date2])
+            //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err);
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    getSubAllDetail_admin_level_month: function(db,date_today,startpage){
+        var q = Q.defer();
+        var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,' +
+            'd2.depname as department_risk,r.detail,f.confirm,f.abstract FROM risk_request_first f '+
+            'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
+            'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id                     '+
+            'LEFT JOIN risk_abstract r ON r.request_id = f.id                                 '+
+            'LEFT JOIN department d ON u.depcode=d.depcode                             '+
+            'LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
+            'WHERE MONTH(f.date_risk) = ?  '+
+            'AND s.risk_level IN ("5","6","7","8","9","12","13") '+
+            'ORDER BY f.date_risk ASC  limit 15 offset ? ';
+        db.raw(sql,[date_today,startpage])
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    risk_report_level_month: function(db,date_today){
+        var q = Q.defer();
+        var sql =   'SELECT count(*) as total FROM  risk_request_first f '+
+        'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
+        'WHERE MONTH(f.date_risk) = ?  '+
+        'AND s.risk_level IN ("5","6","7","8","9","12","13") ';
+        db.raw(sql,[date_today])
+            .then(function(rows){
+                q.resolve(rows[0][0].total)
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    search_program_select_chart: function(db,data){
+        var q = Q.defer();
+        var sql =   'select concat(m.month," ",YEAR(f.date_risk)) as aa,count(f.id) as cc from risk_request_first f '+
+        'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
+        'LEFT JOIN risk_month m ON m.id=month(f.date_risk)      '+
+        'WHERE   f.date_risk between  ?  and  ? '+
+        'AND s.risk_program = ?  '+
+        'group by aa    '+
+        'order by m.id';
+        db.raw(sql,[data.date_chart1,data.date_chart2,data.sl_program])
             //var sql = db.raw(sql,[data.date,data.username]).toSQL() คำสั่งเช็ค ค่า และคำสั่ง SQL
             .then(function(rows){
                 console.log(rows[0]);

@@ -20,6 +20,7 @@ var update_part1 = require('../models/risk_report');
 var update_part2 = require('../models/risk_report');
 var level_user = require('../models/users');
 var news = require('../models/abstract');
+var group = require('../models/risk_detail')
 
 /* GET home page. */
 
@@ -127,11 +128,38 @@ router.post('/risk_today_admin', function(req, res, next) {
     }
 });
 
+router.post('/risk_level_month', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id != 3 ){
+        res.render('./page/access_denied')
+    }else{
+        var db = req.db;
+        var date_today = moment().format('MM');
+        console.log(date_today);
+        news.risk_report_level_month(db,date_today)
+            .then(function(total){
+                console.log(total);
+                var data = total;
+                res.send({ok:true,total:data})
+            },function(err){
+                res.send({ok:false,msg:err})
+            }
+        )
+    }
+});
+
+
 router.get('/admin_risk_today', function(req, res, next) {
     if (req.session.level_user_id != 2 && req.session.level_user_id !=3){
         res.render('./page/access_denied')
     }else{
         res.render('page/admin_risk_report_today');}
+});
+
+router.get('/admin_risk_level_month', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id !=3){
+        res.render('./page/access_denied')
+    }else{
+        res.render('page/admin_risk_level_month');}
 });
 
 router.get('/user_senior_risk_today', function(req, res, next) {
@@ -191,6 +219,30 @@ router.get('/chart_risk_level_nonclinic', function(req, res, next) {
         res.render('page/chart_risk_level_nonclinic');}
 });
 
+router.get('/chart_risk_program', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id !=3){
+        res.render('./page/access_denied')
+    }else{
+        res.render('page/chart_risk_program');}
+});
+
+router.get('/chart_risk_select_program', function(req, res, next) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id !=3){
+        res.render('./page/access_denied')
+    }else {
+        var db = req.db;
+        var data = {};
+        program.getList_program_group(db)
+            .then(function (rows) {
+                console.log(rows);
+                data.programs = rows;
+                res.render('./page/risk_chart_select_program', {data: data});
+            }, function (err) {
+                res.render('./page/risk_chart_select_program', {data: {risk_types: []}});
+            }
+        )
+        }
+});
 
 router.post('/get_risk_report' ,function(req,res) {
     var db = req.db;
@@ -322,6 +374,34 @@ router.post('/admin_get_risk_report_total_today' ,function(req,res) {
         }
     )
 });
+
+router.post('/admin_get_risk_report_total_level_month' ,function(req,res) {
+    var db = req.db;
+    var date_today = moment().format('MM');
+    console.log(date_today);
+    news.risk_report_level_month(db,date_today)
+        .then(function(total) {
+            res.send({ok:true,total:total})
+        },function(err){
+            res.send({ok:false,msg:err})
+        }
+    )
+});
+
+router.post('/admin_get_risk_report_level_month' ,function(req,res) {
+    var db = req.db;
+    var startpage = parseInt(req.body.startRecord);
+    var date_today = moment().format('MM');
+    console.log(date_today);
+    news.getSubAllDetail_admin_level_month(db,date_today,startpage)
+        .then(function(rows) {
+            res.send({ok:true,rows:rows})
+        },function(err){
+            res.send({ok:false,msg:err})
+        }
+    )
+});
+
 
 router.post('/user_senior_get_risk_feedback_report' ,function(req,res) {
     var db = req.db;
@@ -1015,6 +1095,50 @@ router.post('/update_news',function(req,res){
             })
     } else {
         res.send({ok:false,msg:'ข้อมูลไม่สมบูรณ์'})
+    }
+});
+
+router.get('/search_risk_show_user' ,function(req,res) {
+    if (req.session.level_user_id != 1){
+        res.render('./page/access_denied')
+    }else {
+        var db = req.db;
+        var data = {};
+        program.getList_program_group(db)
+            .then(function (rows) {
+                data.programs = rows;
+                return group.getListDetail(db)
+            })
+            .then(function (rows) {
+                console.log(rows);
+                data.groups = rows;
+                res.render('page/search_risk_show_user', {data: data});
+            }, function (err) {
+                console.log(err);
+                res.render('page/search_risk_show_user', {data: {programs: [], groups: []}});
+            })
+    }
+});
+
+router.get('/search_risk_show_senior' ,function(req,res) {
+    if (req.session.level_user_id != 4){
+        res.render('./page/access_denied')
+    }else {
+        var db = req.db;
+        var data = {};
+        program.getList_program_group(db)
+            .then(function (rows) {
+                data.programs = rows;
+                return group.getListDetail(db)
+            })
+            .then(function (rows) {
+                console.log(rows);
+                data.groups = rows;
+                res.render('page/search_risk_show_senior', {data: data});
+            }, function (err) {
+                console.log(err);
+                res.render('page/search_risk_show_senior', {data: {programs: [], groups: []}});
+            })
     }
 });
 

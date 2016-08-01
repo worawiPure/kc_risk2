@@ -2,6 +2,7 @@ extends  ../admin_layout
 block scripts
     script(src="/javascripts/admin_risk_edit.js")
     script(src="/javascripts/risk_today_admin.js")
+    script(src="/javascripts/risk_level_month.js")
 block content
     br
     ol.breadcrumb
@@ -302,11 +303,11 @@ block content
                             .form-group
                                 label(for="slDepartment2") หน่วยงาน
                                 select#slDepartment2.form-control
-                                    for m in data.depcodes
-                                        if m.depcode == data.detail.depcode
-                                            option(value="#{m.depcode}", selected="selected") #{m.depname}
+                                    for f in data.departments
+                                        if f.depcode == data.detail.cc
+                                            option(value="#{f.depcode}", selected="selected") #{f.depname}
                                         else
-                                            option(value="#{m.depcode}") #{m.depname}
+                                            option(value="#{f.depcode}") #{f.depname}
         #part5.tab-pane(role='tabpanel')
             .panel.panel-primary
                 .panel-heading

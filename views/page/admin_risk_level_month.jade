@@ -1,12 +1,11 @@
 extends  ../admin_layout
-
 block scripts
-    script(src="/javascripts/abstract_risk.js")
     script(src="/javascripts/risk_today_admin.js")
     script(src="/javascripts/risk_level_month.js")
+    script(src="/javascripts/admin_risk_report_level_month.js")
 block content
     br
-    .well.well-sm#show_search
+    //.well.well-sm#show_search
         div.form-inline
             .row
                 .col-md-12
@@ -29,38 +28,25 @@ block content
                             span.input-group-addon
                                 span.glyphicon.glyphicon-calendar
                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        button#btnSearch_date(type="button").btn.btn-primary.btn-sm ค้นหา
-            br
-        div.form-inline
+                        button#Searchrisk(type="button").btn.btn-primary.btn-sm ค้นหา
             .row
-                .col-md-6
-                    .form-group
-                        label แผนที่เกิดความเสี่ยง
-                        | &nbsp;&nbsp;
-                        select.form-control#slDepartment
-                            option(value="") กรุณาเลือกรายการ....
-                            for p in data.abstracts
-                                option(value="#{p.depcode}") #{p.depname}
-                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        button#btnSearch_department(type="button").btn.btn-primary.btn-sm ค้นหา
-                .col-md-6
+                .col-md-12
                     .form-group
                         label หัวข้อความเสี่ยง
                         | &nbsp;&nbsp;
                         input#txtSearch(type="text",placeholder="Search..").form-control
                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        button#btnSearch_topic(type="button").btn.btn-primary.btn-sm ค้นหา
+                        button#btnSearch(type="button").btn.btn-primary.btn-sm ค้นหา
     .panel.panel-primary#show_detail
         .panel-heading
             h3.panel-title
                 i.fa.fa-comments-o
-                | &nbsp; สรุปความเสี่ยง
+                | &nbsp; รายงานความเสี่ยงที่มีระดับความรุนแรงภายในเดือน
         .panel-body
-            button.btn.btn-xs.btn-primary.pull-right#btnShowSearch
+            //button.btn.btn-xs.btn-primary.pull-right#btnShowSearch
                 i.fa.fa-search.fa-lg
                 | &nbsp; ค้นหา
-        .panel-body
-            table.table.table-hover#tblAbstractRisk
+            table.table.table-hover#tblLevel_month
                 thead
                     tr
                         td ลำดับ
@@ -72,10 +58,8 @@ block content
                             i.fa.fa-cog.fa-spin.fa-3w.fa-fw
                         td(style="width : 90px")
                             i.fa.fa-print
-
                     tbody
             ul.pagination#paging
-
     .modal.fade#mdlNew(tabindex="-1",role="dialog")
         .modal-dialog
             .modal-content
@@ -96,7 +80,3 @@ block content
                     button.btn.btn-danger(data-dismiss="modal")
                         i.fa.fa-close
                         | &nbsp; ปิดหน้าต่าง
-
-
-
-

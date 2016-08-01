@@ -2,6 +2,7 @@ extends  ../admin_layout
 block scripts
     script(src="/javascripts/risk_today_admin.js")
     script(src="/javascripts/admin_risk_report_today.js")
+    script(src="/javascripts/risk_level_month.js")
 block content
     br
     //.well.well-sm#show_search
@@ -59,3 +60,23 @@ block content
                             i.fa.fa-print
                     tbody
             ul.pagination#paging
+    .modal.fade#mdlNew(tabindex="-1",role="dialog")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') &times;
+                    h4.modal-title สรุปความเสี่ยง
+                .modal-body(style="padding-top: 20px;")
+                    input(type="hidden")#txtId
+                    input(type="hidden" value="")#txtId_detail
+                    .form-group
+                        label(for="txtDetail") เพิ่ม/แก้ไข สรุปความเสี่ยง
+                        textarea#txtdetail(type="text", rows="10", placeholder="ยังไม่มีรายละเอียด").form-control
+                .modal-footer
+                    button.btn.btn-primary#btnAdd
+                        i.fa.fa-save
+                        | &nbsp; บันทึก
+                    button.btn.btn-danger(data-dismiss="modal")
+                        i.fa.fa-close
+                        | &nbsp; ปิดหน้าต่าง

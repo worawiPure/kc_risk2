@@ -133,6 +133,45 @@ router.post('/search_detail',function(req,res){
             console.log(err);
             res.send({ok:false,msg:err})
         })
+});
+
+router.get('/search_risk_show' ,function(req,res) {
+    if (req.session.level_user_id != 2 && req.session.level_user_id != 3 ){
+        res.render('./page/access_denied')
+    }else {
+        var db = req.db;
+        var data = {};
+        program.getList_program_group(db)
+            .then(function (rows) {
+                data.programs = rows;
+                return group.getListDetail(db)
+            })
+            .then(function (rows) {
+                console.log(rows);
+                data.groups = rows;
+                res.render('page/search_risk_show', {data: data});
+            }, function (err) {
+                console.log(err);
+                res.render('page/search_risk_show', {data: {programs: [], groups: []}});
+            })
+    }
+});
+
+router.post('/search_risk_show',function(req,res){
+    var db = req.db;
+    var data = {};
+    data.search_program = req.body.search_program;
+    data.search_sub_program = req.body.search_sub_program;
+    console.log(data);
+    group.search_risk_show(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
 
 });
 

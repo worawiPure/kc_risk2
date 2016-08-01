@@ -117,6 +117,12 @@ html
                                               | &nbsp; รายงานความเสี่ยงวันนี้
                                               .badge
                                                   span#dataTotal
+                                      li
+                                          a(href="/admin_risk_level_month")
+                                              i.fa.fa-exclamation-circle
+                                              | &nbsp; รายงานความเสี่ยงที่มีระดับความรุนแรงภายในเดือน
+                                              .badge
+                                                  span#dataTotal_Level
                                   if session.level_user_id==2
                                       li
                                           a(href="/abstract_risk")
@@ -129,6 +135,10 @@ html
                                               i.fa.fa-file-text-o
                                               | &nbsp;&nbsp;รายงาน
                                           ul.dropdown-menu
+                                              //li
+                                                  a(href="/report_risk/")
+                                                      i.fa.fa-file
+                                                      | &nbsp;&nbsp; : รายงานความเสี่ยงแยกประเภทคลีนิค
                                               li
                                                   a(href="/report_risk")
                                                       i.fa.fa-file
@@ -171,6 +181,14 @@ html
                                                   a(href="/chart_risk_level_nonclinic")
                                                       i.fa.fa-bar-chart-o
                                                       | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกระดับความรุนแรงทาง Non-Clinic
+                                              li
+                                                  a(href="/chart_risk_program")
+                                                      i.fa.fa-bar-chart-o
+                                                      | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกตามโปรแกรมความเสี่ยง
+                                              li
+                                                  a(href="/chart_risk_select_program")
+                                                      i.fa.fa-bar-chart-o
+                                                      | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกรายเดือนแบบเลือกโปรแกรมความเสี่ยง
                               | &nbsp;
                           if session.level_user_id==2
                               #accordion.panel-group(role='tablist', aria-multiselectable='true')
@@ -182,7 +200,7 @@ html
                                                   h4.panel-title
                                                       a(style="color:white", role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseOne', aria-expanded='true', aria-controls='collapseOne')
                                                           i.fa.fa-refresh.fa-spin.fa-lg.fa-fw
-                                                          | &nbsp; จัดการระบบพื้นฐาน
+                                                          | &nbsp; ตั้งค่าระบบ
                                       #collapseOne.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingOne')
                                           .panel-body
                                               .ul.nav.nav-pills.nav-stacked
@@ -197,7 +215,11 @@ html
                                                       li
                                                           a(href="/detail/risk_group_detail")
                                                               i.fa.fa-cog.fa-spin.fa-3w.fa-fw
-                                                              | &nbsp;ความเสี่ยง
+                                                              | &nbsp; รายละเอียดความเสี่ยง
+                                                      li
+                                                          a(href="/detail/search_risk_show")
+                                                              i.fa.fa-cog.fa-spin.fa-3w.fa-fw
+                                                              | &nbsp; ดูตารางโปรแกรมความเสี่ยง
                                                       li
                                                           a(href="/users/department")
                                                               i.fa.fa-cog.fa-spin.fa-3w.fa-fw
