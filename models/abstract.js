@@ -486,10 +486,11 @@ module.exports = {
             'LEFT JOIN risk_abstract r ON r.request_id = f.id                                 '+
             'LEFT JOIN department d ON u.depcode=d.depcode                             '+
             'LEFT JOIN department d2 ON f.depcode=d2.depcode        '+
-            'WHERE MONTH(f.date_risk) = ?  '+
+            'WHERE (MONTH(f.date_risk) = ?  '+
+            'AND YEAR(f.date_risk) = ? ) '+
             'AND s.risk_level IN ("5","6","7","8","9","12","13") '+
             'ORDER BY f.date_risk ASC  limit 15 offset ? ';
-        db.raw(sql,[date_today,startpage])
+        db.raw(sql,[date_today,date_today,startpage])
             .then(function(rows){
                 q.resolve(rows[0])
             })
@@ -504,9 +505,10 @@ module.exports = {
         var q = Q.defer();
         var sql =   'SELECT count(*) as total FROM  risk_request_first f '+
         'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
-        'WHERE MONTH(f.date_risk) = ?  '+
+        'WHERE ( MONTH(f.date_risk) = ?  '+
+        'AND YEAR(f.date_risk) = ? )  '+
         'AND s.risk_level IN ("5","6","7","8","9","12","13") ';
-        db.raw(sql,[date_today])
+        db.raw(sql,[date_today,date_today])
             .then(function(rows){
                 q.resolve(rows[0][0].total)
             })
