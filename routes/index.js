@@ -133,9 +133,10 @@ router.post('/risk_level_month', function(req, res, next) {
         res.render('./page/access_denied')
     }else{
         var db = req.db;
-        var date_today = moment().format('YYYY-MM');
-        console.log(date_today);
-        news.risk_report_level_month(db,date_today)
+        var _year = moment().format('YYYY');
+        var _month = moment().format('MM');
+        console.log(_year,_month);
+        news.risk_report_level_month(db,_month,_year)
             .then(function(total){
                 console.log(total);
                 var data = total;
@@ -377,9 +378,10 @@ router.post('/admin_get_risk_report_total_today' ,function(req,res) {
 
 router.post('/admin_get_risk_report_total_level_month' ,function(req,res) {
     var db = req.db;
-    var date_today = moment().format('YYYY-MM');
-    console.log(date_today);
-    news.risk_report_level_month(db,date_today)
+    var _year = moment().format('YYYY');
+    var _month = moment().format('MM');
+    console.log(_year,_month);
+    news.risk_report_level_month(db,_month,_year)
         .then(function(total) {
             res.send({ok:true,total:total})
         },function(err){
@@ -391,9 +393,10 @@ router.post('/admin_get_risk_report_total_level_month' ,function(req,res) {
 router.post('/admin_get_risk_report_level_month' ,function(req,res) {
     var db = req.db;
     var startpage = parseInt(req.body.startRecord);
-    var date_today = moment().format('YYYY-MM');
-    console.log(date_today);
-    news.getSubAllDetail_admin_level_month(db,date_today,startpage)
+    var _year = moment().format('YYYY');
+    var _month = moment().format('MM');
+    console.log(_year,_month);
+    news.getSubAllDetail_admin_level_month(db,_month,_year,startpage)
         .then(function(rows) {
             res.send({ok:true,rows:rows})
         },function(err){

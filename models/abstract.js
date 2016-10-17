@@ -477,7 +477,7 @@ module.exports = {
         return q.promise;
     },
 
-    getSubAllDetail_admin_level_month: function(db,date_today,startpage){
+    getSubAllDetail_admin_level_month: function(db,_month,_year,startpage){
         var q = Q.defer();
         var sql =   'SELECT f.date_risk,f.id,f.topic_risk,d.depname as department_report,' +
             'd2.depname as department_risk,r.detail,f.confirm,f.abstract FROM risk_request_first f '+
@@ -490,7 +490,7 @@ module.exports = {
             'AND YEAR(f.date_risk) = ? ) '+
             'AND s.risk_level IN ("5","6","7","8","9","12","13") '+
             'ORDER BY f.date_risk ASC  limit 15 offset ? ';
-        db.raw(sql,[date_today,date_today,startpage])
+        db.raw(sql,[_month,_year,startpage])
             .then(function(rows){
                 q.resolve(rows[0])
             })
@@ -501,14 +501,14 @@ module.exports = {
         return q.promise;
     },
 
-    risk_report_level_month: function(db,date_today){
+    risk_report_level_month: function(db,_month,_year){
         var q = Q.defer();
         var sql =   'SELECT count(*) as total FROM  risk_request_first f '+
         'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
         'WHERE ( MONTH(f.date_risk) = ?  '+
         'AND YEAR(f.date_risk) = ? )  '+
         'AND s.risk_level IN ("5","6","7","8","9","12","13") ';
-        db.raw(sql,[date_today,date_today])
+        db.raw(sql,[_month,_year])
             .then(function(rows){
                 q.resolve(rows[0][0].total)
             })
