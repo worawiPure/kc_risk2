@@ -56,10 +56,10 @@ $(function(){
     $('#btnSave').on('click',function(e){
         e.preventDefault();
         var username = $('#txtEdit_Username').val();
-        var password = $('#txtEdit_password').val();
+        var pw = $('#txtEdit_password').val();
         var id = $('#txtId_user').val();
 
-        if(username && password){
+        if(username && pw){
 
             $.ajax({
                 method:'POST',
@@ -67,7 +67,7 @@ $(function(){
                 dataType:'json',
                 data:{
                     username:username,
-                    password:password,
+                    pw:pw,
                     id:id
                 }
             })

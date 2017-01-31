@@ -60,7 +60,7 @@ module.exports = {
         db('risk_user')
             .insert({user:data.username,password:data.password,
                 level_user_id:1,pname:data.pname,fname:data.fname,
-                lname:data.lname,depcode:data.department,sub_depcode:data.sub_department})
+                lname:data.lname,depcode:data.department,sub_depcode:data.sub_department,pw:data.pw})
             .then(function (rows) {
                 q.resolve(rows);
             })
@@ -83,10 +83,10 @@ module.exports = {
             });
         return q.promise;
     },
-    save_user4: function(db,id,username,encryptPass){
+    save_user4: function(db,id,username,encryptPass,pw){
         var q = Q.defer();
         db('risk_user')
-            .update({user:username,password:encryptPass})
+            .update({user:username,password:encryptPass,pw:pw})
             .where('id',id)
             .then(function (rows) {
                 q.resolve(rows);
@@ -112,10 +112,10 @@ module.exports = {
         return q.promise;
     },
 
-    update_user: function(db,id,username,level_user_id,pname,fname,lname,depcode){
+    update_user: function(db,id,username,newPassword,level_user_id,pname,fname,lname,depcode,pw){
        var q = Q.defer();
         db('risk_user')
-            .update({user:username,level_user_id:level_user_id,pname:pname,fname:fname,lname:lname,depcode:depcode})
+            .update({user:username,password:newPassword,level_user_id:level_user_id,pname:pname,fname:fname,lname:lname,depcode:depcode,pw:pw})
             .where('id',id)
             .then(function(){
                 q.resolve();

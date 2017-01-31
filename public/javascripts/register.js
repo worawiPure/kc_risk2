@@ -24,14 +24,14 @@ $(function(){
         //   console.log($(this).val());
         var data = {};
         data.username = $('#txtUsername').val();
-        data.password = $('#txtPassword').val();
+        data.pw = $('#txtPassword').val();
         data.pname = $('#slPname').val();
         data.fname = $('#txtName').val();
         data.lname = $('#txtLname').val();
         data.department = $('#slDepartment').val();
         data.sub_department = $('#slDepartment2').val();
 
-        if(!data.username|| !data.password || !data.pname|| !data.fname || !data.lname || !data.department ) {
+        if(!data.username|| !data.pw || !data.pname|| !data.fname || !data.lname || !data.department ) {
             $('#divAlert').fadeIn('slow');
             setTimeout(function () {
                 $('#divAlert').fadeOut('slow');

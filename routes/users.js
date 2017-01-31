@@ -276,6 +276,8 @@ router.post('/remove_department', function(req,res){
 router.post('/update_users', function(req,res){
     var db = req.db;
     var username = req.body.username;
+    var pw = req.body.pw;
+    var newPassword = crypto.createHash('md5').update(pw).digest('hex');
     var pname = req.body.pname;
     var fname = req.body.fname;
     var lname = req.body.lname;
@@ -283,7 +285,7 @@ router.post('/update_users', function(req,res){
     var level_user_id = req.body.level_user_id;
     var id = req.body.id;
     if(id && username && pname && fname && lname && depcode && level_user_id){
-        user.update_user(db,id,username,level_user_id,pname,fname,lname,depcode)
+        user.update_user(db,id,username,newPassword,level_user_id,pname,fname,lname,depcode,pw)
             .then(function(){
                 res.send({ok:true})
             },function(err){
@@ -322,7 +324,7 @@ router.post('/check_register',function(req,res){
     var db=req.db;
     var data = req.body.data;
     console.log(data);
-    var encryptPass = crypto.createHash('md5').update(data.password).digest('hex');
+    var encryptPass = crypto.createHash('md5').update(data.pw).digest('hex');
     data.password = encryptPass;
     db('risk_user')
         .select()
@@ -356,11 +358,11 @@ router.post('/edit_user',function(req,res){
 router.post('/edit_user_password',function(req,res) {
     var db = req.db;
     var username =req.body.username;
-    var password =req.body.password;
+    var pw =req.body.pw;
+    var encryptPass = crypto.createHash('md5').update(pw).digest('hex');
     var id =req.body.id;
-    var encryptPass = crypto.createHash('md5').update(password).digest('hex');
-    console.log(username,encryptPass,id);
-            user.save_user4(db,id,username,encryptPass)
+    console.log(username,encryptPass,id,pw);
+            user.save_user4(db,id,username,encryptPass,pw)
                 .then(function () {
                     res.send({ok: true});
                     }, function (err) {

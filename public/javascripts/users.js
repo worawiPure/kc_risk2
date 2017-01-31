@@ -147,7 +147,7 @@ $(function(){
     $(document).on('click','a[data-action="edit"]',function(e){
         e.preventDefault();
         var username = $(this).data('username');
-       // var password = $(this).data('password');
+        var pw = $(this).data('password');
         var pname = $(this).data('pname');
         var fname = $(this).data('fname');
         var lname = $(this).data('lname');
@@ -155,8 +155,9 @@ $(function(){
         var level_user_id = $(this).data('level_user_id');
         var id = $(this).data('id');
 
+
         $('#txtUsername').val(username);
-     //   $('#txtPassword').val(password);
+        $('#txtPassword').val(pw);
         $('#slPname').val(pname);
         $('#txtFname').val(fname);
         $('#txtLname').val(lname);
@@ -191,7 +192,7 @@ $(function(){
     $('#btnSave').on('click',function(e){
         e.preventDefault();
         var username = $('#txtUsername').val();
-        var password = $('#txtPassword').val();
+        var pw = $('#txtPassword').val();
         var pname = $('#slPname').val();
         var fname = $('#txtFname').val();
         var lname = $('#txtLname').val();
@@ -212,6 +213,7 @@ $(function(){
                         lname:lname,
                         depcode:depcode,
                         level_user_id:level_user_id,
+                        pw:pw,
                         id:id
                     }
                 })
@@ -236,12 +238,12 @@ $(function(){
                     dataType:'json',
                     data:{
                         username:username,
-                        password:password,
                         level_user_id:level_user_id,
                         pname:pname,
                         fname:fname,
                         lname:lname,
-                        depcode:depcode
+                        depcode:depcode,
+                        pw:pw
                     }
                 })
                     .success(function(data){
