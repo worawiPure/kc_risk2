@@ -60,24 +60,47 @@ html
                                 li.dropdown
                                       a(href="#", data-toggle="dropdown", role="button",
                                       aria-haspopup="true", aria-expanded="false").dropdown-toggle
-                                        i.fa.fa-file-text
-                                        | &nbsp; รายงานสรุปความเสี่ยง
-                                        //span.caret
+                                          i.fa.fa-square
+                                          | &nbsp; เมนู
+                                          //span.caret
                                       ul.dropdown-menu
-                                            //li
-                                                a(href="/user_senior_request") บันทึกความเสี่ยง
-                                            li
-                                                a(href="#")
+                                          //li
+                                              a(href="/user_senior_request") บันทึกความเสี่ยง
+                                          li
+                                              a(href="/user_senior_risk_today")
+                                                  i.fa.fa-file-text
+                                                  | &nbsp; รายงานความเสี่ยงวันนี้
+                                                  .badge
+                                                      span#dataTotal
+                                          li
+                                              a(href="/user_senior_risk_report")
+                                                  i.fa.fa-file-text
+                                                  | &nbsp; : หัวข้อความเสี่ยงที่รายงาน
+                                          li
+                                              a(href="/user_senior_risk_report_feedback")
+                                                  i.fa.fa-eye
+                                                  | &nbsp; : ความเสี่ยงที่หน่วยงานอื่นรายงานเกี่ยวกับแผนกเรา
+                                li.dropdown
+                                      a(href="#", data-toggle="dropdown", role="button",
+                                      aria-haspopup="true", aria-expanded="false").dropdown-toggle
+                                          i.fa.fa-file-text
+                                          | &nbsp; รายงานสรุปความเสี่ยง
+                                          //span.caret
+                                      ul.dropdown-menu
+                                          //li
+                                              a(href="/user_senior_request") บันทึกความเสี่ยง
+                                          li
+                                              a(href="#")
 
-                                            li
-                                                a(href="/report_risk/user_senior_report")
-                                                      i.fa.fa-bar-chart-o
-                                                      | &nbsp; : รายงานความเสี่ยงที่รายงาน
-                                            li
-                                                a(href="/report_risk/user_senior_report_department")
-                                                      i.fa.fa-bar-chart-o
-                                                      | &nbsp; : รายงานความเสี่ยงที่เกิดขึ้นในแผนก
-                                //li.dropdown
+                                          li
+                                              a(href="/report_risk/user_senior_report")
+                                                  i.fa.fa-bar-chart-o
+                                                  | &nbsp; : รายงานความเสี่ยงที่รายงาน
+                                          li
+                                              a(href="/report_risk/user_senior_report")
+                                                  i.fa.fa-bar-chart-o
+                                                  | &nbsp; : รายงานความเสี่ยงที่เกิดขึ้นในแผนก
+                                li.dropdown
                                       a(href="#", data-toggle="dropdown", role="button",
                                       aria-haspopup="true", aria-expanded="false").dropdown-toggle
                                           i.fa.fa-area-chart
@@ -110,7 +133,7 @@ html
                                             a(href="/users/logout")
                                                 i.fa.fa-power-off
                                                 | &nbsp;&nbsp;ออกจากระบบ
-        .container
+        //.container
             .row
                 .col-md-3
                     br
@@ -129,22 +152,30 @@ html
                                       li
                                             a(href="/user_senior_risk_today")
                                                 i.fa.fa-file-text
-                                                | &nbsp;  ความเสี่ยงที่รายงานวันนี้
+                                                | &nbsp; รายงานความเสี่ยงวันนี้
                                                 .badge
                                                     span#dataTotal
                                       li
                                             a(href="/user_senior_risk_report")
                                                   i.fa.fa-file-text
-                                                  | &nbsp;  หัวข้อความเสี่ยงที่รายงาน
+                                                  | &nbsp; : หัวข้อความเสี่ยงที่รายงาน
                                       li
                                             a(href="/user_senior_risk_report_feedback")
                                                   i.fa.fa-eye
-                                                  | &nbsp;  ทบทวนความเสี่ยงที่หน่วยงานอื่นรายงานเกี่ยวกับแผนกเรา
-                                      //li
+                                                  | &nbsp; : ความเสี่ยงที่หน่วยงานอื่นรายงานเกี่ยวกับแผนกเรา
+                                      li
+                                            a(href="/report_risk/user_senior_report")
+                                                  i.fa.fa-bar-chart-o
+                                                  | &nbsp; : สรุปรายงานความเสี่ยง
+                                      li
+                                            a(href="/chart_risk_month_senior")
+                                                  i.fa.fa-area-chart
+                                                  | &nbsp; กราฟแสดงการเกิดความเสี่ยงแยกรายเดือน
+                                      li
                                             a(href="/search_risk_show_senior")
                                                 i.fa.fa-cog.fa-spin.fa-3w.fa-fw
                                                 | &nbsp; ดูตารางโปรแกรมความเสี่ยง
-                .col-md-9
-                  block content
+  .col-md-12
+    block content
 
 

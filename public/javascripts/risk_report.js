@@ -18,7 +18,8 @@ $(function() {
                 //'<a class="btn btn-primary" type="button", href="#" disabled="disabled" data-toggle="tooltip" data-placement="top" title="ทบทวน"> <i class="glyphicon glyphicon-book"></i></a>';
           // }
           //  else {
-            html += '<a href="/edit_risk/'+ v.id+'" data-toggle="tooltip" data-placement="top" title="แก้ไข" class="btn btn-warning"> <i class="glyphicon glyphicon-pencil"></i></a>  ';
+            html += '<a href="/edit_risk/'+ v.id+'" data-toggle="tooltip" data-placement="top" title="แก้ไข" class="btn btn-warning"> <i class="glyphicon glyphicon-pencil"></i></a>  '+
+                    '<a class="btn btn-info" type="button", href="/risk_repeat_user/'+ v.id +'/'+ v.depcode +'" data-toggle="tooltip" data-placement="top" title="ทบทวน"> <i class="glyphicon glyphicon-book"></i></a>';
                 //'<a class="btn btn-primary" type="button", href="/risk_repeat/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ทบทวน"> <i class="glyphicon glyphicon-book"></i></a>';
             //}
             //html += '</div></td> '+
@@ -150,11 +151,11 @@ $(function() {
             data.name_repeat = $('#txtName_repeat').val();
             data.result_repeat = $('#txtResult_repeat').val();
             data.depcode_connected = $('#txtDepcode_connected').val();
-            data.edit_system = $('#txtEdit_system').val();
-            data.date_finished = $('#txtDate_finished').val();
-            data.note = $('#txtNote').val();
+            //data.edit_system = $('#txtEdit_system').val();
+            //data.date_finished = $('#txtDate_finished').val();
+            //data.note = $('#txtNote').val();
 
-            if(!data.date_repeat || !data.name_repeat || !data.result_repeat ) {
+            if(!data.date_repeat || !data.result_repeat ) {
                 $('#divAlert').fadeIn('slow');
             } else{
                 $.ajax({
@@ -165,7 +166,7 @@ $(function() {
                 })
                     .success(function(data) {
                         alert('บันทึกข้อมูลเรียบร้อยแล้ว');
-                        window.location.href="/";
+                        window.location.href="/risk_news";
                     })
                     .error(function (xhr, status, err) {
                         alert(err);

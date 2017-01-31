@@ -55,6 +55,43 @@ html
                                 li
                                       a(href="/risk_news_senior")
                                         | &nbsp; หน้าแรก
+                                li.dropdown
+                                      a(href="#", data-toggle="dropdown", role="button",
+                                      aria-haspopup="true", aria-expanded="false").dropdown-toggle
+                                          i.fa.fa-file-text
+                                          | &nbsp; รายงานสรุปความเสี่ยง
+                                          //span.caret
+                                      ul.dropdown-menu
+                                          //li
+                                              a(href="/user_senior_request") บันทึกความเสี่ยง
+                                          li
+                                              a(href="#")
+
+                                          li
+                                              a(href="/report_risk/user_senior_report")
+                                                  i.fa.fa-bar-chart-o
+                                                  | &nbsp; : รายงานความเสี่ยงที่รายงาน
+                                          li
+                                              a(href="/report_risk/user_senior_report_department")
+                                                  i.fa.fa-bar-chart-o
+                                                  | &nbsp; : รายงานความเสี่ยงที่เกิดขึ้นในแผนก
+                                //li.dropdown
+                                      a(href="#", data-toggle="dropdown", role="button",
+                                      aria-haspopup="true", aria-expanded="false").dropdown-toggle
+                                          i.fa.fa-area-chart
+                                          | &nbsp; กราฟแสดงความเสี่ยง
+                                          //span.caret
+                                      ul.dropdown-menu
+                                          //li
+                                              a(href="/user_senior_request") บันทึกความเสี่ยง
+                                          li
+                                              a(href="/report_risk/user_senior_report")
+                                                  i.fa.fa-bar-chart-o
+                                                  | &nbsp; : กราฟแสดงความเสี่ยงที่รายงาน
+                                          li
+                                              a(href="/report_risk/user_senior_report")
+                                                  i.fa.fa-bar-chart-o
+                                                  | &nbsp; : กราฟแสดงความเสี่ยงที่เกิดขึ้นในแผนก
                           p.navbar-text.navbar-right #{session.fullname} | #{session.depname}
                           ul.nav.navbar-nav.pull-right
                                 li.dropdown

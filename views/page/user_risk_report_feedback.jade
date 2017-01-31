@@ -1,6 +1,7 @@
-extends  ../layout_show_topic_user
+extends  ../layout
 block scripts
-    script(src="/javascripts/risk_report.js")
+    //script(src="/javascripts/risk_today_senior.js")
+    script(src="/javascripts/user_risk_report_feedback.js")
 block content
     br
     .well.well-sm#show_search
@@ -27,33 +28,31 @@ block content
                                 span.glyphicon.glyphicon-calendar
                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         button#Searchrisk(type="button").btn.btn-primary.btn-sm ค้นหา
-            .row
                 .col-md-12
                     .form-group
                         label หัวข้อความเสี่ยง
-                            | &nbsp;&nbsp;
-                            input#txtSearch(type="text",placeholder="Search..").form-control
+                        | &nbsp;&nbsp;
+                        input#txtSearch(type="text",placeholder="Search..").form-control
                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         button#btnSearch(type="button").btn.btn-primary.btn-sm ค้นหา
-
     .panel.panel-primary#show_detail
         .panel-heading
             h3.panel-title
                 i.fa.fa-comments-o
-                | &nbsp; รายการอุบัติการณ์ความเสี่ยง
+                | &nbsp; ความเสี่ยงที่หน่วยงานอื่นรายงานเกี่ยวกับแผนกเรา
         .panel-body
             button.btn.btn-xs.btn-primary.pull-right#btnShowSearch
                 i.fa.fa-search.fa-lg
                 | &nbsp; ค้นหา
-            table.table.table-hover#tblRisk_report
+            table.table.table-hover#tblRisk_report_feedback
                 thead
                     tr
-                        td.h4 #
-                        td.h4 วันที่
-                        td.h4(style="width : 100px") ประเภท
-                        td.h4 หัวข้อความเสี่ยง
-                        td(style="width : 50px")
+                        td.h4(style="width : 10px") ลำดับ
+                        td.h4(style="width : 50px") วันที่
+                        td.h4(style="width : 90px") ประเภท
+                        td.h4(style="width : 500px") หัวข้อความเสี่ยง
+                        td.h4(style="width : 100px") หน่วยงานที่รายงาน
+                        td(style="width : 100px")
                             i.fa.fa-cog.fa-spin.fa-3w.fa-fw
-                            i.fa.fa-print
                     tbody
             ul.pagination#paging

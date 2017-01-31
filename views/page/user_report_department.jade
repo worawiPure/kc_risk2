@@ -1,6 +1,6 @@
 extends  ../report_user_layout
 block scripts
-    script(src="/javascripts/user_report.js")
+    script(src="/javascripts/user_report_department.js")
 block content
     br
     .alert.alert-warning(role="alert",style="display: none;")#divAlert
@@ -31,7 +31,7 @@ block content
         .panel-heading
             h3.panel-title
                 i.fa.fa-comments-o
-                | &nbsp; รายงานอุบัติการณ์ความเสี่ยงที่รายงาน
+                | &nbsp; รายงานอุบัติการณ์ความเสี่ยงที่เกิดขึ้นในแผนก
         .panel-body
 
             table.table.table-hover#tblReport_terminal

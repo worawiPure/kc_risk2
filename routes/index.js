@@ -184,6 +184,14 @@ router.get('/user_senior_risk_report_feedback', function(req, res, next) {
         res.render('page/user_senior_risk_report_feedback');}
 });
 
+router.get('/user_risk_report_feedback', function(req, res, next) {
+    //if (req.session.level_user_id != 2 && req.session.level_user_id !=3){
+     //   res.render('./page/access_denied')
+    //}else {
+        res.render('page/user_risk_report_feedback');
+    //}
+});
+
 router.get('/chart_risk_month_senior', function(req, res, next) {
     if (req.session.level_user_id != 4){
         res.render('./page/access_denied')
@@ -436,14 +444,14 @@ router.post('/user_senior_get_risk_report_feedback_total' ,function(req,res) {
 });
 
 router.get('/show_risk/:id',function(req,res){
-    if (req.session.level_user_id != 1){
-        res.render('./page/access_denied')
-    }else {
+    //if (req.session.level_user_id != 1){
+    //    res.render('./page/access_denied')
+    //}else {
         var db = req.db;
-        var id = req.params.id;
-        show_risk2.Chack_sesion(db, id, req.session.username)
-            .then(function (total) {
-                if (total > 0) {
+       var id = req.params.id;
+    //    show_risk2.Chack_sesion(db, id, req.session.username)
+    //        .then(function (total) {
+    //            if (total > 0) {
                     show_risk2.getSubShowDetail(db, id)
                         .then(function (rows) {
                             var data = rows[0];
@@ -456,12 +464,12 @@ router.get('/show_risk/:id',function(req,res){
                             res.send({ok: false, msg: err})
                         }
                     )
-                }
-                else {
-                    res.render('./page/access_denied')
-                }
-            })
-    }
+                //}
+                //else {
+                //    res.render('./page/access_denied')
+                //}
+            //})
+    //}
 });
 
 router.get('/user_senior_show_risk/:id/:cc',function(req,res){
@@ -506,12 +514,12 @@ router.get('/user_senior_show_risk_feedback/:id',function(req,res){
 });
 
 router.get('/risk_repeat/:id/:depcode',function(req,res){
-    if (req.session.level_user_id != 4){
-        res.render('./page/access_denied')
-    }else {
+    //if (req.session.level_user_id != 4){
+    //    res.render('./page/access_denied')
+    //}else {
         var db = req.db;
         var id = req.params.id;
-        risk_repeat.getSubShowPast5(db, id)
+        risk_repeat.getSubShowPast5(db,id)
             .then(function (rows) {
                 var data = rows[0];
                 data.date_repeat = moment(data.date_repeat).format('DD/MM/YYYY');
@@ -520,18 +528,36 @@ router.get('/risk_repeat/:id/:depcode',function(req,res){
             }, function (err) {
                 res.send({ok: false, msg: err})
             })
-    }
+    //}
+});
+
+router.get('/risk_repeat_user/:id/:depcode',function(req,res){
+    //if (req.session.level_user_id != 4){
+    //    res.render('./page/access_denied')
+    //}else {
+    var db = req.db;
+    var id = req.params.id;
+    risk_repeat.getSubShowPast5(db,id)
+        .then(function (rows) {
+            var data = rows[0];
+            data.date_repeat = moment(data.date_repeat).format('DD/MM/YYYY');
+            data.date_finished = moment(data.date_finished).format('DD/MM/YYYY');
+            res.render('page/risk_repeat_user', {rows: data, risk_id: id});
+        }, function (err) {
+            res.send({ok: false, msg: err})
+        })
+    //}
 });
 
 
 router.post('/update_part5', function(req,res) {
-    if (req.session.level_user_id != 1 && req.session.level_user_id != 4){
-        res.render('./page/access_denied')
-    }else {
+    //if (req.session.level_user_id != 1 && req.session.level_user_id != 4){
+    //    res.render('./page/access_denied')
+    //}else {
         var db = req.db;
         var data = req.body.data;
         data.date_repeat=moment(data.date_repeat, 'DD/MM/YYYY').format('YYYY-MM-DD');
-        data.date_finished=moment(data.date_finished, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        //data.date_finished=moment(data.date_finished, 'DD/MM/YYYY').format('YYYY-MM-DD');
         console.log(data.id);
         update_part1.Update_part1(db, data.id)
             .then(function () {
@@ -543,7 +569,7 @@ router.post('/update_part5', function(req,res) {
             function (err) {
                 res.send({ok: false, msg: err})
             })
-    }
+    //}
 });
 
 router.get('/request', function(req,res){
@@ -648,6 +674,57 @@ router.get('/user_senior_request', function(req,res){
     }
 });
 
+router.get('/request_admin', function(req,res){
+    var db = req.db;
+    var data = {};
+    if (req.session.level_user_id != 2){
+        res.render('./page/access_denied')
+    } else {
+        depcode.getList_Department(db,req.session.depcode)
+            .then(function(rows){
+                data.depcodes = rows;
+                return  department.getList(db);
+            })
+            .then(function (rows) {
+                data.departments = rows;
+                return program.getList(db);
+            })
+            .then(function (rows) {
+                console.log(rows);
+                data.programs = rows;
+                return risk_type.getRisk_type(db);
+            })
+            .then(function (rows) {
+                console.log(rows);
+                data.risk_types = rows;
+                return risk_report.getType_report(db);
+            })
+            .then(function (rows) {
+                console.log(rows);
+                data.risk_reports = rows;
+                return type_complaint.getType_complaint(db);
+            })
+            .then(function (rows) {
+                console.log(rows);
+                data.type_complaints = rows;
+                return risk_type.getRisk_type(db);
+            })
+            .then(function (rows) {
+                console.log(rows);
+                data.clinics = rows;
+                res.render('page/request_admin', {data: data});
+            }, function (err) {
+                console.log(err);
+                res.render('page/request_admin', {
+                    data: {
+                        programs: [], depratments: [], risk_types: [], risk_reports: []
+                        , type_complaints: [], clinics: [],depcodes: []
+                    }
+                });
+            });
+    }
+});
+
 router.get('/edit_risk/:id', function(req,res){
     if (req.session.level_user_id != 1){
         res.render('./page/access_denied')
@@ -676,16 +753,6 @@ router.get('/edit_risk/:id', function(req,res){
                         })
                         .then(function (rows) {
                             data.programs = rows;
-                            return sub_progarm.getSubList2(db, data.detail.risk_program);
-                        })
-                        .then(function (rows) {
-                            console.log(rows);
-                            data.sub_programs = rows;
-                            return sub_group.getSubList3(db, data.detail.risk_group);
-                        })
-                        .then(function (rows) {
-                            console.log(rows);
-                            data.sub_groups = rows;
                             return risk_type.getRisk_type(db);
                         })
                         .then(function (rows) {
@@ -712,8 +779,6 @@ router.get('/edit_risk/:id', function(req,res){
                             res.render('page/edit_risk', {
                                 data: {
                                     programs: [],
-                                    sub_programs: [],
-                                    sub_groups: [],
                                     depratments: [],
                                     depcodes: [],
                                     risk_types: [],
@@ -869,9 +934,6 @@ router.post('/save_request', function(req,res){
                 return request.Save_part2(db,data)
             })
             .then(function(){
-                return request.Save_part3(db,data)
-            })
-            .then(function(){
                 return request.Save_part4(db,data)
             })
             .then(function(){
@@ -899,13 +961,8 @@ router.post('/edit_request', function(req,res){
             .then(function(){
                 console.log(data);
                 console.log(data.program);
-                console.log(data.subprogram);
-                console.log(data.subgroup);
                 console.log(data.sentinel);
                 return request.update_part2(db,data)
-            })
-            .then(function(){
-                return request.update_part3(db,data)
             })
             .then(function(){
                 return request.update_part4(db,data)

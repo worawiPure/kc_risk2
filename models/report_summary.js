@@ -5,7 +5,7 @@ module.exports = {
         var q = Q.defer();
         var sql =   'SELECT f.id,f.topic_risk,d.risk_detail,p.name_sub_program,z.program_risk,l.risk_level,e.depname,CONCAT(f.date_risk," / ",time_risk) as Date_Time,f.confirm,i.result_repeat  FROM  risk_request_first f '+
        'INNER JOIN risk_request_second c ON f.id = c.risk_request_id '+
-       'INNER JOIN risk_request_third t ON t.risk_request_id = f.id '+
+       //'INNER JOIN risk_request_third t ON t.risk_request_id = f.id '+
        'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id '+
        'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id '+
         'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
@@ -32,7 +32,7 @@ module.exports = {
         var sql =   'SELECT f.id,f.topic_risk,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
         'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
         'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
-        'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
+        //'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
         'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
         'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
         'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
@@ -57,61 +57,59 @@ module.exports = {
 
     getReport_summary_date: function(db,data){
         var q = Q.defer();
-        var sql = 'SELECT concat(SUBSTR(r.program_risk,1,3),SUBSTR(p.name_sub_program,7),SUBSTR(d.risk_detail,9) ) as Name_risk,        '+
-        '(select count(*) FROM risk_request_first f                     '+
-        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-        'WHERE f.date_risk BETWEEN ? and ?            '+
-        'and month(f.date_risk) = 1 and s.risk_sub_group=d.id) as M1,   '+
-        '(select count(*) FROM risk_request_first f                     '+
-        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-        'WHERE f.date_risk BETWEEN ? and ?             '+
-        'and month(f.date_risk) = 2 and s.risk_sub_group=d.id) as M2,   '+
-        '(select count(*) FROM risk_request_first f                     '+
-        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-        'WHERE f.date_risk BETWEEN ? and ?            '+
-        'and month(f.date_risk) = 3 and s.risk_sub_group=d.id) as M3,   '+
-        '(select count(*) FROM risk_request_first f                     '+
-        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-        'WHERE f.date_risk BETWEEN ? and ?             '+
-        'and month(f.date_risk) = 4 and s.risk_sub_group=d.id) as M4,   '+
-        '(select count(*) FROM risk_request_first f                     '+
-        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-        'WHERE f.date_risk BETWEEN ? and ?             '+
-        'and month(f.date_risk) = 5 and s.risk_sub_group=d.id) as M5,   '+
-        '(select count(*) FROM risk_request_first f                     '+
-        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-        'WHERE f.date_risk BETWEEN ? and ?             '+
-        'and month(f.date_risk) = 6 and s.risk_sub_group=d.id) as M6,   '+
-        '(select count(*) FROM risk_request_first f                     '+
-        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-        'WHERE f.date_risk BETWEEN ? and ?            '+
-        'and month(f.date_risk) = 7 and s.risk_sub_group=d.id) as M7,   '+
-        '(select count(*) FROM risk_request_first f                     '+
-        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-        'WHERE f.date_risk BETWEEN ? and ?          '+
-        'and month(f.date_risk) = 8 and s.risk_sub_group=d.id) as M8,   '+
-        '(select count(*) FROM risk_request_first f                     '+
-        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-        'WHERE f.date_risk  BETWEEN ? and ?            '+
-        'and month(f.date_risk) = 9 and s.risk_sub_group=d.id) as M9,   '+
-        '(select count(*) FROM risk_request_first f                     '+
-        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-        'WHERE f.date_risk BETWEEN ? and ?             '+
-        'and month(f.date_risk) = 10 and s.risk_sub_group=d.id) as M10, '+
-        '(select count(*) FROM risk_request_first f                     '+
-        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-        'WHERE f.date_risk BETWEEN ? and ?            '+
-        'and month(f.date_risk) = 11 and s.risk_sub_group=d.id) as M11, '+
-        '(select count(*) FROM risk_request_first f                     '+
-        'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-        'WHERE f.date_risk BETWEEN ? and ?             '+
-        'and month(f.date_risk) = 12 and s.risk_sub_group=d.id) as M12  '+
-        'from risk_detail d                                             '+
-        'LEFT JOIN risk_sub_program p ON p.id=d.risk_group              '+
-        'LEFT JOIN risk_program r ON r.id=d.risk_program                ' +
-        'HAVING M1 > 0 OR M2 > 0 OR M3 > 0 OR M4 > 0 OR M5 > 0 OR M6 > 0 '+
-        'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0 '+
-        'ORDER BY d.risk_program ASC ';
+        var sql = 'SELECT p.program_risk,                        '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id  '+
+            'WHERE f.date_risk BETWEEN ? and ?   '+
+            'and month(f.date_risk) = 1 and s.risk_program = p.id ) as M1, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id  '+
+            'WHERE f.date_risk BETWEEN ? and ?   '+
+            'and month(f.date_risk) = 2 and s.risk_program = p.id) as M2, '+
+            '(select count(*) FROM risk_request_first f   '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ? '+
+            'and month(f.date_risk) = 3 and s.risk_program = p.id) as M3, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ?  '+
+            'and month(f.date_risk) = 4 and s.risk_program = p.id) as M4, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ?   '+
+            'and month(f.date_risk) = 5 and s.risk_program = p.id) as M5, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ? '+
+            'and month(f.date_risk) = 6 and s.risk_program = p.id) as M6, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id  '+
+            'WHERE f.date_risk BETWEEN ? and ? '+
+            'and month(f.date_risk) = 7 and s.risk_program = p.id) as M7, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ?   '+
+            'and month(f.date_risk) = 8 and s.risk_program = p.id) as M8, '+
+            '(select count(*) FROM risk_request_first f   '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ? '+
+            'and month(f.date_risk) = 9 and s.risk_program = p.id) as M9, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ?   '+
+            'and month(f.date_risk) = 10 and s.risk_program = p.id) as M10, '+
+            '(select count(*) FROM risk_request_first f   '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ? '+
+            'and month(f.date_risk) = 11 and s.risk_program = p.id) as M11, '+
+            '(select count(*) FROM risk_request_first f '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ? '+
+            'and month(f.date_risk) = 12 and s.risk_program = p.id) as M12 '+
+            'from risk_program  p '+
+            'HAVING M1 > 0 OR M2 > 0 OR M3 > 0 OR M4 > 0 OR M5 > 0 OR M6 > 0 '+
+            'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0 '+
+            'ORDER BY p.id ASC ';
         db.raw(sql,[data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,
             data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,data.date1,data.date2,
             data.date1,data.date2,data.date1,data.date2,data.date1,data.date2])
@@ -127,61 +125,59 @@ module.exports = {
 
     getReport_summary_date2: function(db,date1,date2){
         var q = Q.defer();
-        var sql = 'SELECT concat(SUBSTR(r.program_risk,1,3),SUBSTR(p.name_sub_program,7),SUBSTR(d.risk_detail,9) ) as Name_risk,        '+
-            '(select count(*) FROM risk_request_first f                     '+
-            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-            'WHERE f.date_risk BETWEEN ? and ?            '+
-            'and month(f.date_risk) = 1 and s.risk_sub_group=d.id) as M1,   '+
-            '(select count(*) FROM risk_request_first f                     '+
-            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-            'WHERE f.date_risk BETWEEN ? and ?             '+
-            'and month(f.date_risk) = 2 and s.risk_sub_group=d.id) as M2,   '+
-            '(select count(*) FROM risk_request_first f                     '+
-            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-            'WHERE f.date_risk BETWEEN ? and ?            '+
-            'and month(f.date_risk) = 3 and s.risk_sub_group=d.id) as M3,   '+
-            '(select count(*) FROM risk_request_first f                     '+
-            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-            'WHERE f.date_risk BETWEEN ? and ?             '+
-            'and month(f.date_risk) = 4 and s.risk_sub_group=d.id) as M4,   '+
-            '(select count(*) FROM risk_request_first f                     '+
-            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-            'WHERE f.date_risk BETWEEN ? and ?             '+
-            'and month(f.date_risk) = 5 and s.risk_sub_group=d.id) as M5,   '+
-            '(select count(*) FROM risk_request_first f                     '+
-            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-            'WHERE f.date_risk BETWEEN ? and ?             '+
-            'and month(f.date_risk) = 6 and s.risk_sub_group=d.id) as M6,   '+
-            '(select count(*) FROM risk_request_first f                     '+
-            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-            'WHERE f.date_risk BETWEEN ? and ?            '+
-            'and month(f.date_risk) = 7 and s.risk_sub_group=d.id) as M7,   '+
-            '(select count(*) FROM risk_request_first f                     '+
-            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-            'WHERE f.date_risk BETWEEN ? and ?          '+
-            'and month(f.date_risk) = 8 and s.risk_sub_group=d.id) as M8,   '+
-            '(select count(*) FROM risk_request_first f                     '+
-            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-            'WHERE f.date_risk  BETWEEN ? and ?            '+
-            'and month(f.date_risk) = 9 and s.risk_sub_group=d.id) as M9,   '+
-            '(select count(*) FROM risk_request_first f                     '+
-            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-            'WHERE f.date_risk BETWEEN ? and ?             '+
-            'and month(f.date_risk) = 10 and s.risk_sub_group=d.id) as M10, '+
-            '(select count(*) FROM risk_request_first f                     '+
-            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-            'WHERE f.date_risk BETWEEN ? and ?            '+
-            'and month(f.date_risk) = 11 and s.risk_sub_group=d.id) as M11, '+
-            '(select count(*) FROM risk_request_first f                     '+
-            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
-            'WHERE f.date_risk BETWEEN ? and ?             '+
-            'and month(f.date_risk) = 12 and s.risk_sub_group=d.id) as M12  '+
-            'from risk_detail d                                             '+
-            'LEFT JOIN risk_sub_program p ON p.id=d.risk_group              '+
-            'LEFT JOIN risk_program r ON r.id=d.risk_program                ' +
+        var sql = 'SELECT p.program_risk,                        '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id  '+
+            'WHERE f.date_risk BETWEEN ? and ?   '+
+            'and month(f.date_risk) = 1 and s.risk_program = p.id ) as M1, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id  '+
+            'WHERE f.date_risk BETWEEN ? and ?   '+
+            'and month(f.date_risk) = 2 and s.risk_program = p.id) as M2, '+
+            '(select count(*) FROM risk_request_first f   '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ? '+
+            'and month(f.date_risk) = 3 and s.risk_program = p.id) as M3, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ?  '+
+            'and month(f.date_risk) = 4 and s.risk_program = p.id) as M4, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ?   '+
+            'and month(f.date_risk) = 5 and s.risk_program = p.id) as M5, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ? '+
+            'and month(f.date_risk) = 6 and s.risk_program = p.id) as M6, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id  '+
+            'WHERE f.date_risk BETWEEN ? and ? '+
+            'and month(f.date_risk) = 7 and s.risk_program = p.id) as M7, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ?   '+
+            'and month(f.date_risk) = 8 and s.risk_program = p.id) as M8, '+
+            '(select count(*) FROM risk_request_first f   '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ? '+
+            'and month(f.date_risk) = 9 and s.risk_program = p.id) as M9, '+
+            '(select count(*) FROM risk_request_first f  '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ?   '+
+            'and month(f.date_risk) = 10 and s.risk_program = p.id) as M10, '+
+            '(select count(*) FROM risk_request_first f   '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ? '+
+            'and month(f.date_risk) = 11 and s.risk_program = p.id) as M11, '+
+            '(select count(*) FROM risk_request_first f '+
+            'INNER JOIN risk_request_second s ON f.id=s.risk_request_id '+
+            'WHERE f.date_risk BETWEEN ? and ? '+
+            'and month(f.date_risk) = 12 and s.risk_program = p.id) as M12 '+
+            'from risk_program  p '+
             'HAVING M1 > 0 OR M2 > 0 OR M3 > 0 OR M4 > 0 OR M5 > 0 OR M6 > 0 '+
-            'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0  '+
-            'ORDER BY d.risk_program ASC   ';
+            'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0 '+
+            'ORDER BY p.id ASC   ';
 
         db.raw(sql,[date1,date2,date1,date2,date1,date2,date1,date2,
             date1,date2,date1,date2,date1,date2,date1,date2,date1,date2,
@@ -198,61 +194,59 @@ module.exports = {
 
     getReport_summary_department: function(db,data){
         var q = Q.defer();
-        var sql = 'SELECT concat(SUBSTR(r.program_risk,1,3),SUBSTR(p.name_sub_program,7),SUBSTR(d.risk_detail,9) ) as Name_risk,        '+
+        var sql = 'SELECT d.program_risk,        '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?          '+
-            'and month(f.date_risk) = 1 and s.risk_sub_group=d.id) as M1,   '+
+            'and month(f.date_risk) = 1 and s.risk_program=d.id) as M1,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?           '+
-            'and month(f.date_risk) = 2 and s.risk_sub_group=d.id) as M2,   '+
+            'and month(f.date_risk) = 2 and s.risk_program=d.id) as M2,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?          '+
-            'and month(f.date_risk) = 3 and s.risk_sub_group=d.id) as M3,   '+
+            'and month(f.date_risk) = 3 and s.risk_program=d.id) as M3,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ? and f.depcode = ?            '+
-            'and month(f.date_risk) = 4 and s.risk_sub_group=d.id) as M4,   '+
+            'and month(f.date_risk) = 4 and s.risk_program=d.id) as M4,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?           '+
-            'and month(f.date_risk) = 5 and s.risk_sub_group=d.id) as M5,   '+
+            'and month(f.date_risk) = 5 and s.risk_program=d.id) as M5,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?           '+
-            'and month(f.date_risk) = 6 and s.risk_sub_group=d.id) as M6,   '+
+            'and month(f.date_risk) = 6 and s.risk_program=d.id) as M6,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?          '+
-            'and month(f.date_risk) = 7 and s.risk_sub_group=d.id) as M7,   '+
+            'and month(f.date_risk) = 7 and s.risk_program=d.id) as M7,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?        '+
-            'and month(f.date_risk) = 8 and s.risk_sub_group=d.id) as M8,   '+
+            'and month(f.date_risk) = 8 and s.risk_program=d.id) as M8,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk  BETWEEN ? and ?  and f.depcode = ?           '+
-            'and month(f.date_risk) = 9 and s.risk_sub_group=d.id) as M9,   '+
+            'and month(f.date_risk) = 9 and s.risk_program=d.id) as M9,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ? and f.depcode = ?            '+
-            'and month(f.date_risk) = 10 and s.risk_sub_group=d.id) as M10, '+
+            'and month(f.date_risk) = 10 and s.risk_program=d.id) as M10, '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ? and f.depcode = ?           '+
-            'and month(f.date_risk) = 11 and s.risk_sub_group=d.id) as M11, '+
+            'and month(f.date_risk) = 11 and s.risk_program=d.id) as M11, '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?            '+
-            'and month(f.date_risk) = 12 and s.risk_sub_group=d.id) as M12  '+
-            'from risk_detail d                                             '+
-            'LEFT JOIN risk_sub_program p ON p.id=d.risk_group              '+
-            'LEFT JOIN risk_program r ON r.id=d.risk_program                '+
+            'and month(f.date_risk) = 12 and s.risk_program=d.id) as M12  '+
+            'from risk_program d                                             '+
             'HAVING M1 > 0 OR M2 > 0 OR M3 > 0 OR M4 > 0 OR M5 > 0 OR M6 > 0 '+
             'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0  '+
-            'ORDER BY d.risk_program ASC ';
+            'ORDER BY d.id ASC ';
         db.raw(sql,[data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,
             data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,
             data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode,data.date1,data.date2,data.depcode])
@@ -268,61 +262,59 @@ module.exports = {
 
     getReport_summary_department2: function(db,date1,date2,depcode){
         var q = Q.defer();
-        var sql = 'SELECT concat(SUBSTR(r.program_risk,1,3),SUBSTR(p.name_sub_program,7),SUBSTR(d.risk_detail,9) ) as Name_risk,        '+
+        var sql = 'SELECT d.program_risk,        '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?          '+
-            'and month(f.date_risk) = 1 and s.risk_sub_group=d.id) as M1,   '+
+            'and month(f.date_risk) = 1 and s.risk_program=d.id) as M1,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?           '+
-            'and month(f.date_risk) = 2 and s.risk_sub_group=d.id) as M2,   '+
+            'and month(f.date_risk) = 2 and s.risk_program=d.id) as M2,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?          '+
-            'and month(f.date_risk) = 3 and s.risk_sub_group=d.id) as M3,   '+
+            'and month(f.date_risk) = 3 and s.risk_program=d.id) as M3,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ? and f.depcode = ?            '+
-            'and month(f.date_risk) = 4 and s.risk_sub_group=d.id) as M4,   '+
+            'and month(f.date_risk) = 4 and s.risk_program=d.id) as M4,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?           '+
-            'and month(f.date_risk) = 5 and s.risk_sub_group=d.id) as M5,   '+
+            'and month(f.date_risk) = 5 and s.risk_program=d.id) as M5,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?           '+
-            'and month(f.date_risk) = 6 and s.risk_sub_group=d.id) as M6,   '+
+            'and month(f.date_risk) = 6 and s.risk_program=d.id) as M6,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?          '+
-            'and month(f.date_risk) = 7 and s.risk_sub_group=d.id) as M7,   '+
+            'and month(f.date_risk) = 7 and s.risk_program=d.id) as M7,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?        '+
-            'and month(f.date_risk) = 8 and s.risk_sub_group=d.id) as M8,   '+
+            'and month(f.date_risk) = 8 and s.risk_program=d.id) as M8,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk  BETWEEN ? and ?  and f.depcode = ?           '+
-            'and month(f.date_risk) = 9 and s.risk_sub_group=d.id) as M9,   '+
+            'and month(f.date_risk) = 9 and s.risk_program=d.id) as M9,   '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ? and f.depcode = ?            '+
-            'and month(f.date_risk) = 10 and s.risk_sub_group=d.id) as M10, '+
+            'and month(f.date_risk) = 10 and s.risk_program=d.id) as M10, '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ? and f.depcode = ?           '+
-            'and month(f.date_risk) = 11 and s.risk_sub_group=d.id) as M11, '+
+            'and month(f.date_risk) = 11 and s.risk_program=d.id) as M11, '+
             '(select count(*) FROM risk_request_first f                     '+
             'INNER JOIN risk_request_second s ON f.id=s.risk_request_id     '+
             'WHERE f.date_risk BETWEEN ? and ?  and f.depcode = ?            '+
-            'and month(f.date_risk) = 12 and s.risk_sub_group=d.id) as M12  '+
-            'from risk_detail d                                             '+
-            'LEFT JOIN risk_sub_program p ON p.id=d.risk_group              '+
-            'LEFT JOIN risk_program r ON r.id=d.risk_program                '+
+            'and month(f.date_risk) = 12 and s.risk_program=d.id) as M12  '+
+            'from risk_program d                                             '+
             'HAVING M1 > 0 OR M2 > 0 OR M3 > 0 OR M4 > 0 OR M5 > 0 OR M6 > 0 '+
             'OR M7 > 0 OR M8 > 0 OR M9 > 0 OR M10 > 0 OR M11 > 0 OR M12 > 0  '+
-            'ORDER BY d.risk_program ASC ';
+            'ORDER BY d.id ASC ';
         db.raw(sql,[date1,date2,depcode,date1,date2,depcode,date1,date2,depcode,date1,date2,depcode,
             date1,date2,depcode,date1,date2,depcode,date1,date2,depcode,date1,date2,depcode,
             date1,date2,depcode,date1,date2,depcode,date1,date2,depcode,date1,date2,depcode])
@@ -341,7 +333,7 @@ module.exports = {
         var sql =   'SELECT f.id,f.topic_risk,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
             'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
             'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
-            'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
+            //'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
             'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
             'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
             'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
@@ -371,7 +363,7 @@ module.exports = {
         var sql =   'SELECT f.topic_risk,f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
             'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
             'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
-            'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
+            //'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
             'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
             'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
             'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
@@ -395,12 +387,42 @@ module.exports = {
         return q.promise;
     },
 
+    getReport_user_senior_department: function(db,data){
+        var q = Q.defer();
+        var sql =   'SELECT f.topic_risk,f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
+            'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
+            'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
+                //'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
+            'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
+            'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
+            'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
+            'LEFT JOIN risk_sub_program p ON p.id = c.risk_group        '+
+            'LEFT JOIN risk_detail d ON d.id = c.risk_sub_group             '+
+            'LEFT JOIN clinic_level l ON l.id = c.risk_level                '+
+            'LEFT JOIN department e ON e.depcode = f.depcode                '+
+            'LEFT JOIN risk_type x ON x.id=f.type_risk                      '+
+            'WHERE f.date_risk BETWEEN ? and ?        '+
+            'AND ( f.depcode = ?                        '+
+            'OR   f.depcode = ?  )                        '+
+            'ORDER BY f.date_risk';
+
+        db.raw(sql,[data.date1,data.date2,data.depcode,data.sub_depcode])
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
     getReport_terminal2: function(db,date1,date2){
         var q = Q.defer();
         var sql =   'SELECT f.id,f.topic_risk,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
         'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
         'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
-        'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
+        //'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
         'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
         'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
         'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
@@ -427,7 +449,7 @@ module.exports = {
         var sql =   'SELECT f.id,f.topic_risk,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
             'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
             'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
-            'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
+            //'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
             'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
             'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
             'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
@@ -452,12 +474,41 @@ module.exports = {
         return q.promise;
     },
 
+    getReport_type2: function(db,date1,date2,risk_type){
+        var q = Q.defer();
+        var sql =   'SELECT f.id,f.topic_risk,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
+            'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
+            'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
+                //'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
+            'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
+            'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
+            'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
+            'LEFT JOIN risk_sub_program p ON p.id = c.risk_group        '+
+            'LEFT JOIN risk_detail d ON d.id = c.risk_sub_group             '+
+            'LEFT JOIN clinic_level l ON l.id = c.risk_level                '+
+            'LEFT JOIN department e ON e.depcode = f.depcode                '+
+            'LEFT JOIN risk_type x ON x.id=f.type_risk                      '+
+            'WHERE f.date_risk BETWEEN ? and ?                              '+
+            'AND f.type_risk = ?                       '+
+            'ORDER BY f.date_risk';
+
+        db.raw(sql,[date1,date2,risk_type])
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
     getReport_senior: function(db,date1,date2,depcode){
         var q = Q.defer();
         var sql =   'SELECT f.topic_risk,f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
             'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
             'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
-            'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
+            //'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
             'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
             'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
             'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
@@ -481,14 +532,12 @@ module.exports = {
         return q.promise;
     },
 
-
-
-    getReport_user: function(db,data){
+    getReport_senior_department: function(db,date1,date2,depcode,subcode){
         var q = Q.defer();
-        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,f.topic_risk,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
+        var sql =   'SELECT f.topic_risk,f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
             'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
             'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
-            'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
+                //'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
             'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
             'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
             'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
@@ -497,11 +546,12 @@ module.exports = {
             'LEFT JOIN clinic_level l ON l.id = c.risk_level                '+
             'LEFT JOIN department e ON e.depcode = f.depcode                '+
             'LEFT JOIN risk_type x ON x.id=f.type_risk                      '+
-            'WHERE f.date_risk BETWEEN ? and ?        '+
-            'AND f.username = ?                        '+
+            'WHERE f.date_risk BETWEEN ? and ?                              '+
+            'AND ( f.depcode = ?                                              '+
+            'OR f.depcode = ? )  '+
             'ORDER BY f.date_risk';
 
-        db.raw(sql,[data.date1,data.date2,data.username])
+        db.raw(sql,[date1,date2,depcode,subcode])
             .then(function(rows){
                 q.resolve(rows[0])
             })
@@ -512,12 +562,71 @@ module.exports = {
         return q.promise;
     },
 
-    getReport_user2: function(db,date1,date2,username){
+
+
+    getReport_user: function(db,data){
+        var q = Q.defer();
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,f.topic_risk,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
+            'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
+            'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
+            'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
+            'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
+            'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
+            'LEFT JOIN risk_sub_program p ON p.id = c.risk_group        '+
+            'LEFT JOIN risk_detail d ON d.id = c.risk_sub_group             '+
+            'LEFT JOIN clinic_level l ON l.id = c.risk_level                '+
+            'LEFT JOIN department e ON e.depcode = f.depcode                '+
+            'LEFT JOIN risk_type x ON x.id=f.type_risk                      '+
+            'WHERE f.date_risk BETWEEN ? and ?        '+
+            'AND ( o.depcode = ?                        '+
+            'OR o.depcode = ? )            '+
+            'ORDER BY f.date_risk';
+
+        db.raw(sql,[data.date1,data.date2,data.depcode,data.sub_code])
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    getReport_user_department: function(db,data){
+        var q = Q.defer();
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,f.topic_risk,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname, '+
+            'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
+            'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
+            'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
+            'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
+            'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
+            'LEFT JOIN risk_sub_program p ON p.id = c.risk_group        '+
+            'LEFT JOIN risk_detail d ON d.id = c.risk_sub_group             '+
+            'LEFT JOIN clinic_level l ON l.id = c.risk_level                '+
+            'LEFT JOIN department e ON e.depcode = f.depcode                '+
+            'LEFT JOIN risk_type x ON x.id=f.type_risk                      '+
+            'WHERE f.date_risk BETWEEN ? and ?        '+
+            'AND ( f.depcode = ?                        '+
+            'OR f.depcode = ? )            '+
+            'ORDER BY f.date_risk';
+
+        db.raw(sql,[data.date1,data.date2,data.depcode,data.sub_code])
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    getReport_user2: function(db,date1,date2,depcode,sub_code){
         var q = Q.defer();
         var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,f.topic_risk,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname,j.depname as Room, '+
             'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
             'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
-            'INNER JOIN risk_request_third t ON t.risk_request_id = f.id    '+
             'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
             'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
             'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
@@ -528,10 +637,41 @@ module.exports = {
             'LEFT JOIN department j ON j.depcode = o.depcode                '+
             'LEFT JOIN risk_type x ON x.id=f.type_risk                      '+
             'WHERE f.date_risk BETWEEN ? and ?        '+
-            'AND f.username = ?                        '+
+            'AND ( o.depcode = ?                        '+
+            'OR o.depcode = ? )                          '+
             'ORDER BY f.date_risk';
 
-        db.raw(sql,[date1,date2,username])
+        db.raw(sql,[date1,date2,depcode,sub_code])
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    getReport_user2_department: function(db,date1,date2,depcode,sub_code){
+        var q = Q.defer();
+        var sql =   'SELECT f.id,CONCAT(f.date_risk," / ",time_risk) as Date_Time,f.topic_risk,d.risk_detail,p.name_sub_program,z.program_risk,x.name as Type,l.risk_level as Leve,e.depname,j.depname as Room, '+
+            'IF (f.confirm=1,"Y","N") as confirm    FROM  risk_request_first f '+
+            'INNER JOIN risk_request_second c ON f.id = c.risk_request_id   '+
+            'INNER JOIN risk_request_fourth o ON o.risk_request_id = f.id   '+
+            'INNER JOIN risk_request_fifth i ON i.risk_request_id = f.id    '+
+            'LEFT JOIN risk_program z ON z.id = c.risk_program              '+
+            'LEFT JOIN risk_sub_program p ON p.id = c.risk_group            '+
+            'LEFT JOIN risk_detail d ON d.id = c.risk_sub_group             '+
+            'LEFT JOIN clinic_level l ON l.id = c.risk_level                '+
+            'LEFT JOIN department e ON e.depcode = f.depcode                '+
+            'LEFT JOIN department j ON j.depcode = o.depcode                '+
+            'LEFT JOIN risk_type x ON x.id=f.type_risk                      '+
+            'WHERE f.date_risk BETWEEN ? and ?        '+
+            'AND ( f.depcode = ?                        '+
+            'OR f.depcode = ? )                          '+
+            'ORDER BY f.date_risk';
+
+        db.raw(sql,[date1,date2,depcode,sub_code])
             .then(function(rows){
                 q.resolve(rows[0])
             })

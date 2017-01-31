@@ -1,12 +1,11 @@
-extends  ../user_senior_layout
+extends  ../layout
 block scripts
-    script(src="/javascripts/risk_today_senior.js")
-    script(src="/javascripts/user_senior_risk_report.js")
+    script(src="/javascripts/risk_report.js")
 block content
     br
     ol.breadcrumb
         //li
-            a(href="/user_senior_risk_report")
+            a(href="/risk_news")
                 i.fa.fa-home
                 | &nbsp; หน้าหลัก
         li
@@ -51,11 +50,11 @@ block content
                     .row
                         .col-md-8
                             .form-group
-                                label(for="txtResult_repeat") ผลทบทวน
+                                label(for="txtResult_repeat") ผลทบทวน/การแก้ไข/มาตรการป้องกัน
                                 if rows.result_repeat
                                     textarea#txtResult_repeat(type="text" rows="3").form-control #{rows.result_repeat}
                                 else
-                                    textarea#txtResult_repeat(type="text" rows="3", placeholder="ผลการทบทวน").form-control
+                                    textarea#txtResult_repeat(type="text" rows="3", placeholder="ผลการทบทวนผลทบทวน/การแก้ไข/มาตรการป้องกัน").form-control
                     .row
                         .col-md-8
                             .form-group

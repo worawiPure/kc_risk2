@@ -53,18 +53,25 @@ html
                                 | &nbsp; KC Risk
                     #navbar.navbar-collapse.collapse
                           ul.nav.navbar-nav
-                                li
-                                      a(href="/risk_news") หน้าแรก
-                                li.dropdown
-                                      a(href="#", data-toggle="dropdown", role="button",
-                                      aria-haspopup="true", aria-expanded="false").dropdown-toggle
-                                            | สรุปรายงานความเสี่ยง
-                                            span.caret
-                                      ul.dropdown-menu
-                                            li
-                                                  a(href="#")
-                                                        i.fa.fa-file-text-o
-                                                        |&nbsp;&nbsp; สรุปความเสี่ยง
+                              li
+                                  a(href="/risk_news")
+                                      i.fa.fa-home
+                                      | &nbsp; หน้าแรก
+                              li.dropdown
+                                  a(href="#", data-toggle="dropdown", role="button",
+                                  aria-haspopup="true", aria-expanded="false").dropdown-toggle
+                                        i.fa.fa-file-text
+                                        | &nbsp; รายงานสรุปความเสี่ยง
+                                        //span.caret
+                                  ul.dropdown-menu
+                                      li
+                                          a(href="/report_risk/user_report")
+                                              i.fa.fa-bar-chart-o
+                                              | &nbsp; รายงานความเสี่ยงที่รายงาน
+                                      li
+                                          a(href="/report_risk/user_report_department")
+                                              i.fa.fa-bar-chart-o
+                                              | &nbsp; รายงานความเสี่ยงที่เกิดขึ้นในแผนก
                           p.navbar-text.navbar-right #{session.fullname} | #{session.depname}
                           ul.nav.navbar-nav.pull-right
                                 li.dropdown
@@ -80,7 +87,6 @@ html
                                                   a(href="/users/logout")
                                                         i.fa.fa-power-off
                                                         | &nbsp;&nbsp;ออกจากระบบ
-        .container
-            .row
-                .col-md-12
-                    block content
+
+  .col-md-12
+        block content

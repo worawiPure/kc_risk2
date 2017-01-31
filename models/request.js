@@ -129,6 +129,8 @@ module.exports = {
                 time_risk: data.time_risk,
                 depcode: data.department,
                 area_risk: data.area_risk,
+                confirm: '1',
+
                 //username: data.username,
                 date_update: moment().format('YYYY-MM-DD HH:mm:ss')
             })
@@ -147,13 +149,13 @@ module.exports = {
         db('risk_request_second')
             .update({
                 risk_program:data.program,
-                risk_group:data.subprogram,
-                risk_sub_group:data.subgroup,
-                note_other:data.note_other,
-                risk_detail:data.risk_detail,
+                //risk_group:data.subprogram,
+                //risk_sub_group:data.subgroup,
+                //note_other:data.note_other,
+                //risk_detail:data.risk_detail,
                 sentinel:data.sentinel,
-                risk_level:data.risk_level,
-                risk_correct:data.risk_correct
+                risk_level:data.risk_level
+                //risk_correct:data.risk_correct
             })
             .where('risk_request_id',data.id)
             .then(function (rows) {
@@ -197,7 +199,7 @@ module.exports = {
             .update({
                 type_report:data.type_report,
                 name_report:data.name_report,
-                position:data.position,
+               // position:data.position,
                 depcode:data.department2
             })
             .where('risk_request_id',data.id)
@@ -217,10 +219,10 @@ module.exports = {
                 date_repeat:data.date_repeat,
                 name_repeat:data.name_repeat,
                 result_repeat:data.result_repeat,
-                depcode_connected:data.depcode_connected,
-                edit_system:data.edit_system,
-                date_finished:data.date_finished,
-                note:data.note
+                depcode_connected:data.depcode_connected
+                //edit_system:data.edit_system,
+                //date_finished:data.date_finished,
+                //note:data.note
             })
             .where('risk_request_id',data.id)
             .then(function(rows){
@@ -233,7 +235,8 @@ module.exports = {
     },
     search_date: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.`name` as aa FROM  risk_request_first f  '+
+        var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.`name` as aa,u.depcode FROM  risk_request_first f  '+
+        'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
         'LEFT JOIN risk_type t ON f.type_risk=t.id '+
         'WHERE f.date_risk between ? and ?  '+
         'and f.username = ? ';
@@ -253,7 +256,7 @@ module.exports = {
 
     user_senior_search_date: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.name as aa FROM  risk_request_first f  '+
+        var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.name as aa,u.depcode as cc FROM  risk_request_first f  '+
         'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
         'LEFT JOIN risk_type t ON f.type_risk=t.id '+
         'WHERE f.date_risk between ? and ? '+
@@ -275,7 +278,7 @@ module.exports = {
     user_senior_search_date_feedback: function(db,data){
         var q = Q.defer();
         db('risk_request_first as f')
-            .select( 'f.id','f.date_risk','f.topic_risk','t.name as aa','d.depname as mm')
+            .select( 'f.id','f.date_risk','f.topic_risk','t.name as aa','d.depname as mm','u.depcode as cc')
             .innerJoin('risk_request_fourth as u', 'u.risk_request_id', 'f.id')
             .leftJoin('risk_type as t','t.id','f.type_risk')
             .leftJoin('department as d', 'd.depcode', 'u.depcode')
@@ -295,7 +298,8 @@ module.exports = {
 
     search_topic: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.`name` as aa FROM  risk_request_first f  '+
+        var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.`name` as aa,u.depcode FROM  risk_request_first f  '+
+            'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
             'LEFT JOIN risk_type t ON f.type_risk=t.id '+
             'WHERE f.topic_risk Like ? '+
             'and f.username = ? ';
@@ -315,7 +319,7 @@ module.exports = {
 
     user_senior_search_topic: function(db,data){
         var q = Q.defer();
-        var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.`name` as aa FROM  risk_request_first f  '+
+        var sql =   'SELECT f.id,f.date_risk,f.topic_risk,t.`name` as aa,u.depcode as cc FROM  risk_request_first f  '+
             'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
             'LEFT JOIN risk_type t ON f.type_risk=t.id '+
             'WHERE f.topic_risk Like ? '+
@@ -338,7 +342,7 @@ module.exports = {
         var q = Q.defer();
         var query = '%'+data.topic+'%';
         db('risk_request_first as f')
-            .select( 'f.id','f.date_risk','f.topic_risk','t.name as aa','d.depname as mm')
+            .select( 'f.id','f.date_risk','f.topic_risk','t.name as aa','d.depname as mm','u.depcode as cc')
             .innerJoin('risk_request_fourth as u', 'u.risk_request_id', 'f.id')
             .leftJoin('risk_type as t','t.id','f.type_risk')
             .leftJoin('department as d', 'd.depcode', 'u.depcode')

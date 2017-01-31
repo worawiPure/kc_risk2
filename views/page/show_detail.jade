@@ -4,7 +4,7 @@ block scripts
 block content
     br
     ol.breadcrumb
-        li
+        //li
             a(href="/risk_report")
                 i.fa.fa-home
                 | &nbsp; หน้าหลัก
@@ -14,22 +14,23 @@ block content
     ul.nav.nav-tabs(role="tablist")
         li.active(role='presentation')
             a(href="#part1", aria-controls="part1", role="tab", data-toggle="tab")
-                | ส่วนที่ 1 &nbsp;
+                | รายละเอียดความเสี่ยง &nbsp;
                 i.fa.fa-arrow-right
-        li(role='presentation')
+        //li(role='presentation')
             a(href='#part2', aria-controls='part2', role='tab', data-toggle='tab')
                 | ส่วนที่ 2 &nbsp;
                 i.fa.fa-arrow-right
-        li(role='presentation')
+        //li(role='presentation')
             a(href='#part3', aria-controls='part3', role='tab', data-toggle='tab')
                 | ส่วนที่ 3 &nbsp;
                 i.fa.fa-arrow-right
-        li(role='presentation')
+        //li(role='presentation')
             a(href='#part4', aria-controls='part4', role='tab', data-toggle='tab')
                 | ส่วนที่ 4 &nbsp;
                 i.fa.fa-arrow-right
         li(role='presentation')
-            a(href='#part5', aria-controls='part5', role='tab', data-toggle='tab') ส่วนที่ 5
+            a(href='#part5', aria-controls='part5', role='tab', data-toggle='tab')
+                | ทบทวนความเสี่ยง
     .tab-content
         br
         #part1.tab-pane.active(role='tabpanel')
@@ -37,23 +38,22 @@ block content
                 .panel-heading
                     h3.panel-title
                         i.fa.fa-file-text
-                        | &nbsp; ส่วนที่ 1 ข้อมูลการเกิดอุบัติการณ์
+                        | &nbsp; ข้อมูลการเกิดอุบัติการณ์
                 .panel-body
                     .row
                         .col-md-4
                             .form-group
                                 label(for="slRisktype") ประเภทอุบัติการณ์
                                 input(type="text", value="#{rows.qq}", readonly).form-control
-                        .col-md-8
+                        .col-md-4
                             .form-grop
                                 label(for="slComplaint") การจำแนกประเภท
                                 input(type="text", value="#{rows.ww}", readonly).form-control
-
                     .row
                         .col-md-12
                             .form-group
                                 label(for="txtTopic") เรื่องหัวข้อความเสี่ยง
-                                input(type="text", value="#{rows.topic_risk}", readonly).form-control
+                                textarea(type="text",rows="5", readonly).form-control #{rows.topic_risk}
                     .row
                         .col-md-3
                             .form-group
@@ -64,7 +64,6 @@ block content
                             .form-group
                                 label(for="txtTime_risk") เวลาที่เกิดเหตุ
                                 input(type="text", value="#{rows.time_risk}", readonly).form-control
-                    .row
                         .col-md-3
                             .form-group
                                 label(for="txtDate_report_risk") วันที่รายงาน
@@ -74,15 +73,48 @@ block content
                                 label(for="txtTime_report_risk") เวลาที่รายงาน
                                 input(type="text", value="#{rows.time_report_risk}", readonly).form-control
                     .row
-                        .col-md-4
+                        .col-md-3
                             .form-group
                                 label(for="slDepartment") หน่วยงานที่เกิดความเสี่ยง
                                 input(type="text", value="#{rows.depname}", readonly).form-control
+                        .col-md-9
+                            .form-group
+                                label(for="slProgram") Program
+                                input(type="text", value="#{rows.program_risk}", readonly).form-control
+                    .row
+                        .col-md-7
+                            .form-group
+                                label.radio(for="radioSentinel") Sentinel event case (เหตุการณ์ที่ต้องรายงานภายใน 24 ชม.)
+                                | &nbsp;&nbsp;&nbsp;
+                                if rows.sentinel=="Y"
+                                    input#radioYes(type='radio', name='sentinel', checked='checked', disabled="disabled")
+                                    |  ใช่
+                                else
+                                    input#radioNo(type='radio', name='sentinel', checked='checked', disabled="disabled")
+                                    |  ไม่
+                        .col-md-4
+                            .form-group
+                                label(for="slDepartment2") หน่วยงานที่รายงาน
+                                input(type="text", value="#{rows.ii}", readonly).form-control
+                    .row
+                        .col-md-12#divRiskLevel
+                            .form-group
+                                label(for="slRisk_level") ระดับความรุนแรง
+                                textarea(type="text", rows="3", readonly).form-control #{rows.pp}
+                    .row
+                        .col-md-4
+                            .form-group
+                                label(for="slType_report") ประเภทรายงาน
+                                input(type="text", value="#{rows.zz}", readonly).form-control
+                        .col-md-6
+                            .form-group
+                                label(for="txtName_report") ผู้รายงาน
+                                input(type="text", value="#{rows.name_report}", readonly).form-control
                         //.col-md-8
                             .form-group
                                 label(for="txtArea_risk") บริเวณที่เกิดความเสี่ยง
                                 input(type="text", value="#{rows.area_risk}", readonly).form-control
-        #part2.tab-pane(role='tabpanel')
+        //#part2.tab-pane(role='tabpanel')
             .panel.panel-primary
                 .panel-heading
                     h3.panel-title
@@ -135,7 +167,7 @@ block content
                             .form-group
                                 label(for="txtRisk_correct") การแก้ไขปัญหาทันที
                                 input(type="text", value="#{rows.risk_correct}", readonly).form-control
-        #part3.tab-pane(role='tabpanel')
+        //#part3.tab-pane(role='tabpanel')
             .panel.panel-primary
                 .panel-heading
                     h3.panel-title
@@ -199,7 +231,7 @@ block content
                                 .form-group
                                     label(for="txtNote_other2") รายละเอียด
                                     input(type="text", value="#{rows.note_other}", readonly).form-control
-        #part4.tab-pane(role='tabpanel')
+        //#part4.tab-pane(role='tabpanel')
             .panel.panel-primary
                 .panel-heading
                     h3.panel-title
@@ -232,7 +264,7 @@ block content
                 .panel-heading
                     h3.panel-title
                         i.fa.fa-file-text
-                        | &nbsp; ส่วนที่ 5 ทบทวนการเกิดอุบัติการณ์ (กรรมการความเสี่ยง/หัวหน้า)
+                        | &nbsp; ทบทวนการเกิดอุบัติการณ์ (กรรมการความเสี่ยง/หัวหน้า)
                 .panel-body
                     .row
                         .col-md-3
@@ -244,28 +276,28 @@ block content
                         .col-md-8
                             .form-group
                                 label(for="txtName_repeat") ผู้ทบทวน
-                                input(type="text", value="#{rows.name_repeat}", readonly).form-control
+                                textarea(type="text", rows="3", readonly).form-control #{rows.name_repeat}
                     .row
                         .col-md-8
                             .form-group
-                                label(for="txtResult_repeat") ผลทบทวน
+                                label(for="txtResult_repeat") ผลทบทวน/การแก้ไข/มาตรการป้องกัน
                                 textarea(type="text", rows="3", readonly).form-control #{rows.result_repeat}
                     .row
                         .col-md-8
                             .form-group
-                                label(for="txtDepcode_connected") ชื่อหหน่วยงานที่เกี่ยวข้อง
+                                label(for="txtDepcode_connected") หน่วยงานที่เกี่ยวข้อง
                                 textarea(type="text", rows="3", readonly).form-control #{rows.depcode_connected}
-                    .row
+                    //.row
                         .col-md-8
                             .form-group
                                 label(for="txtEdit_system") การแก้ไขเชิงระบบ
                                 textarea(type="text", rows="3", readonly).form-control #{rows.edit_system}
-                    .row
+                    //.row
                         .col-md-3
                             .form-group
                                 label(for="txtDate_finished") วันที่สิ้นสุดการแก้ไข
                                 input(type="text", value="#{rows.date_finished}", readonly).form-control
-                    .row
+                    //.row
                         .col-md-8
                             .form-group
                                 label(for="txtNote") หมายเหตุ

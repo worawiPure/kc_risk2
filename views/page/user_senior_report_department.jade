@@ -1,6 +1,6 @@
-extends  ../report_user_layout
+extends  ../report_senior_layout
 block scripts
-    script(src="/javascripts/user_report.js")
+    script(src="/javascripts/user_senior_report_department.js")
 block content
     br
     .alert.alert-warning(role="alert",style="display: none;")#divAlert
@@ -31,17 +31,16 @@ block content
         .panel-heading
             h3.panel-title
                 i.fa.fa-comments-o
-                | &nbsp; รายงานอุบัติการณ์ความเสี่ยงที่รายงาน
+                | &nbsp; รายงานอุบัติการณ์ความเสี่ยงที่เกิดขึ้นในหน่วยงาน
         .panel-body
-
             table.table.table-hover#tblReport_terminal
                 thead
                     tr
                         td.h4 ลำดับ
                         td.h4 วัน/เวลา
-                        td.h4 ความเสี่ยง
+                        td.h4 อุบัติการณ์ความเสี่ยง
                         td.h4 ประเภท
-                        td.h4(style="width: 100px") ระดับความรุนแรง
+                        td.h4 ระดับความรุนแรง
                         td(style="width : 100px").h4 หน่วยที่เกิดความเสี่ยง
                         td.h4 ทบทวน
                     tbody

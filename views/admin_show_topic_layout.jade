@@ -140,11 +140,9 @@ html
                                                 i.fa.fa-power-off
                                                 | &nbsp;&nbsp;ออกจากระบบ
 
-
-
         .container
               .row
-                  .col-md-3
+                  //.col-md-3
                       br
                       .panel.panel-primary
                           .panel-heading
@@ -155,12 +153,8 @@ html
                               .ul.nav.nav-pills.nav-stacked
                                   if session.level_user_id==2 || session.level_user_id==3
                                       li
-                                          a(href="/request_admin")
-                                              i.fa.fa-save
-                                              | &nbsp; บันทึกความเสี่ยง
-                                      li
                                           a(href="/admin_risk_today")
-                                              i.fa.fa-exclamation-circle
+                                              i.fa.fa-spinner.fa-pulse.fa-lg.fa-fw
                                               | &nbsp; รายงานความเสี่ยงวันนี้
                                               .badge
                                                   span#dataTotal
@@ -207,7 +201,7 @@ html
                                                       i.fa.fa-file
                                                       | &nbsp;&nbsp; : รายงานความเสี่ยงสรุปยอดแบบเลือกแผนกที่เกิดความเสี่ยง
 
-                              //| &nbsp;
+                              | &nbsp;
                           //if session.level_user_id==2
                               #accordion.panel-group(role='tablist', aria-multiselectable='true')
                                   .panel.panel-primary
@@ -246,5 +240,5 @@ html
                                                           a(href="/users/user")
                                                               i.fa.fa-circle-o-notch.fa-spin.fa-lg.fa-fw
                                                               | &nbsp; จัดการผู้ใช้งาน
-                  .col-md-9
+                  .col-md-12
                         block content

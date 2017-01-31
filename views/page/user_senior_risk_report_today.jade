@@ -1,4 +1,4 @@
-extends  ../user_senior_layout
+extends  ../user_senior_show_topic_layout
 block scripts
     script(src="/javascripts/risk_today_senior.js")
     script(src="/javascripts/user_senior_risk_report_today.js")
@@ -48,10 +48,10 @@ block content
             table.table.table-hover#tblRisk_report
                 thead
                     tr
-                        td.h4 ลำดับ
-                        td.h4 วันที่
-                        td.h4 ประเภท
-                        td.h4 หัวข้อความเสี่ยง
+                        td.h4(style="width : 10px") ลำดับ
+                        td.h4(style="width : 50px") วันที่
+                        td.h4(style="width : 80px") ประเภท
+                        td.h4(style="width : 800px") หัวข้อความเสี่ยง
                         td(style="width : 150px")
                             i.fa.fa-cog.fa-spin.fa-3w.fa-fw
                             i.fa.fa-print

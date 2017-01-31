@@ -19,22 +19,20 @@ block content
     ul.nav.nav-tabs(role="tablist")
         li.active(role='presentation')
             a(href="#part1", aria-controls="part1", role="tab", data-toggle="tab")
-                | ส่วนที่ 1 &nbsp;
+                | ข้อมูลการเกิดอุบัติการณ์ &nbsp;
                 i.fa.fa-arrow-right
-        li(role='presentation')
+        //li(role='presentation')
             a(href='#part2', aria-controls='part2', role='tab', data-toggle='tab')
                 | ส่วนที่ 2 &nbsp;
                 i.fa.fa-arrow-right
-        li(role='presentation')
+        //li(role='presentation')
             a(href='#part3', aria-controls='part3', role='tab', data-toggle='tab')
                 | ส่วนที่ 3 &nbsp;
                 i.fa.fa-arrow-right
+        //li(role='presentation')
+            a(href='#part4', aria-controls='part4', role='tab', data-toggle='tab') ส่วนที่ 4
         li(role='presentation')
-            a(href='#part4', aria-controls='part4', role='tab', data-toggle='tab')
-                | ส่วนที่ 4 &nbsp;
-                i.fa.fa-arrow-right
-        li(role='presentation')
-            a(href='#part5', aria-controls='part5', role='tab', data-toggle='tab') ส่วนที่ 5
+            a(href='#part5', aria-controls='part5', role='tab', data-toggle='tab') ทบทวนความเสี่ยง
     .tab-content
         br
         #part1.tab-pane.active(role='tabpanel')
@@ -42,7 +40,7 @@ block content
                 .panel-heading
                     h3.panel-title
                         i.fa.fa-file-text
-                        | &nbsp; ส่วนที่ 1 ข้อมูลการเกิดอุบัติการณ์
+                        | &nbsp; ข้อมูลการเกิดอุบัติการณ์
                 .panel-body
                     input(type="hidden" value="#{data.detail.id}")#txtId
                     .row
@@ -56,8 +54,7 @@ block content
                                             option(value="#{a.id}", selected="selected") #{a.name}
                                         else
                                             option(value="#{a.id}") #{a.name}
-
-                        .col-md-8
+                        .col-md-4
                             .form-grop
                                 label(for="slComplaint") การจำแนกประเภท
                                 select#slComplaint.form-control
@@ -71,13 +68,13 @@ block content
                         .col-md-12
                             .form-group
                                 label(for="txtTopic") เรื่องหัวข้อความเสี่ยง
-                                input#txtTopic(type="text", value="#{data.detail.topic_risk}" placeholder="กรุณาระบุหัวข้อความเสี่ยง").form-control
+                                textarea#txtTopic(type="text", rows="5",placeholder="กรุณาระบุหัวข้อความเสี่ยง").form-control #{data.detail.topic_risk}
                     .row
                         .col-md-3
                             .form-group
                                 label(for="txtDate_risk") วันที่เกิดเหตุ
                                 //input#txtDate_risk(type="date", value="#{data.detail.date_risk}").form-control
-                                #datetimepicker5.input-group(data-datepicker)
+                                #datetimepicker1.input-group(data-datepicker)
                                     input#txtDate_risk.form-control(type='text',value="#{data.detail.date_risk}")
                                     span.input-group-addon
                                         span.glyphicon.glyphicon-calendar
@@ -89,39 +86,17 @@ block content
                                     input#txtTime_risk.form-control(type='text',value="#{data.detail.time_risk}")
                                     span.input-group-addon
                                         span.glyphicon.glyphicon-time
-                    //.row
-                        .col-md-3
-                            .form-group
-                                label(for="txtDate_report_risk") วันที่รายงาน
-                                input#txtDate_report_risk(type="date").form-control
-                        .col-md-3
-                            .form-group
-                                label(for="txtTime_report_risk") เวลาที่รายงาน
-                                input#txtTime_report_risk(type="time").form-control
-                    .row
                         .col-md-4
                             .form-group
                                 label(for="slDepartment") หน่วยงานที่เกิดความเสี่ยง
                                 select#slDepartment.form-control
                                     for f in data.departments
-                                        if f.id == data.detail.depcode
+                                        if f.depcode == data.detail.depcode
                                             option(value="#{f.depcode}", selected="selected") #{f.depname}
                                         else
                                             option(value="#{f.depcode}") #{f.depname}
-
-                        //.col-md-8
-                            .form-group
-                                label(for="txtArea_risk") บริเวณที่เกิดความเสี่ยง
-                                input#txtArea_risk(type="text", value="#{data.detail.area_risk}").form-control
-        #part2.tab-pane(role='tabpanel')
-            .panel.panel-primary
-                .panel-heading
-                    h3.panel-title
-                        i.fa.fa-file-text
-                        | &nbsp; ส่วนที่ 2 รายละเอียดอุบัติการณ์
-                .panel-body
                     .row
-                        .col-md-6
+                        .col-md-7
                             .form-group
                                 label(for="slProgram") Program
                                 select#slProgram.form-control
@@ -131,37 +106,8 @@ block content
                                             option(value="#{p.id}", selected="selected") #{p.program_risk}
                                         else
                                             option(value="#{p.id}") #{p.program_risk}
-                        .col-md-6#divSubProgram
-                            .form-group
-                                label(for="slSubProgram") Sub Program
-                                select#slSubProgram.form-control
-                                    for o in data.sub_programs
-                                        if o.id == data.detail.risk_group
-                                            option(value="#{o.id}", selected="selected") #{o.name_sub_program}
-                                        else
-                                            option(value="#{o.id}") #{o.name_sub_program}
                     .row
-                        .col-md-6#divSubGroup
-                            .form-group
-                                label(for="slSubGroup") Sub Group
-                                select#slSubGroup.form-control
-                                    for y in data.sub_groups
-                                        if y.id == data.detail.risk_sub_group
-                                            option(value="#{y.id}", selected="selected") #{y.risk_detail}
-                                        else
-                                            option(value="#{y.id}") #{y.risk_detail}
-                    //.row
-                        .col-md-12
-                            .form-group
-                                label(for="txtNote_other") ระบุกรณีเลือกประเภทอื่นๆ
-                                input#txtNote_other(type="text", value="#{data.detail.dd}").form-control
-                    .row
-                        .col-md-12
-                            .form-group
-                                label(for="txtRisk_detail") รายละเอียดความเสี่ยง
-                                textarea#txtRisk_detail(type="text",rows="3" ).form-control #{data.detail.risk_detail}
-                    .row
-                        .col-md-5
+                        .col-md-7
                             .form-group
                                 label.radio(for="radioSentinel") Sentinel event case (เหตุการณ์ที่ต้องรอใน 24 ชม.)
                                 | &nbsp;&nbsp;&nbsp;
@@ -179,6 +125,15 @@ block content
                                     label(value="N", style='width:20%')
                                         input#radioNo(type='radio', name='sentinel', checked)
                                         |  ไม่
+                        .col-md-4
+                            .form-group
+                                label(for="slDepartment2") หน่วยงานที่รายงาน
+                                select#slDepartment2.form-control
+                                    for m in data.departments
+                                        if m.depcode == data.detail.cc
+                                            option(value="#{m.depcode}", selected="selected") #{m.depname}
+                                        else
+                                            option(value="#{m.depcode}") #{m.depname}
                     .row
                         .col-md-12#divRiskLevel
                             .form-group
@@ -191,95 +146,7 @@ block content
                                         else
                                             option(value="#{l.id}") #{l.risk_level}
                     .row
-                        .col-md-12
-                            .form-group
-                                label(for="txtRisk_correct") การแก้ไขปัญหาทันที
-                                textarea#txtRisk_correct(type="text", rows="3").form-control #{data.detail.risk_correct}
-        #part3.tab-pane(role='tabpanel')
-            .panel.panel-primary
-                .panel-heading
-                    h3.panel-title
-                        i.fa.fa-file-text
-                        | &nbsp; ส่วนที่ 3 ผลกระจากการเกิดอุบัติการณ์
-                .panel-body
-                    #divPatient
-                        .row
-                            .col-md-5
-                                form.form-inline
-                                    .form-group
-                                        label.radio(for="radiosone") ประเภทผู้ป่วย :
-                                        | &nbsp;&nbsp;&nbsp;
-                                        if  data.detail.sone == "OPD"
-                                            label(value="OPD")
-                                                input#radioOPD(type='radio', name='sone', checked)
-                                                | OPD
-                                                | &nbsp;&nbsp;&nbsp;
-                                            label(value="IPD")
-                                                input#radioIPD(type='radio', name='sone')
-                                                | IPD
-                                                | &nbsp;&nbsp;&nbsp;
-                                        else
-                                            label(value="OPD")
-                                                input#radioOPD(type='radio', name='sone')
-                                                | OPD
-                                                | &nbsp;&nbsp;&nbsp;
-                                            label(value="IPD")
-                                                input#radioIPD(type='radio', name='sone', checked)
-                                                | IPD
-                                                | &nbsp;&nbsp;&nbsp;
-                            .col-md-3
-                                .form-group
-                                    label(for="txtHn") HN
-                                    input#txtHn(type="text", value="#{data.detail.hn}").form-control
-                            .col-md-3
-                                .form-group
-                                    label(for="txtAn") AN
-                                    input#txtAn(type="text", value="#{data.detail.an}").form-control
-                        .row
-                            .col-md-4
-                                .form-group
-                                    label(for="txtName_patient") ชื่อผู้ป่วย
-                                    input#txtName_patient(type="text", value="#{data.detail.name_patient}").form-control
-                            .col-md-8
-                                .form-group
-                                    label(for="txtNote_patient") รายละเอียด
-                                    input#txtNote_patient(type="text",value="#{data.detail.note_patient}").form-control
-                        .row
-                            .col-md-4
-                                .form-group
-                                    label(for="txtName_kin") ญาติผู้ป่วย
-                                    input#txtName_kin(type="text", value="#{data.detail.name_kin}").form-control
-                            .col-md-8
-                                .form-group
-                                    label(for="txtNote_kin") รายละเอียด
-                                    input#txtNote_kin(type="text", value="#{data.detail.note_kin}" ).form-control
-                        .row
-                            .col-md-4
-                                .form-group
-                                    label(for="txtName_officer") เจ้าหน้าที่
-                                    input#txtName_officer(type="text", value="#{data.detail.name_officer}").form-control
-                            .col-md-8
-                                .form-group
-                                    label(for="txtNote_officer") รายละเอียด
-                                    input#txtNote_officer(type="text", value="#{data.detail.note_officer}").form-control
-                        .row
-                            .col-md-4
-                                .form-group
-                                    label(for="txtName_other") อื่นๆ
-                                    input#txtName_other(type="text", value="#{data.detail.name_other}").form-control
-                            .col-md-8
-                                .form-group
-                                    label(for="txtNote_other2") รายละเอียด
-                                    input#txtNote_other2(type="text", value="#{data.detail.note_other}").form-control
-        #part4.tab-pane(role='tabpanel')
-            .panel.panel-primary
-                .panel-heading
-                    h3.panel-title
-                        i.fa.fa-file-text
-                        | &nbsp; ส่วนที่ 4 รายละเอียดผู้รายงาน
-                .panel-body
-                    .row
-                        .col-md-6
+                        .col-md-4
                             .form-group
                                 label(for="slType_report") ประเภทรายงาน
                                 select#txtType_report.form-control
@@ -288,26 +155,28 @@ block content
                                             option(value="#{n.id}",selected="selected") #{n.name}
                                         else
                                             option(value="#{n.id}") #{n.name}
-                    .row
-                        .col-md-8
+                        .col-md-6
                             .form-group
                                 label(for="txtName_report") ผู้รายงาน
                                 input#txtName_report(type="text", value="#{data.detail.name_report}").form-control
-                    .row
-                        .col-md-8
+
+
+                    //.row
+                        .col-md-3
                             .form-group
-                                label(for="txtPosition") ตำแหน่ง
-                                input#txtPosition(type="text", value="#{data.detail.position}").form-control
-                    .row
-                        .col-md-4
+                                label(for="txtDate_report_risk") วันที่รายงาน
+                                input#txtDate_report_risk(type="date").form-control
+                        .col-md-3
                             .form-group
-                                label(for="slDepartment2") หน่วยงาน
-                                select#slDepartment2.form-control
-                                    for f in data.departments
-                                        if f.depcode == data.detail.cc
-                                            option(value="#{f.depcode}", selected="selected") #{f.depname}
-                                        else
-                                            option(value="#{f.depcode}") #{f.depname}
+                                label(for="txtTime_report_risk") เวลาที่รายงาน
+                                input#txtTime_report_risk(type="time").form-control
+
+
+                        //.col-md-8
+                            .form-group
+                                label(for="txtArea_risk") บริเวณที่เกิดความเสี่ยง
+                                input#txtArea_risk(type="text", value="#{data.detail.area_risk}").form-control
+
         #part5.tab-pane(role='tabpanel')
             .panel.panel-primary
                 .panel-heading
@@ -336,13 +205,13 @@ block content
                             .form-group
                                 label(for="txtName_repeat") ผู้ทบทวน
                                 if data.detail.name_repeat
-                                    input#txtName_repeat(type="text", value="#{data.detail.name_repeat}").form-control
+                                    textarea#txtName_repeat(type="text", rows="3" ).form-control #{data.detail.name_repeat}
                                 else
-                                    input#txtName_repeat(type="text", placeholder="ชื่อผู้ทบทวน").form-control
+                                    textarea#txtName_repeat(type="text",rows="3", placeholder="ชื่อผู้ทบทวน").form-control
                     .row
                         .col-md-8
                             .form-group
-                                label(for="txtResult_repeat") ผลทบทวน
+                                label(for="txtResult_repeat") ผลทบทวน/การแก้ไข/มาตรการป้องกัน
                                 if data.detail.result_repeat
                                     textarea#txtResult_repeat(type="text" rows="3").form-control #{data.detail.result_repeat}
                                 else
@@ -352,10 +221,10 @@ block content
                             .form-group
                                 label(for="txtDepcode_connected") ชื่อหหน่วยงานที่เกี่ยวข้อง
                                 if data.detail.depcode_connected
-                                    textarea#txtDepcode_connected(type="text" rows="3").form-control #{data.detail.depcode_connected}
+                                    textarea#txtDepcode_connected(type="text", rows="3").form-control #{data.detail.depcode_connected}
                                 else
-                                    textarea#txtDepcode_connected(type="text" rows="3", placeholder="ชื่อหน่วยงานที่เกี่ยวข้อง").form-control
-                    .row
+                                    textarea#txtDepcode_connected(type="text", rows="3", placeholder="ชื่อหน่วยงานที่เกี่ยวข้อง").form-control
+                    //.row
                         .col-md-8
                             .form-group
                                 label(for="txtEdit_system") การแก้ไขเชิงระบบ
@@ -363,7 +232,7 @@ block content
                                     textarea#txtEdit_system(type="text" rows="3").form-control #{data.detail.edit_system}
                                 else
                                     textarea#txtEdit_system(type="text" rows="3", placeholder="การแก้ไขเชิงระบบ").form-control
-                    .row
+                    //.row
                         .col-md-3
                             .form-group
                                 label(for="txtDate_finished") วันที่สิ้นสุดการแก้ไข
@@ -378,7 +247,7 @@ block content
                                         input#txtDate_finished.form-control(type='text')
                                         span.input-group-addon
                                             span.glyphicon.glyphicon-calendar
-                    .row
+                    //.row
                         .col-md-8
                             .form-group
                                 label(for="txtNote") หมายเหตุ
@@ -387,7 +256,7 @@ block content
                                 else
                                     textarea#txtNote(type="text" rows="3", placeholder="หมายเหตุ" ).form-control
 
-    button(type="button").btn.btn-primary#btnEdit บันทึก
+        button(type="button").btn.btn-primary#btnEdit บันทึก
 
   //  label(for="checkboxSentinel") Sentinel event case
         | &nbsp;&nbsp;&nbsp;

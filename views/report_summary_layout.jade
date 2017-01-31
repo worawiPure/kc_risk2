@@ -57,42 +57,63 @@ html
           ul.nav.navbar-nav
             li
               a(href="/risk_news_admin") หน้าแรก
-            li.dropdown
-              a(href="#", data-toggle="dropdown", role="button",
-              aria-haspopup="true", aria-expanded="false").dropdown-toggle
-                | สรุปรายงานความเสี่ยง
-                span.caret
-              ul.dropdown-menu
-                li
-                  a(href="/abstract_risk")
-                    i.fa.fa-file-text-o
-                    |&nbsp;&nbsp; สรุปความเสี่ยง
-            li.dropdown
-              a(href="#", data-toggle="dropdown", role="button",
-              aria-haspopup="true", aria-expanded="false").dropdown-toggle
-                | รายงาน
-                span.caret
-              ul.dropdown-menu
-                li
-                    a(href="/report_risk")
-                        i.fa.fa-file
-                        | &nbsp;&nbsp;รายงานความเสี่ยงแยกประเภทคลีนิค
-                li
-                    a(href="/report_risk/level")
-                        i.fa.fa-file
-                        | &nbsp;&nbsp;รายงานความเสี่ยงแยกระดับความรุนแรง
-                li
-                    a(href="/report_risk/terminal")
-                        i.fa.fa-file
-                        | &nbsp;&nbsp;รายงานสรุปหัวข้อความเสี่ยงตามวันที่
-                li
-                    a(href="/report_risk/summary_date")
-                        i.fa.fa-file
-                        | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดตามวันที่
-                li
-                    a(href="/report_risk/summary_department")
-                        i.fa.fa-file
-                        | &nbsp;&nbsp;รายงานความเสี่ยงสรุปยอดแบบเลือกแผนกที่เกิดความเสี่ยง
+              li.dropdown
+                  a(href="#", data-toggle="dropdown", role="button",
+                  aria-haspopup="true", aria-expanded="false").dropdown-toggle
+                      i.fa.fa-file
+                      | &nbsp; รายงาน
+                      //span.caret
+                  ul.dropdown-menu
+                      li
+                          a(href="/report_risk")
+                              i.fa.fa-file
+                              | &nbsp;&nbsp; : รายงานความเสี่ยงแยกประเภทคลีนิค
+                      li
+                          a(href="/report_risk/level")
+                              i.fa.fa-file
+                              | &nbsp;&nbsp; : รายงานความเสี่ยงแยกระดับความรุนแรง
+                      li
+                          a(href="/report_risk/terminal")
+                              i.fa.fa-file
+                              | &nbsp;&nbsp; : รายงานหัวข้อความเสี่ยงตามวันที่
+                      li
+                          a(href="/report_risk/summary_date")
+                              i.fa.fa-file
+                              | &nbsp;&nbsp; : รายงานความเสี่ยงสรุปยอดตามวันที่
+                      li
+                          a(href="/report_risk/summary_department")
+                              i.fa.fa-file
+                              | &nbsp;&nbsp; : รายงานความเสี่ยงสรุปยอดแบบเลือกแผนกที่เกิดความเสี่ยง
+              li.dropdown
+                  a(href="#", data-toggle="dropdown", role="button",
+                  aria-haspopup="true", aria-expanded="false").dropdown-toggle
+                      i.fa.fa-area-chart
+                      | &nbsp;&nbsp;กราฟความเสี่ยง
+                  ul.dropdown-menu
+                      li
+                          a(href="/chart_risk_month")
+                              i.fa.fa-bar-chart-o
+                              | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกรายเดือน
+                      li
+                          a(href="/chart_risk_department")
+                              i.fa.fa-bar-chart-o
+                              | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกแผนก
+                      li
+                          a(href="/chart_risk_level_clinic")
+                              i.fa.fa-bar-chart-o
+                              | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกระดับความรุนแรงทาง Clinic
+                      li
+                          a(href="/chart_risk_level_nonclinic")
+                              i.fa.fa-bar-chart-o
+                              | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกระดับความรุนแรงทาง Non-Clinic
+                      li
+                          a(href="/chart_risk_program")
+                              i.fa.fa-bar-chart-o
+                              | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกตามโปรแกรมความเสี่ยง
+                      li
+                          a(href="/chart_risk_select_program")
+                              i.fa.fa-bar-chart-o
+                              | &nbsp; : กราฟแสดงการเกิดความเสี่ยงแยกรายเดือนแบบเลือกโปรแกรมความเสี่ยง
           p.navbar-text.navbar-right #{session.fullname} | #{session.depname}
           ul.nav.navbar-nav.pull-right
             li.dropdown

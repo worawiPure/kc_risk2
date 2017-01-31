@@ -49,9 +49,11 @@ module.exports = {
 
     getSubAllDetail: function(db,username,startpage){
         var q = Q.defer();
-        var sql =   'SELECT f.confirm,f.id,a.name as aa,f.topic_risk,c.name as com,f.date_risk,f.time_risk,d.depname,f.area_risk,p.program_risk,b.name_sub_program,e.risk_detail as subgroup,s.note_other as yy,s.risk_correct,s.risk_detail,s.risk_level,t.hn,t.an,t.name_kin,t.name_officer,t.name_other,t.name_patient,t.note_kin,t.note_officer,t.note_other,t.note_patient,r.name as report,u.name_report,u.position,u.depcode,d2.depname as mm FROM risk_request_first f '+
+        var sql =   'SELECT f.confirm,f.id,a.name as aa,f.topic_risk,c.name as com,f.date_risk, '+
+        'f.time_risk,d.depname,f.area_risk,p.program_risk,b.name_sub_program,e.risk_detail as subgroup, '+
+        's.note_other as yy,s.risk_correct,s.risk_detail,s.risk_level,r.name as report,  '+
+        'u.name_report,u.position,u.depcode,d2.depname as mm FROM risk_request_first f   '+
         'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
-        'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
         'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
         'LEFT JOIN risk_type a ON a.id=f.type_risk    '+
         'LEFT JOIN type_complaint c ON c.id=f.complaint_type '+
@@ -79,7 +81,6 @@ module.exports = {
         var q = Q.defer();
         var sql =   'SELECT count(*) as total FROM risk_request_first f '+
         'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
-        'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
         'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
         'WHERE f.username = ? ';
         db.raw(sql,[username])
@@ -95,9 +96,11 @@ module.exports = {
 
     getSubAllDetail_user_senior: function(db,depcode,startpage){
         var q = Q.defer();
-        var sql =   'SELECT f.confirm,f.id,a.name as aa,f.topic_risk,c.name as com,f.date_risk,f.time_risk,d.depname,f.area_risk,p.program_risk,b.name_sub_program,e.risk_detail as subgroup,s.note_other as yy,s.risk_correct,s.risk_detail,s.risk_level,t.hn,t.an,t.name_kin,t.name_officer,t.name_other,t.name_patient,t.note_kin,t.note_officer,t.note_other,t.note_patient,r.name as report,u.name_report,u.position,f.depcode,d2.depname as mm,u.depcode as cc FROM risk_request_first f '+
+        var sql =   'SELECT f.confirm,f.id,a.name as aa,f.topic_risk,c.name as com,f.date_risk,f.time_risk,d.depname, '+
+        'f.area_risk,p.program_risk,b.name_sub_program,e.risk_detail as subgroup,s.note_other as yy,s.risk_correct,s.risk_detail, ' +
+        's.risk_level,r.name as report,u.name_report,u.position,f.depcode,d2.depname as mm,u.depcode as cc FROM risk_request_first f '+
         'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
-        'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
+        //'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
         'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
         'LEFT JOIN risk_type a ON a.id=f.type_risk    '+
         'LEFT JOIN type_complaint c ON c.id=f.complaint_type '+
@@ -107,7 +110,7 @@ module.exports = {
         'LEFT JOIN risk_sub_program b ON b.id=s.risk_group   '+
         'LEFT JOIN risk_detail e ON e.id=s.risk_sub_group   '+
         'LEFT JOIN type_report r ON r.id=u.type_report '+
-        'WHERE u.depcode = ? ' +
+        'WHERE u.depcode = ? '+
         'ORDER BY f.date_risk DESC '+
         'limit 10 offset ? ';
         db.raw(sql,[depcode,startpage])
@@ -123,9 +126,11 @@ module.exports = {
 
     getSubAllDetail_user_senior_today: function(db,depcode,date_today,startpage){
         var q = Q.defer();
-        var sql =   'SELECT f.confirm,f.id,a.name as aa,f.topic_risk,c.name as com,f.date_risk,f.time_risk,d.depname,f.area_risk,p.program_risk,b.name_sub_program,e.risk_detail as subgroup,s.note_other as yy,s.risk_correct,s.risk_detail,s.risk_level,t.hn,t.an,t.name_kin,t.name_officer,t.name_other,t.name_patient,t.note_kin,t.note_officer,t.note_other,t.note_patient,r.name as report,u.name_report,u.position,f.depcode,d2.depname as mm,u.depcode as cc FROM risk_request_first f '+
+        var sql =   'SELECT f.confirm,f.id,a.name as aa,f.topic_risk,c.name as com,f.date_risk,f.time_risk,d.depname, '+
+            'f.area_risk,p.program_risk,b.name_sub_program,e.risk_detail as subgroup,s.note_other as yy,s.risk_correct, '+
+            's.risk_detail,s.risk_level,r.name as report,u.name_report,u.position,f.depcode,d2.depname as mm,u.depcode as cc FROM risk_request_first f '+
             'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
-            'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
+            //'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
             'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
             'LEFT JOIN risk_type a ON a.id=f.type_risk    '+
             'LEFT JOIN type_complaint c ON c.id=f.complaint_type '+
@@ -154,7 +159,7 @@ module.exports = {
         var q = Q.defer();
         var sql =   'SELECT count(*) as total FROM risk_request_first f '+
         'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
-        'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
+        //'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
         'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
         'WHERE u.depcode = ? ';
         db.raw(sql,[depcode])
@@ -172,7 +177,7 @@ module.exports = {
         var q = Q.defer();
         var sql =   'SELECT count(*) as total FROM risk_request_first f '+
             'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
-            'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
+            //'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
             'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
             'WHERE u.depcode = ? ' +
             'AND f.date_report_risk = ? ';
@@ -248,12 +253,11 @@ module.exports = {
         db('risk_request_first as f')
             .select('f.confirm', 'f.id', 'a.name as aa', 'f.topic_risk', 'c.name as com', 'f.date_risk', 'f.time_risk',
             'd.depname', 'f.area_risk', 'p.program_risk', 'b.name_sub_program', 'e.risk_detail as subgroup', 's.note_other as yy',
-            's.risk_correct', 's.risk_detail', 's.risk_level', 't.hn', 't.an', 't.name_kin', 't.name_officer', 't.name_other', 't.name_patient',
-            't.note_kin', 't.note_officer', 't.note_other', 't.note_patient', 'r.name as report', 'u.name_report',
+            's.risk_correct', 's.risk_detail', 's.risk_level','r.name as report', 'u.name_report',
             'u.position', 'f.depcode', 'd2.depname as mm', 'u.depcode as cc'
         )
             .innerJoin('risk_request_second as s', 's.risk_request_id', 'f.id')
-            .innerJoin('risk_request_third as t', 't.risk_request_id', 'f.id')
+            //.innerJoin('risk_request_third as t', 't.risk_request_id', 'f.id')
             .innerJoin('risk_request_fourth as u', 'u.risk_request_id', 'f.id')
             .leftJoin('risk_type as a', 'a.id', 'f.type_risk')
             .leftJoin('type_complaint as c', 'c.id', 'f.complaint_type')
@@ -290,7 +294,7 @@ module.exports = {
         db('risk_request_first as f')
             .count('* as total')
             .innerJoin('risk_request_second as s', 's.risk_request_id', 'f.id')
-            .innerJoin('risk_request_third as t', 't.risk_request_id', 'f.id')
+            //.innerJoin('risk_request_third as t', 't.risk_request_id', 'f.id')
             .innerJoin('risk_request_fourth as u', 'u.risk_request_id', 'f.id')
             .whereIn('f.depcode',[depcode,sub_depcode])
             .whereNotIn('u.depcode',[depcode,sub_depcode])
@@ -307,14 +311,12 @@ module.exports = {
 
     getSubShowDetail: function(db,id){
         var q = Q.defer();
-        var sql =   'SELECT s.sentinel,v.risk_level as pp,s.risk_level,s.risk_program,s.risk_group,' +
-        's.risk_sub_group,r.name as zz,a.name as qq,c.name as ww,d.depname,f.*,p.program_risk,b.name_sub_program,' +
-        'e.risk_detail as vv,s.note_other as dd,s.risk_correct,s.risk_detail,t.sone,t.hn,t.an,t.name_kin,t.name_officer,' +
-        't.name_other,t.name_patient,t.note_kin,t.note_officer,t.note_other,t.note_patient,r.name as report,u.name_report,u.position,' +
+        var sql =   'SELECT s.sentinel,v.risk_level as pp,s.risk_level,s.risk_program,s.risk_group, ' +
+        's.risk_sub_group,r.name as zz,a.name as qq,c.name as ww,d.depname,f.*,p.program_risk,b.name_sub_program, ' +
+        'e.risk_detail as vv,s.note_other as dd,s.risk_correct,s.risk_detail,r.name as report,u.name_report,u.position, ' +
         'u.depcode as cc,u.type_report as mm,d2.depname as ii,l.date_repeat,l.name_repeat,l.result_repeat,l.depcode_connected,l.edit_system,' +
         'l.date_finished,l.note as zx FROM  risk_request_first f   '+
         'INNER JOIN risk_request_second s ON s.risk_request_id=f.id '+
-        'INNER JOIN risk_request_third t ON t.risk_request_id=f.id '+
         'INNER JOIN risk_request_fourth u ON u.risk_request_id=f.id '+
         'INNER JOIN risk_request_fifth l ON l.risk_request_id=f.id '+
         'LEFT JOIN risk_type a ON a.id=f.type_risk   '+
@@ -342,7 +344,7 @@ module.exports = {
     getSubShowPast5: function(db,id){
         var q = Q.defer();
         var sql =   'SELECT f.*,i.topic_risk FROM risk_request_fifth f  '+
-        'INNER JOIN risk_request_first i ON f.risk_request_id=i.id '+
+            'INNER JOIN risk_request_first i ON f.risk_request_id=i.id '+
         'WHERE f.risk_request_id = ? ';
         console.log('id: ' + id);
         db.raw(sql, [id])
@@ -378,10 +380,10 @@ module.exports = {
                 date_repeat:data.date_repeat,
                 name_repeat:data.name_repeat,
                 result_repeat:data.result_repeat,
-                depcode_connected:data.depcode_connected,
-                edit_system:data.edit_system,
-                date_finished:data.date_finished,
-                note:data.note})
+                depcode_connected:data.depcode_connected})
+                //edit_system:data.edit_system,
+                //date_finished:data.date_finished,
+                //note:data.note
                 .where('risk_request_id',data.id)
             .then(function(rows){
                 q.resolve(rows);
@@ -391,6 +393,7 @@ module.exports = {
             });
         return q.promise;
     },
+
     Chack_sesion: function(db,id,user){
         var q = Q.defer();
         db('risk_request_first')
@@ -407,6 +410,7 @@ module.exports = {
             });
         return q.promise;
     },
+
     Chack_sesion_depcode: function(db,id,depcode){
         var q = Q.defer();
         db('risk_request_fourth')

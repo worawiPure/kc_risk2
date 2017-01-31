@@ -344,7 +344,7 @@ $(function() {
             })
                 .success(function (data) {
                     alert('บันทึกข้อมูลเรียบร้อยแล้ว');
-                    window.location.href="/risk_report";
+                    window.location.href="/request_admin";
                 })
                 .error(function (xhr, status, err) {
                     alert(err);

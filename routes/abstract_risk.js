@@ -215,7 +215,7 @@ router.get('/edit_risk/:id', function(req,res){
         var db = req.db;
         var id = req.params.id;
         var data = {};
-            show_risk2.getSubShowDetail(db, id)
+            show_risk2.getSubShowDetail(db,id)
                 .then(function (rows) {
                     console.log(rows);
                     data.detail = rows[0];
@@ -292,7 +292,7 @@ router.post('/admin_edit_request', function(req,res){
     //data.username = req.session.username;
     data.date_risk=moment(data.date_risk, 'DD/MM/YYYY').format('YYYY-MM-DD');
     data.date_repeat=moment(data.date_repeat, 'DD/MM/YYYY').format('YYYY-MM-DD');
-    data.date_finished=moment(data.date_finished, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    //data.date_finished=moment(data.date_finished, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(data.date_risk);
     if(data){
         request.update_part1(db,data)
@@ -304,9 +304,9 @@ router.post('/admin_edit_request', function(req,res){
                 console.log(data.sentinel);
                 return request.update_part2(db,data)
             })
-            .then(function(){
-                return request.update_part3(db,data)
-            })
+            //.then(function(){
+            //    return request.update_part3(db,data)
+            //})
             .then(function(){
                 return request.update_part4(db,data)
             })

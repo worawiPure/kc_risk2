@@ -1,4 +1,4 @@
-extends  ../report_summary_layout
+extends  ../admin_show_topic_layout
 block scripts
     script(src="/javascripts/report_summary.js")
 block content
@@ -38,6 +38,7 @@ block content
                                 option(value="#{c.id}") #{c.name}
                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         button#btnSearch(type="button").btn.btn-primary.btn-sm ค้นหา
+                        button#btnPrint(type="button").btn.btn-primary.btn-sm ปริ้น
     .panel.panel-primary
         .panel-heading
             h3.panel-title

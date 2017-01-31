@@ -7,7 +7,7 @@ html
             html, body {
                 margin: 0;
                 padding: 10px;
-                font-size: 22px;
+                font-size: 14px;
                 font-family: 'TH Sarabun New';
             }
             div.image {
@@ -215,41 +215,71 @@ html
                             tr
                                 td
                                     .head(style="width: 100%;")
-                                        strong ส่วนที่1 ข้อมูลการเกิดอุบัติการณ์
+                                        strong ข้อมูลการเกิดอุบัติการณ์
                                         br
                             tr
                                 td
                                     .head(style="width: 100%;")
+                                        strong วันที่เกิดเหตุการณ์:
+                                        | &nbsp; #{detail.date_risk}
+                                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        strong เวลาที่เกิดเหตุการณ์:
+                                        | &nbsp; #{detail.time_risk}
+                                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         strong ประเภทอุบัติการณ์:
                                         | &nbsp; #{detail.risk_type}
                                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        br
+                                       // strong หน่วยงาน:
+                                        | &nbsp; #{detail.depname}
+                            tr
+                                td
+                                    .head(style="width: 100%;")
+                                        strong โปรแกรม:
+                                        | &nbsp; #{detail.program_risk}
+                                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         strong ประเภท:
                                         | &nbsp; #{detail.complaint_type}
                                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       // strong หน่วยงาน:
-                                        | &nbsp; #{detail.depname}
+                                        br
+                            tr
+                                td
+                                    .head(style="width: 100%;")
+                                        strong ความรุนแรง:
+                                        | &nbsp; #{detail.risk_level}
+                                        br
                             tr
                                 td
                                     .head(style="width: 100%;")
                                         strong หัวข้อความเสี่ยง:
                                         | &nbsp; #{detail.topic_risk}
                                         br
+
                             tr
                                 td
                                     .head(style="width: 100%;")
-                                        strong วันที่เกิด:
-                                        | &nbsp; #{detail.date_risk}
-                                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        strong เวลาที่เกิดเหตุ:
-                                        | &nbsp; #{detail.time_risk}
+                                        strong Sentinel event case (เหตุการณ์ที่ต้องรายงานภายใน 24 ชม.) :
+                                            | &nbsp;&nbsp;&nbsp;
+                                            if detail.sentinel == "Y"
+                                                |  ใช่
+                                            else
+                                                |  ไม่
+                                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        strong หน่วยงานที่รายงาน:
+                                        | &nbsp; #{detail.oe}
                                         br
                             tr
                                 td
                                     .head(style="width: 100%;")
                                         strong หน่วยงานที่เกิดความเสี่ยง:
                                         | &nbsp; #{detail.depname}
-                                        br
-                    div.slib-box
+                                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        strong ประเภทการรายงาน:
+                                        | &nbsp; #{detail.type_report}
+                                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        strong ผู้รายงาน:
+                                        | &nbsp; #{detail.name_report}
+                    //div.slib-box
                         table
                             tr
                                 td
@@ -303,8 +333,8 @@ html
                                         strong การแก้ไขปัญหาทันที:
                                         | &nbsp; #{detail.risk_correct}
                                         br
-                    div(style="page-break-after:always;")
-                    div.slib-box
+                    //div(style="page-break-after:always;")
+                    //div.slib-box
                         table
                             tr
                                 td
@@ -361,7 +391,7 @@ html
                                         strong รายละเอียด:
                                         | &nbsp; #{detail.ot}
 
-                    div.slib-box
+                    //div.slib-box
                         table
                             tr
                                 td
@@ -389,13 +419,12 @@ html
                                     .head(style="width: 100%;")
                                         strong หน่วยงาน:
                                         | &nbsp; #{detail.oe}
-
                     div.slib-box
                         table
                             tr
                                 td
                                     .head(style="width: 100%;")
-                                        strong ส่วนที่5 ทบทวนการเกิดอุบัติการณ์
+                                        strong ทบทวนการเกิดอุบัติการณ์
                                         br
                             tr
                                 td
@@ -403,15 +432,15 @@ html
                                         strong วันที่ทบทวน:
                                         | &nbsp; #{detail.date_repeat}
                                         | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        strong วันที่สิ้นสุดการแก้ไข:
-                                        | &nbsp; #{detail.date_finished}
-                                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        //strong วันที่สิ้นสุดการแก้ไข:
+                                        //| &nbsp; #{detail.date_finished}
+                                        //| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         strong ผู้ทบทวน:
                                         | &nbsp; #{detail.name_repeat}
                             tr
                                 td
                                     .head(style="width: 100%;")
-                                        strong ผลทบทวน:
+                                        strong ผลทบทวน/การแก้ไข/มาตรการป้องกัน:
                                         | &nbsp; #{detail.result_repeat}
                                         br
                             tr
@@ -419,12 +448,12 @@ html
                                     .head(style="width: 100%;")
                                         strong ชื่อหน่วยงานที่เกี่ยวข้อง:
                                         | &nbsp; #{detail.depcode_connected}
-                            tr
+                            //tr
                                 td
                                     .head(style="width: 100%;")
                                         strong การแก้ไขเชิงระบบ:
                                         | &nbsp; #{detail.edit_system}
-                            tr
+                            //tr
                                 td
                                     .head(style="width: 100%;")
                                         strong หมายเหตุ:

@@ -133,6 +133,24 @@ router.get('/user_senior_report', function(req, res, next) {
     }
 });
 
+router.get('/user_senior_report_department', function(req, res, next) {
+    if (req.session.level_user_id != 4 ){
+        res.render('./page/access_denied')
+    }else {
+        var db = req.db;
+        var data = {};
+        risk_type.getRisk_type(db)
+            .then(function (rows) {
+                console.log(rows);
+                data.risk_types = rows;
+                res.render('./page/user_senior_report_department', {data: data});
+            }, function (err) {
+                res.render('./page/user_senior_report_department', {data: {risk_types: []}});
+            }
+        )
+    }
+});
+
 router.get('/user_report', function(req, res, next) {
     if (req.session.level_user_id != 1 ){
         res.render('./page/access_denied')
@@ -146,6 +164,24 @@ router.get('/user_report', function(req, res, next) {
                 res.render('./page/user_report', {data: data});
             }, function (err) {
                 res.render('./page/user_report', {data: {risk_types: []}});
+            }
+        )
+    }
+});
+
+router.get('/user_report_department', function(req, res, next) {
+    if (req.session.level_user_id != 1 ){
+        res.render('./page/access_denied')
+    }else {
+        var db = req.db;
+        var data = {};
+        risk_type.getRisk_type(db)
+            .then(function (rows) {
+                console.log(rows);
+                data.risk_types = rows;
+                res.render('./page/user_report_department', {data: data});
+            }, function (err) {
+                res.render('./page/user_report_department', {data: {risk_types: []}});
             }
         )
     }
@@ -274,17 +310,69 @@ router.post('/report_senior',function(req,res){
         })
 });
 
+router.post('/report_senior_department',function(req,res){
+    var db = req.db;
+    var depcode2 = req.session.depcode;
+    var sub_depcode2 = req.session.sub_depcode;
+    var data = {};
+    data.depcode = depcode2;
+    data.sub_depcode = sub_depcode2;
+    data.date1 = req.body.date1;
+    data.date2 = req.body.date2;
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(data);
+    report_summary.getReport_user_senior_department(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
+});
+
 router.post('/report_user',function(req,res){
     var db = req.db;
     var username = req.session.username;
+    var depcode2 = req.session.depcode;
+    var subcode2 = req.session.sub_depcode;
     var data = {};
     data.username = username;
+    data.depcode = depcode2;
+    data.sub_code =subcode2;
     data.date1 = req.body.date1;
     data.date2 = req.body.date2;
     data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
     data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(data);
     report_summary.getReport_user(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
+});
+
+router.post('/report_user_department',function(req,res){
+    var db = req.db;
+    var username = req.session.username;
+    var depcode2 = req.session.depcode;
+    var subcode2 = req.session.sub_depcode;
+    var data = {};
+    data.username = username;
+    data.depcode = depcode2;
+    data.sub_code =subcode2;
+    data.date1 = req.body.date1;
+    data.date2 = req.body.date2;
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(data);
+    report_summary.getReport_user_department(db,data)
         .then(function(rows){
             console.log(rows);
             res.send({ok: true,rows:rows});
