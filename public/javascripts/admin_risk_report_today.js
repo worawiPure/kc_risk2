@@ -188,7 +188,7 @@ $(function(){
                 .success(function(data){
                     if(data.ok) {
                         alert('ลบเสร็จเรีนบร้อยแล้ว');
-                        getAbstractRisk();
+                        getAdmin_Risk_today();
                     } else {
                         console.log(data.msg);
                         alert('ไม่สามารถบันทึได้')
