@@ -171,7 +171,7 @@ $(function() {
             })
                 .success(function (data) {
                     alert('แก้ไขข้อมูลเรียบร้อยแล้ว');
-                    window.location.href="/admin_risk_today";
+                    window.location.href="/abstract_risk";
                 })
                 .error(function (xhr, status, err) {
                     alert(err);
