@@ -15,7 +15,7 @@ $(function() {
                 '<td style="width: 190px;"> '+
                 '<div class="btn-group btn-group-sm" role="group"> '+
                 '<a class="btn btn-primary" type="button" href="/show_risk/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ดูรายละเอียด"> <i class="fa fa-search"></i></a> '+
-                '<a class="btn btn-danger" type="button", href="/risk_repeat_user/'+ v.id +'/'+ v.cc +'" data-toggle="tooltip" data-placement="top" title="ทบทวน"> <i class="glyphicon glyphicon-book"></i></a>'+
+                '<a class="btn btn-danger" type="button", href="/risk_repeat_user_feedback/'+ v.id +'/'+ v.cc +'" data-toggle="tooltip" data-placement="top" title="ทบทวน"> <i class="glyphicon glyphicon-book"></i></a>'+
                 '<a class="btn btn-info" type="button" href="/prints/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ปริ้นรายละเอียด" class="btn btn-warning"> <i class="fa fa-print"></i></a> ';
             html += '</div></td> ';
 

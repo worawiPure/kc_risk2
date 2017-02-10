@@ -1,0 +1,98 @@
+extends  ../layout
+block scripts
+    script(src="/javascripts/risk_report_feedback.js")
+block content
+    br
+    ol.breadcrumb
+        //li
+            a(href="/risk_news")
+                i.fa.fa-home
+                | &nbsp; หน้าหลัก
+        li
+            i.fa.fa-check-square
+            | &nbsp; ทบทวนความเสี่ยง : #{rows.topic_risk}
+    .alert.alert-warning(role="alert",style="display: none;")#divAlert
+        i.fa.fa-warning
+        | &nbsp; กรอกข้อมูลไม่สมบูรณ์
+    ul.nav.nav-tabs(role="tablist")
+        .tab-panel(role='tabpanel')
+            .panel.panel-primary
+                .panel-heading
+                    h3.panel-title
+                        i.fa.fa-file-text
+                        | &nbsp; ทบทวนการเกิดอุบัติการณ์
+                .panel-body
+                    .row
+                        .col-md-3
+                            input(type="hidden",value="#{risk_id}")#riskid
+                            .form-group
+                                label(for="txtDate_repeat") วันที่ทบทวน
+                                if rows.date_repeat
+                                    //input#txtDate_repeat(type="date", value="#{rows.date_repeat}").form-control
+                                    #datetimepicker1.input-group(data-datepicker)
+                                        input#txtDate_repeat.form-control(type='text', value="#{rows.date_repeat}")
+                                        span.input-group-addon
+                                            span.glyphicon.glyphicon-calendar
+                                else
+                                    //input#txtDate_repeat(type="date").form-control
+                                    #datetimepicker1.input-group(data-datepicker)
+                                        input#txtDate_repeat.form-control(type='text')
+                                        span.input-group-addon
+                                            span.glyphicon.glyphicon-calendar
+                    .row
+                        .col-md-8
+                            .form-group
+                                label(for="txtName_repeat") ผู้ทบทวน
+                                if rows.name_repeat
+                                    textarea#txtName_repeat(type="text", rows="3" ).form-control #{rows.name_repeat}
+                                else
+                                    textarea#txtName_repeat(type="text", rows="3", placeholder="ชื่อผู้ทบทวน").form-control
+                    .row
+                        .col-md-8
+                            .form-group
+                                label(for="txtResult_repeat") ผลทบทวน/การแก้ไข/มาตรการป้องกัน
+                                if rows.result_repeat
+                                    textarea#txtResult_repeat(type="text" rows="3").form-control #{rows.result_repeat}
+                                else
+                                    textarea#txtResult_repeat(type="text" rows="3", placeholder="ผลการทบทวนผลทบทวน/การแก้ไข/มาตรการป้องกัน").form-control
+                    .row
+                        .col-md-8
+                            .form-group
+                                label(for="txtDepcode_connected") หน่วยงานที่เกี่ยวข้อง
+                                if rows.depcode_connected
+                                    textarea#txtDepcode_connected(type="text" rows="3").form-control #{rows.depcode_connected}
+                                else
+                                    textarea#txtDepcode_connected(type="text" rows="3", placeholder="ชื่อหน่วยงานที่เกี่ยวข้อง").form-control
+                    //.row
+                        .col-md-8
+                            .form-group
+                                label(for="txtEdit_system") การแก้ไขเชิงระบบ
+                                if rows.edit_system
+                                    textarea#txtEdit_system(type="text" rows="3").form-control #{rows.edit_system}
+                                else
+                                    textarea#txtEdit_system(type="text" rows="3", placeholder="การแก้ไขเชิงระบบ").form-control
+                    //.row
+                        .col-md-3
+                            .form-group
+                                label(for="txtDate_finished") วันที่สิ้นสุดการแก้ไข
+                                //input#txtDate_finished(type="date").form-control
+                                if rows.date_finished
+                                    #datetimepicker2.input-group(data-datepicker)
+                                        input#txtDate_finished.form-control(type='text',value="#{rows.date_finished}")
+                                        span.input-group-addon
+                                            span.glyphicon.glyphicon-calendar
+                                else
+                                    #datetimepicker2.input-group(data-datepicker)
+                                        input#txtDate_finished.form-control(type='text')
+                                        span.input-group-addon
+                                            span.glyphicon.glyphicon-calendar
+                    //.row
+                        .col-md-8
+                            .form-group
+                                label(for="txtNote") หมายเหตุ
+                                if rows.note
+                                    textarea#txtNote(type="text" rows="3").form-control #{rows.note}
+                                else
+                                    textarea#txtNote(type="text" rows="3", placeholder="หมายเหตุ" ).form-control
+
+                    button(type="button").btn.btn-primary#btnRepeat บันทึก

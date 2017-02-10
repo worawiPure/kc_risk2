@@ -166,7 +166,7 @@ $(function() {
                 })
                     .success(function(data) {
                         alert('บันทึกข้อมูลเรียบร้อยแล้ว');
-                        window.location.href="/risk_news";
+                        window.location.href="/risk_report";
                     })
                     .error(function (xhr, status, err) {
                         alert(err);

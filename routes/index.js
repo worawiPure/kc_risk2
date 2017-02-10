@@ -531,6 +531,24 @@ router.get('/risk_repeat/:id/:depcode',function(req,res){
     //}
 });
 
+router.get('/risk_repeat_senior_feedback/:id/:depcode',function(req,res){
+    //if (req.session.level_user_id != 4){
+    //    res.render('./page/access_denied')
+    //}else {
+    var db = req.db;
+    var id = req.params.id;
+    risk_repeat.getSubShowPast5(db,id)
+        .then(function (rows) {
+            var data = rows[0];
+            data.date_repeat = moment(data.date_repeat).format('DD/MM/YYYY');
+            data.date_finished = moment(data.date_finished).format('DD/MM/YYYY');
+            res.render('page/risk_repeat_senior_feedback', {rows: data, risk_id: id});
+        }, function (err) {
+            res.send({ok: false, msg: err})
+        })
+    //}
+});
+
 router.get('/risk_repeat_user/:id/:depcode',function(req,res){
     //if (req.session.level_user_id != 4){
     //    res.render('./page/access_denied')
@@ -543,6 +561,24 @@ router.get('/risk_repeat_user/:id/:depcode',function(req,res){
             data.date_repeat = moment(data.date_repeat).format('DD/MM/YYYY');
             data.date_finished = moment(data.date_finished).format('DD/MM/YYYY');
             res.render('page/risk_repeat_user', {rows: data, risk_id: id});
+        }, function (err) {
+            res.send({ok: false, msg: err})
+        })
+    //}
+});
+
+router.get('/risk_repeat_user_feedback/:id/:depcode',function(req,res){
+    //if (req.session.level_user_id != 4){
+    //    res.render('./page/access_denied')
+    //}else {
+    var db = req.db;
+    var id = req.params.id;
+    risk_repeat.getSubShowPast5(db,id)
+        .then(function (rows) {
+            var data = rows[0];
+            data.date_repeat = moment(data.date_repeat).format('DD/MM/YYYY');
+            data.date_finished = moment(data.date_finished).format('DD/MM/YYYY');
+            res.render('page/risk_repeat_user_feedback', {rows: data, risk_id: id});
         }, function (err) {
             res.send({ok: false, msg: err})
         })
