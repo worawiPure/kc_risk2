@@ -159,10 +159,30 @@ $(function() {
         //data.edit_system = $('#txtEdit_system').val();
         //data.date_finished = $('#txtDate_finished').val();
         //data.note = $('#txtNote').val();
-        if(!data.risktype || !data.complaint || !data.topic || !data.date_risk || !data.time_risk
-            || !data.department || !data.program || !data.risk_level || !data.type_report || !data.name_report ) {
-            $('#divAlert').fadeIn('slow');
-        } else{
+        // if(!data.risktype || !data.complaint || !data.topic || !data.date_risk || !data.time_risk
+        //    || !data.department || !data.program || !data.risk_level || !data.type_report || !data.name_report ) {
+        //    $('#divAlert').fadeIn('slow');
+            if (!data.risktype) {
+                alert('คุณยังไม่ได้ลงประเภทความเสี่ยง !!')
+            } else if (!data.complaint){
+                alert('คุณยังไม่ได้ลงการจำแนกประเภท !! ');
+            } else if (!data.topic){
+                alert('คุณยังไม่ได้ลงเรื่องหัวข้อความเสี่ยง !!');
+            } else if (!data.date_risk){
+                alert('คุณยังไม่ได้ลงวันที่เกิดความเสี่ยง !!');
+            } else if (!data.time_risk){
+                alert('คุณยังไม่ได้ลงเวลาที่เกิดความเสี่ยง !!');
+            } else if (!data.department){
+                alert('คุณยังไม่ได้ลงแผนกที่เกิดความเสี่ยง !!');
+            } else if (!data.program){
+                alert('คุณยังไม่ได้ลง Program ความเสี่ยง !!');
+            } else if (!data.risk_level){
+                alert('คุณยังไม่ได้ลงระดับความรุนแรง !!');
+            } else if (!data.type_report){
+                alert('คุณยังไม่ได้ลงประเภทการรายงาน !!');
+            } else if (!data.name_report){
+                alert('คุณยังไม่ได้ลงชื่อผู้รายงาน !!');
+            } else {
             $.ajax({
                 type: "POST",
                 url: "/abstract_risk/admin_edit_request",

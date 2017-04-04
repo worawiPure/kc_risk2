@@ -1,0 +1,51 @@
+extends  ../admin_show_topic_layout
+block scripts
+    script(src="/javascripts/report_check_abstract.js")
+block content
+    br
+    ol.breadcrumb
+        li
+            a(href="/risk_news_admin") หน้าหลัก
+        li.active รายงานความเสี่ยงที่ยังไม่มีการทบทวน
+    .alert.alert-warning(role="alert",style="display: none;")#divAlert
+        i.fa.fa-warning
+        | &nbsp; กรองข้อมูลวันที่ไม่ถูกต้อง
+    .well.well-sm
+        div.form-inline
+            .row
+                .col-md-12
+                    .form-group
+                        label วันที่
+                        | &nbsp;&nbsp;&nbsp;&nbsp;
+                        #datetimepicker1.input-group(data-datepicker)
+                            input#Date_Searchrisk1.form-control(type='text')
+                            span.input-group-addon
+                                span.glyphicon.glyphicon-calendar
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        label ถึง
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        #datetimepicker2.input-group(data-datepicker)
+                            input#Date_Searchrisk2.form-control(type='text')
+                            span.input-group-addon
+                                span.glyphicon.glyphicon-calendar
+                        | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        button#btnSearch(type="button").btn.btn-primary.btn-sm ค้นหา
+                        button#btnPrint(type="button").btn.btn-primary.btn-sm ปริ้น
+    .panel.panel-primary
+        .panel-heading
+            h3.panel-title
+                i.fa.fa-comments-o
+                | &nbsp; รายงานอุบัติการณ์ความเสี่ยง
+        .panel-body
+
+            table.table.striped#tblReport_check_abstract
+                thead
+                    tr
+                        td ลำดับ
+                        td วันเวลาเกิดเหตุ
+                        td อุบัติการณ์ความเสี่ยง
+                        td หน่วยที่รายงาน
+                        td หน่วยที่เกิดความเสี่ยง
+                        td รายละเอียด
+                    tbody
+            ul.pagination#paging

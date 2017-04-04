@@ -100,6 +100,14 @@ router.get('/summary_department', function(req, res, next) {
     }
 });
 
+router.get('/check_abstract', function(req,res,next){
+    if (req.session.level_user_id != 2 && req.session.level_user_id !=3){
+        res.render('./page/access_denied')
+    } else {
+        res.render('./page/report_check_abstract');
+    }
+});
+
 router.post('/sl_level',function(req,res){
     var id = req.body.id;
     var db = req.db;
@@ -373,6 +381,25 @@ router.post('/report_user_department',function(req,res){
     data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
     console.log(data);
     report_summary.getReport_user_department(db,data)
+        .then(function(rows){
+            console.log(rows);
+            res.send({ok: true,rows:rows});
+        },
+        function(err){
+            console.log(err);
+            res.send({ok:false,msg:err})
+        })
+});
+
+router.post('/report_check_abstract',function(req,res){
+    var db = req.db;
+    var data = {};
+    data.date1 = req.body.date1;
+    data.date2 = req.body.date2;
+    data.date1=moment(data.date1, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    data.date2=moment(data.date2, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(data);
+    report_summary.getReport_check_abstract(db,data)
         .then(function(rows){
             console.log(rows);
             res.send({ok: true,rows:rows});

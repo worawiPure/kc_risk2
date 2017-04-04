@@ -856,6 +856,56 @@ module.exports = {
                 q.reject(err);
             });
         return q.promise;
+    },
+
+    getReport_check_abstract: function(db,data){
+        var q = Q.defer();
+        var sql =   'SELECT s.id,concat(s.date_risk,"/",s.time_risk) as risk_datetime,s.topic_risk,d.depname as depart_risk,d2.depname as depart_report FROM risk_request_fifth f '+
+        'INNER JOIN risk_request_first s ON s.id=f.risk_request_id '+
+        'INNER JOIN risk_request_fourth o ON o.risk_request_id=f.risk_request_id '+
+        'LEFT JOIN department d ON s.depcode=d.depcode     '+
+        'LEFT JOIN department d2 ON o.depcode=d2.depcode  '+
+        'WHERE s.date_risk BETWEEN ? AND ? '+
+        'AND (f.result_repeat IS NULL '+
+        'OR f.result_repeat = "" '+
+        'OR f.date_repeat IS NULL '+
+        'OR f.date_finished = "" '+
+        'OR f.name_repeat IS NULL '+
+        'OR f.name_repeat = "") ';
+        db.raw(sql,[data.date1,data.date2])
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
+    },
+
+    getReport_check_abstract2: function(db,date1,date2){
+        var q = Q.defer();
+        var sql =   'SELECT s.id,concat(s.date_risk,"/",s.time_risk) as risk_datetime,s.topic_risk,d.depname as depart_risk,d2.depname as depart_report FROM risk_request_fifth f '+
+            'INNER JOIN risk_request_first s ON s.id=f.risk_request_id '+
+            'INNER JOIN risk_request_fourth o ON o.risk_request_id=f.risk_request_id '+
+            'LEFT JOIN department d ON s.depcode=d.depcode     '+
+            'LEFT JOIN department d2 ON o.depcode=d2.depcode  '+
+            'WHERE s.date_risk BETWEEN ? AND ? '+
+            'AND (f.result_repeat IS NULL '+
+            'OR f.result_repeat = "" '+
+            'OR f.date_repeat IS NULL '+
+            'OR f.date_finished = "" '+
+            'OR f.name_repeat IS NULL '+
+            'OR f.name_repeat = "") ';
+        db.raw(sql,[date1,date2])
+            .then(function(rows){
+                q.resolve(rows[0])
+            })
+            .catch(function(err){
+                console.log(err)
+                q.reject(err)
+            });
+        return q.promise;
     }
 };
 

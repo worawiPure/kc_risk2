@@ -41,7 +41,7 @@ var db = require('knex')({
     port:3306,
     database:'risk',
     user:'root',
-    password:''
+    password:'root'
   }
 });
 
