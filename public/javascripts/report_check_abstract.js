@@ -9,8 +9,8 @@ $(function() {
                 '<td> ' + i + ' </td>'+
                 '<td>' + moment(v.risk_datetime).format('DD/MM/YYYY HH:mm')  + ' </td>'+
                 '<td>' + v.topic_risk  + ' </td>'+
-                '<td>' + v.depart_risk  + ' </td>'+
                 '<td>' + v.depart_report  + ' </td>'+
+                '<td>' + v.depart_risk  + ' </td>'+
                 '<td style="width: 150px;"> '+
                 '<div class="btn-group btn-group-sm" role="group"> '+
                 '<a class="btn btn-success" type="button" href="/prints/'+ v.id +'" data-toggle="tooltip" data-placement="top" title="ปริ้นเอกสาร"> <i class="fa fa-print"></i></a>';
